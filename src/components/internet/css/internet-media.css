@@ -1,0 +1,52 @@
+/**/
+.content{
+    background: url(../../../assets/internet/internet-bg.png) no-repeat;
+    -webkit-background-size: contain ;
+    background-size: contain;
+    font-size: .14rem;
+}
+/**/
+.info{
+    padding-left:.3rem;
+    height: .76rem;
+    padding-top: .14rem;
+    display: grid;
+    grid-template-columns: .6rem auto;
+    position: relative;
+}
+.info-header{
+    width: .6rem;
+    height: .6rem;
+    padding:.05rem;
+    background: rgba(242,242,242,0.22);
+    border-radius: 50%;
+}
+.info-header img{
+    width: 100%;
+}
+.info-msg{
+    text-align:left;
+    padding-left: .16rem;
+    color:#fff;
+}
+.info-msg h2{
+    font-size: .16rem;
+    line-height: .2rem;
+    padding-top: .1rem;
+}
+.info-msg p{
+    line-height: .3rem;
+}
+.info > button{
+    position: absolute;
+    right:0;
+    top:.25rem;
+    width: .96rem;
+    height: .25rem;
+    background: rgba(242,242,242,0.22);
+    color:#fff;
+    border-top-left-radius:.5rem; 
+    border-bottom-left-radius:.5rem; 
+    font-size: .12rem;
+    border:0;
+}

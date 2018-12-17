@@ -1,0 +1,236 @@
+.volunteer-view{
+    position: absolute;
+    width: 100%;
+    top:0;
+    bottom:0;
+    background: #fff;
+    overflow: hidden;
+    z-index: 1;
+}
+.slide-fade-y-enter,.slide-fade-y-leave-to{
+    transform: translateY(100%);
+    /*opacity: 0;*/
+}
+.slide-fade-y-enter-active,.slide-fade-y-leave-active{
+    transition: all .2s ease;
+    
+}
+.volunteer .banner{
+    background: url(../../../assets/volunteer/volunteer-bg.png) no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    height: 127px;
+    margin-bottom: 13px;
+}
+.volunteer .banner h2{
+    font-size: 36px;
+    line-height: 36px;
+    padding-top: 30px;
+    color:#fff;
+    font-weight: normal;
+}
+.volunteer .banner p{
+    display: inline-block;
+    padding:3px 20px;
+    background: rgba(0,0,0,.13);
+    color:#fff;
+    font-size: 14px;
+    border-radius:5rem;
+    margin-top: 5px;
+}
+/**/
+.volunteer .content{
+    position: absolute;
+    top:0;
+    bottom:0;
+    width: 100%;
+    height: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
+}
+.volunteer .content .search-Box{
+    padding: 0 20px;
+}
+.volunteer .content .search-Box a{
+    border-radius:5rem;
+    border:0;
+    color: #bababa;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    padding:0 20px;
+    outline: none;
+    text-align: left;
+    background: url(../../../assets/volunteer/search.png) no-repeat right 15px center #f8f8f8;
+    background-size: 20px;
+}
+.volunteer .list{
+   /*height: 100%;*/
+   
+}
+.volunteer .list li{
+    position: relative;
+    height: 130px;
+    overflow:hidden;
+    font-size: 0;
+    padding: 22px 25px;
+    text-align: left;
+
+}
+.volunteer .list li div{
+    display: inline-block;
+    vertical-align: top;
+}
+.volunteer .list li:after{
+    position: absolute;
+    content:' '; 
+    height: 1px;
+    width: 100%;
+    bottom:0;
+    left:15px;
+    background: #f2f2f2;
+    transform: rotateX(60deg);
+    -webkit-transform: rotateX(60deg);
+}
+.volunteer .list li .list-img{
+    width: 106px;
+    height: 90px;
+    overflow:hidden;
+    position: relative;
+}
+.volunteer .list li .list-img img{
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+}
+.volunteer .list li .list-info{
+    width: calc(100% - 106px - 22px);
+    margin-left: 22px;
+}
+.volunteer .list li .list-info h3{
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 22px;
+    font-weight: normal;
+}
+.volunteer .list li .list-info p{
+    font-size: 14px;
+    color:#9b9b9b;
+    line-height: 22px;
+}
+.volunteer-view{
+    position: absolute;
+    width: 100%;
+    top:0;
+    bottom: 0;
+
+}
+
+/**/
+.volunteer-detail{
+    overflow-y: scroll;
+    overflow-scrolling:touch;
+    padding-bottom: 55px;
+}
+.volunteer-detail .banner{
+    height: 144px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.volunteer-detail .banner img{
+    width: 100%;
+}
+.volunteer-title{
+    padding: 16px 22px 30px ;
+    text-align: left;
+    position: relative;
+    margin-bottom: 29px;
+}
+.volunteer-title:after{
+    width: calc(100% - 44px);
+    content:'';
+    position: absolute;
+    height: 1px;
+    background: #dbdbdb;
+    transform: rotateX(60deg);
+    bottom:0;
+}
+.volunteer-title h1{
+    font-size: 24px;
+    line-height: 37px;
+    font-weight: normal;
+}
+.volunteer-title p{
+    color:#f5a623;
+    font-size: 14px;
+    margin-top: 3px;
+}
+.volunteer-title img{
+    position: absolute;
+    width: 118px;
+    right:4px;
+    bottom:26px;
+}
+.volunteer-content{
+    text-align: left;
+    margin-bottom: 34px;
+}
+.volunteer-content h2{
+    font-size: 16px;
+    line-height: 16px;
+    position: relative;
+    padding-left: 17px;
+    font-weight: normal;
+    margin-bottom: 11px;
+}
+.volunteer-content >div{
+    padding: 0 28px;
+    font-size: 0;
+    color:#4a4a4a;
+}
+.volunteer-content >div label{
+    width: 70px;
+    font-size: 14px;
+    vertical-align: top;
+}
+.volunteer-content >div p{
+    line-height: 20px;
+    font-size: 14px;
+    display: inline-block;
+    width: calc(100% - 80px);
+    vertical-align: top;
+}
+.volunteer-content:before{
+    width: 7px;
+    height: 15px;
+    content:' '; 
+    position: absolute;
+    left:0;
+    background: linear-gradient(top,#fcac5d,#ff8940);
+} 
+.volunteer-content .detail{
+    padding:0 28px;
+    font-size: 14px;
+    -ms-text-justify: auto;
+    text-align:justify;
+}
+.floot-btn{
+    position: fixed;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    color: #fff;
+    background: #96050b;
+    text-align: center;
+    bottom:0;
+    border:0;
+    left:0;
+    font-size: 18px;
+}

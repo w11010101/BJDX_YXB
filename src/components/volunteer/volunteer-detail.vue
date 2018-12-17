@@ -1,0 +1,62 @@
+<template>
+    <div class="volunteer-detail">
+
+        <div class='banner'>
+            <img :src="item.img2" alt="">
+        </div>
+        <div class='volunteer-title'>
+            <h1>{{item.title}}</h1>
+            <p>招募人数：{{item.peoples}}人</p>
+            <img src="@/assets/volunteer/img5-1.png" alt="">
+        </div>
+        <!-- info -->
+        <div class='volunteer-content'>
+            <h2>项目概况</h2>
+            <div>
+                <label for="">开始时间：</label>
+                <p>{{item.starttime}}</p>
+            </div>
+            <div>
+                <label for="">截止时间：</label>
+                <p>{{item.endtime}}</p>
+            </div>
+            <div>
+                <label for="">招募人数：</label>
+                <p>已报名{{item.peoples}}人</p>
+            </div>
+            <div>
+                <label for="">活动时长：</label>
+                <p>{{item.longtime}}</p>
+            </div>
+            <div>
+                <label for="">活动地点：</label>
+                <p>{{item.address}}</p>
+            </div>
+        </div>
+        <div class='volunteer-content'>
+            <h2>项目详情</h2>
+            <p class='detail'>{{item.detailInfo}}</p>
+        </div>
+        <button class='floot-btn'>立即报名</button>
+    </div>
+</template>
+<script>
+    
+    export default ({
+        data(){
+            return {
+                msg: 'this is volunteer-detail.vue',
+                title: '志愿服务',
+                item:{},
+            }
+        },
+        mounted(){
+            this.item = this.$route.params;
+        }
+
+    })
+</script>
+<style scoped>
+    @import url(./css/volunteer.css);
+    
+</style>

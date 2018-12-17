@@ -1,0 +1,126 @@
+* {
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  list-style: none;
+  -webkit-text-size-adjust: 100% !important;
+}
+html{
+    /*font-size: 100px;*/
+    /*font-size: calc(100vw / 3.75);*/
+}
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  /*margin-top: 60px;*/
+}
+.project-view{
+  
+}
+/**/
+.content{
+    height:calc(100vh - 50px);
+}
+/*  */
+.slide-fade-enter-active,.slide-fade-leave-active{
+  transition: transform .2s ease;
+}
+/*.slide-fade-leave-active {
+  transition: transform .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}*/
+.slide-fade-enter{
+  transform: translateX(100%);
+  opacity: 0;
+}
+.slide-fade-leave-to{
+  transform: translateX(100%);
+  /*opacity: 0;*/
+}
+.nothing{
+  padding:27px 0 37px 0;
+  color: #c5c5c5;
+  font-size: 12px;
+}
+/**/
+.popup-container{
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom:0;
+  z-index: 998;
+}
+.popup-container .popup-mask{
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom:0;
+  z-index: 998;
+  background: rgba(0,0,0,.6);
+  opacity: 0;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+}
+.popup-container ul{
+  width: 100%;
+  position: absolute;
+  left:0;
+  bottom:0;
+  z-index: 999;
+  background:#f9f9f9;
+  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+}
+
+.popup-container ul li{
+  height: 56px;
+  line-height: 56px;
+  text-align:center;
+  font-size: 16px;
+  color: #4a4a4a;
+  background: #fff;
+  border-bottom:1px solid #f9f9f9;
+  
+}
+.popup-container ul li:last-child{
+  margin-top: 5px;
+}
+.popup-container.show .popup-mask{
+  opacity: 1;
+}
+.popup-container.show ul{
+  transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+}
+/**/
+.demo-spin-icon-load{
+  animation: ani-demo-spin 1s linear infinite;
+}
+
+/*@media screen  and (max-width: 320px){
+    html{
+        font-size: calc(100vw / 3.2);
+    }
+}
+@media screen  and (min-width: 321px) and (max-width: 360px){
+    html{
+        font-size: calc(100vw / 3.6);
+    }
+}
+@media screen and (min-width: 361px) and (max-width: 375px){
+    html{
+        font-size: calc(100vw / 3.75);
+    }
+}
+@media screen and (min-width: 376px) and (max-width: 414px){
+    html{
+        font-size: calc(100vw / 4.14);
+    }
+}*/

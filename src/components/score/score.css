@@ -1,0 +1,215 @@
+.score{
+    font-size: 30px;
+}
+#header{
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+}
+a{
+    color:#999;
+}
+li{
+    list-style: none;
+}
+i,em{
+    font-style: normal;
+}
+
+/* ------------------------- */
+.banner{
+    color:#fff;
+    height: 92px;
+    background: linear-gradient(70deg, #ff7200 30%,#ff7815  30%,#ff8b47);
+    background: -webkit-linear-gradient(70deg, #ff7200 30%,#ff7815  30%,#ff8b47);
+    background: -moz-linear-gradient(70deg, #ff7200 30%,#ff7815  30%,#ff8b47);
+    background: -o-linear-gradient(70deg, #ff7200 30%,#ff7815  30%,#ff8b47);
+    margin-bottom: 11px;
+
+}
+.banner h2{
+    font-size: 32px;
+    line-height: 40px;
+    padding-top: 14px;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+.banner p{
+    font-size: 12px;
+    line-height: 12px;
+} 
+/* ------------------------- */
+.tabs{
+    font-size: 0;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    
+}
+.tabs >ul{
+    /*background: #abcdef;*/
+}
+.tabs .tabs-item{
+    display: inline-block;
+    width: 33%;
+    font-size: 16px;
+    color:#999;
+}
+.tabs .tabs-item.active{
+    color:#000;
+}
+
+/* ------------------------- */
+.parts{
+    margin-top: 11px;
+}
+.parts h3{
+    text-align:left;
+    font-weight: normal;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    font-size: 12px;
+    color: #9b9b9b;
+    background: #f9f9f9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+}
+.parts .list{
+    
+}
+.parts .list li,
+.parts .list2 li{
+    height: 92px;
+    padding: 21px 0px 16px 20px;
+    position: relative;
+    overflow: hidden;
+}
+.parts .list li:not(:last-child):after,
+.parts .list2 li:not(:last-child):after{
+    content:' ';
+    width: 100%;
+    position: absolute;
+    height: 1px;
+    transform:rotate(60deg);
+    -webkit-transform:rotateX(60deg);
+    background: #f2f2f2;
+    left: 20px;
+    bottom: 0;
+}
+.parts .list li a,
+.parts .list2 li a{
+    display: block;
+    font-size: 0;
+}
+.parts .list li a > div,
+.parts .list2 li a > div{
+    display: inline-block;
+    vertical-align: top;
+}
+.parts .list li a .parts-1,
+.parts .list2 li a .parts-1{
+    width: calc(100% - 92px);
+}
+.parts .list li a .parts-2,
+.parts .list2 li a .parts-2{
+    width: 92px;
+    height: 100%;
+}
+.parts .list li a > div h4,
+.parts .list2 li a > div h4{
+    font-size: 16px;
+    font-weight: normal;
+    padding-left: 7px;
+    text-align: left;
+    line-height: 22px;
+    margin-bottom: 12px;
+    color: #505050;
+
+}
+.parts .list2 li a > div h4{
+    margin-bottom: 0;
+}
+.sticker{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    color:#fff; 
+    font-size: 14px;
+    margin-right: 8px;
+}
+.parts .list li a > div p{
+    font-size: 14px;
+    color: #a3a3a3;
+    line-height: 20px;
+    text-align: left;
+}
+.parts .list li a > div p span{
+    margin-left: 12px;
+}
+.parts .list li .parts-2,
+.parts .list2 li .parts-2{
+    font-size:24px;
+    color:#31affd;
+}
+.parts .list li .parts-2 span,
+.parts .list2 li .parts-2 span{
+    font-size:18px;
+    vertical-align: top
+}
+/* ------------------------- */
+.parts .list2 li{
+    height: 70px;
+    line-height: 70px;
+    padding:0 0 0 20px;
+}
+.parts .list2 li >a{
+    
+}
+.parts .list2 li a > div h4{
+    line-height: 70px;
+    color:#333;
+}
+/*.parts .list2 li a > div h4 label{
+    line-height: px;
+}*/
+.parts .list2 li a > div h4 img{
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.swiper-scrollbar-drag{
+    height: 4px;
+}
+.swiper-scrollbar{
+    border-radius:0;
+}
+.swiper-container{
+    font-size: 16px;
+    margin-top: -4px;
+    height: calc(100vh - 189px);
+
+}
+.swiper-scrollbar{
+    top:0px;
+    height: 4px;
+}
+.swiper-slide ul{
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+/* scrollbar-container */
+.scrollbar-container{
+    background: #abcdef;
+    height: 10px;
+}
+.scrollbar-drag{
+    width: 65px;
+    height: 100%;
+    background: #123456;
+    /*transition: all .3s ease;*/
+}
