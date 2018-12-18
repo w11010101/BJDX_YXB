@@ -78,7 +78,8 @@
         },
         mounted(){
             this.$nextTick(function(){
-                alert($('.info-msg h2').css('font-size'));
+                // alert($('html').css('font-size'));
+                
             })
             
         }

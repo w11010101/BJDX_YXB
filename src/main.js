@@ -53,4 +53,3 @@ window.myVue = new Vue({
     template: '<App/>',
 
 })
-

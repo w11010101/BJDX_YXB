@@ -79,6 +79,10 @@
     import 'swiper/dist/css/swiper.css';
     import Swiper from 'swiper';
     import {data1,data2} from './score.js';
+    import mui from '../../../static/plugin/mui/js/mui.min.js'
+    import '../../../static/plugin/mui/css/mui.picker.min.css'
+    import picker from '../../../static/plugin/mui/js/mui.picker.min.js'
+    console.log(picker);
     var colors = ['#14cfa0','#4898f6','#f77539','#ebc82c','#8ab668','#439889','#3177ac','#caa52c'];
     export default {
         name: 'score',

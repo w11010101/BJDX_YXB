@@ -1,7 +1,7 @@
 <template>
     <div id="header">
-        <!-- <header class=""> -->
-        <header class="" v-show='!title.includes("Menu")'>
+        <header class="">
+        <!-- <header class="" v-show='!title.includes("Menu")'> -->
             <!-- v-show='!title.includes("Menu")' -->
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
@@ -73,9 +73,9 @@
 </script>
 <style scoped>
     header{
-        height: 50px;
-        line-height: 50px;
-        font-size: 16px;
+        height: .5rem;
+        line-height: .5rem;
+        font-size: .16rem;
         position: relative;
     }
     header:after{
@@ -88,35 +88,35 @@
         bottom: 0;
     }
     #header button{
-        width: 30px;
-        height: 30px;
+        width: .3rem;
+        height: .3rem;
         position: absolute;
-        top:10px;
+        top:.1rem;
         padding:0;
         color:#6b6b6b;
     }
     .backBtn{
-        left:10px;
+        left:.1rem;
 
         background: url(../../assets/icon/back@2x.png) no-repeat center;
-        -webkit-background-size: 20px;
-        background-size: 20px;
+        -webkit-background-size: .2rem;
+        background-size: .2rem;
     }
     .menuBtn{
-        width: 30px;
-        height: 30px;
-        line-height: 15px;
-        font-size: 20px;
-        right:45px;
+        width: .3rem;
+        height: .3rem;
+        line-height: .15rem;
+        font-size: .2rem;
+        right:.45rem;
         background: url(../../assets/icon/ico-dot@2x.png) no-repeat center;
-        -webkit-background-size: 20px;
-        background-size: 20px;
+        -webkit-background-size: .2rem;
+        background-size: .2rem;
     }
     .closeBtn{
-        width: 30px;
-        right:10px;
+        width: .3rem;
+        right:.1rem;
         background: url(../../assets/icon/ico-close@2x.png) no-repeat center;
-        -webkit-background-size: 25px;
-        background-size: 25px;
+        -webkit-background-size: .25rem;
+        background-size: .25rem;
     }
 </style>

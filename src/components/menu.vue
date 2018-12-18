@@ -38,7 +38,7 @@ export default {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,
-            menuShow:false,
+            menuShow:true,
             // title:'Menu.vue',
             menus:[
                 {
@@ -78,33 +78,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-    font-weight: normal;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #fff;
-}
 .project-view{
     position: absolute;
     width: 100%;
-    top:50px;
+    top:.5rem;
     bottom:0;
     background: #fff;
     overflow: hidden;
 }
 .btns{
-    padding:20px;
+    padding:.2rem;
 }
 .btns button,.btns a{
-    margin-top: 10px;
+    margin-top: .1rem;
 }
 /**/
 .demo-spin-icon-load{
@@ -116,7 +102,7 @@ a {
     to   { transform: rotate(360deg);}
 }
 .demo-spin-col{
-    height: 100px;
+    height: 1rem;
     position: relative;
     border: 1px solid #eee;
 }

@@ -1,10 +1,10 @@
 .score{
-    font-size: 30px;
+    font-size: .3rem;
 }
 #header{
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
+    height: .5rem;
+    line-height: .5rem;
+    font-size: .2rem;
 }
 a{
     color:#999;
@@ -28,21 +28,21 @@ i,em{
 
 }
 .banner h2{
-    font-size: 32px;
-    line-height: 40px;
-    padding-top: 14px;
-    margin-bottom: 5px;
+    font-size: .32rem;
+    line-height: .4rem;
+    padding-top: .14rem;
+    margin-bottom: .05rem;
     font-weight: normal;
 }
 .banner p{
-    font-size: 12px;
-    line-height: 12px;
+    font-size: .12rem;
+    line-height: .12rem;
 } 
 /* ------------------------- */
 .tabs{
     font-size: 0;
-    height: 36px;
-    line-height: 36px;
+    height: .36rem;
+    line-height: .36rem;
     text-align: center;
     
 }
@@ -52,7 +52,7 @@ i,em{
 .tabs .tabs-item{
     display: inline-block;
     width: 33%;
-    font-size: 16px;
+    font-size: .16rem;
     color:#999;
 }
 .tabs .tabs-item.active{
@@ -61,15 +61,15 @@ i,em{
 
 /* ------------------------- */
 .parts{
-    margin-top: 11px;
+    margin-top: .11rem;
 }
 .parts h3{
     text-align:left;
     font-weight: normal;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 20px;
-    font-size: 12px;
+    height: .30rem;
+    line-height: .30rem;
+    padding: 0 .20rem;
+    font-size: .12rem;
     color: #9b9b9b;
     background: #f9f9f9;
     border-top: 1px solid #f2f2f2;
@@ -80,8 +80,8 @@ i,em{
 }
 .parts .list li,
 .parts .list2 li{
-    height: 92px;
-    padding: 21px 0px 16px 20px;
+    /*height: .92rem;*/
+    padding: .20rem 0 .16rem .20rem;
     position: relative;
     overflow: hidden;
 }
@@ -94,7 +94,7 @@ i,em{
     transform:rotate(60deg);
     -webkit-transform:rotateX(60deg);
     background: #f2f2f2;
-    left: 20px;
+    left: .2rem;
     bottom: 0;
 }
 .parts .list li a,
@@ -109,21 +109,21 @@ i,em{
 }
 .parts .list li a .parts-1,
 .parts .list2 li a .parts-1{
-    width: calc(100% - 92px);
+    width: calc(100% - .95rem);
 }
 .parts .list li a .parts-2,
 .parts .list2 li a .parts-2{
-    width: 92px;
+    width: .95rem;
     height: 100%;
 }
 .parts .list li a > div h4,
 .parts .list2 li a > div h4{
-    font-size: 16px;
+    font-size: .16rem;
     font-weight: normal;
-    padding-left: 7px;
+    padding-left: .07rem;
     text-align: left;
-    line-height: 22px;
-    margin-bottom: 12px;
+    line-height: .22rem;
+    margin-bottom: .12rem;
     color: #505050;
 
 }
@@ -132,84 +132,80 @@ i,em{
 }
 .sticker{
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: .24rem;
+    height: .24rem;
     border-radius: 50%;
     text-align: center;
-    line-height: 24px;
+    line-height: .24rem;
     color:#fff; 
-    font-size: 14px;
-    margin-right: 8px;
+    font-size: .14rem;
+    margin-right: .08rem;
 }
 .parts .list li a > div p{
-    font-size: 14px;
+    font-size: .14rem;
     color: #a3a3a3;
-    line-height: 20px;
+    line-height: .20rem;
     text-align: left;
 }
 .parts .list li a > div p span{
-    margin-left: 12px;
+    margin-left: .12rem;
+  /*  display: inline-block;
+    width: 50%;*/
 }
 .parts .list li .parts-2,
 .parts .list2 li .parts-2{
-    font-size:24px;
+    font-size:.24rem;
     color:#31affd;
 }
 .parts .list li .parts-2 span,
 .parts .list2 li .parts-2 span{
-    font-size:18px;
+    font-size:.18rem;
     vertical-align: top
 }
 /* ------------------------- */
 .parts .list2 li{
-    height: 70px;
-    line-height: 70px;
-    padding:0 0 0 20px;
+    height: .70rem;
+    line-height: .70rem;
+    padding:0 0 0 .20rem;
 }
 .parts .list2 li >a{
     
 }
 .parts .list2 li a > div h4{
-    line-height: 70px;
+    line-height: .70rem;
     color:#333;
 }
-/*.parts .list2 li a > div h4 label{
-    line-height: px;
-}*/
 .parts .list2 li a > div h4 img{
-    width: 16px;
+    width: .16rem;
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: .10rem;
 }
 .swiper-scrollbar-drag{
-    height: 4px;
+    height: .04rem;
 }
 .swiper-scrollbar{
     border-radius:0;
 }
 .swiper-container{
-    font-size: 16px;
-    margin-top: -4px;
-    height: calc(100vh - 189px);
-
+    font-size: .16rem;
+    margin-top: -.04rem;
+    height: calc(100vh - 1.89rem);
 }
 .swiper-scrollbar{
-    top:0px;
-    height: 4px;
+    top:0;
+    height: .04rem;
 }
 .swiper-slide ul{
     height: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
-/* scrollbar-container */
 .scrollbar-container{
     background: #abcdef;
-    height: 10px;
+    height: .10rem;
 }
 .scrollbar-drag{
-    width: 65px;
+    width: .65rem;
     height: 100%;
     background: #123456;
-    /*transition: all .3s ease;*/
 }
