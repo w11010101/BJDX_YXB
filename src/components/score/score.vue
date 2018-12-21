@@ -24,7 +24,21 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for='(item,index) in tabs'>
                             <!-- v-if -->
+                            <group label-width="5em" class='popup-picker-box' gutter='0' v-if='index == 0'>
+                                <popup-picker 
+                                    value-text-align='left' 
+                                    :columns="2" 
+                                    :data="list2" 
+                                    :value='popupValue' 
+                                    v-model="popupValue" 
+                                    show-name
+                                    :placeholder='title2'
+                                    @on-change='changeFn'>
+                                    
+                                </popup-picker>
+                            </group>
                             <ul v-if='index == 0' >
+                                
                                 <li v-for='todo in data1'>
                                     <div class='parts'>
                                         <h3>{{todo.time}}</h3>
@@ -79,31 +93,87 @@
     import 'swiper/dist/css/swiper.css';
     import Swiper from 'swiper';
     import {data1,data2} from './score.js';
-    import mui from '../../../static/plugin/mui/js/mui.min.js'
-    import '../../../static/plugin/mui/css/mui.picker.min.css'
-    import picker from '../../../static/plugin/mui/js/mui.picker.min.js'
-    console.log(picker);
+    import { Group,PopupPicker } from 'vux'
+
     var colors = ['#14cfa0','#4898f6','#f77539','#ebc82c','#8ab668','#439889','#3177ac','#caa52c'];
     export default {
         name: 'score',
         data(){
             return {
                 title:'成绩查询',
+                title2: '选择学期',
                 msg:'this is score.vue',
                 scrollBarTranslate:0,
                 duration:0,
                 tabActive:0,
                 tabs:['课程成绩','学期绩点','学年绩点'],
+                list2: [
+                    {
+                        name: '2015-2016学年',
+                        value: '2015',
+                        parent: 0
+                    }, {
+                        name: '2016-2017学年',
+                        value: '2016',
+                        parent: 0
+                    }, {
+                        name: '2017-2018学年',
+                        value: '2017',
+                        parent: 0
+                    }, {
+                        name: '2018-2019学年',
+                        value: '2018',
+                        parent: 0
+                    }, {
+                        name: '2015第一学期',
+                        value: 'china001',
+                        parent: '2015'
+                    }, {
+                        name: '2015第二学期',
+                        value: 'china002',
+                        parent: '2015'
+                    }, {
+                        name: '2016第一学期',
+                        value: 'usa001',
+                        parent: '2016'
+                    }, {
+                        name: '2016第二学期',
+                        value: 'usa002',
+                        parent: '2016'
+                    }, {
+                        name: '2017第一学期',
+                        value: 'china001',
+                        parent: '2017'
+                    }, {
+                        name: '2017第二学期',
+                        value: 'china002',
+                        parent: '2017'
+                    }, {
+                        name: '2018第一学期',
+                        value: 'usa001',
+                        parent: '2018'
+                    }, {
+                        name: '2018第二学期',
+                        value: 'usa002',
+                        parent: '2018'
+                    }
+                ],
+                popupValue: [],
                 swiperObj:{},
                 data1,
                 data2,
                 colors,
+                popupStyle:{
+                    color:'#ff5970'
+                }
             }
         },
         // props:['title'],
-        // components:{
-        //     'private-header':resolve=>require(['@/components/header/header.vue'],resolve),
-        // },
+        components:{
+            Group,
+            PopupPicker
+            // 'private-header':resolve=>require(['@/components/header/header.vue'],resolve),
+        },
         mounted(){
             var _this = this;
             this.$nextTick(function(){
@@ -188,6 +258,10 @@
             },
             setIntervalFn(){
                 
+            },
+            changeFn(){
+                console.log(arguments)
+                console.log(this.popupValue)
             }
         }
     }
@@ -197,4 +271,22 @@
 </script>
 <style scoped>
     @import url(score.css);
+    .popup-picker-box /deep/ .weui-cells:before,
+    .popup-picker-box /deep/ .weui-cells:after{
+        display: none;
+    }
+    .popup-picker-box /deep/ .weui-label,
+    .popup-picker-box /deep/ .vux-popup-picker-value,
+    .popup-picker-box /deep/ .vux-popup-picker-placeholder{
+        font-size: 14px;
+        color:#9b9b9b;
+    }
+    .popup-picker-box /deep/ .weui-cell_access .weui-cell__ft:after{
+        height: 12px;
+        width: 12px;
+        border-width: 0 1px 1px 0;
+        margin-top:-10px;
+        right: 10px;
+    }
+    
 </style>

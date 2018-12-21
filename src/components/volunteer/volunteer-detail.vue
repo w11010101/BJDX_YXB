@@ -37,21 +37,45 @@
             <h2>项目详情</h2>
             <p class='detail'>{{item.detailInfo}}</p>
         </div>
-        <button class='floot-btn'>立即报名</button>
+        <button class='floot-btn' @click='submitFn'>立即报名</button>
+        <alert v-model="show"  @on-show="onShow" @on-hide="onHide">报名中。。。</alert>
     </div>
 </template>
 <script>
-    
+    import route from '@/router';
+    import { Alert } from 'vux'
     export default ({
         data(){
             return {
                 msg: 'this is volunteer-detail.vue',
                 title: '志愿服务',
                 item:{},
+                show:false
             }
         },
         mounted(){
             this.item = this.$route.params;
+            console.log(this.$router)
+        },
+        components:{
+            Alert
+        },
+        methods:{
+            submitFn(){
+                this.show = true;
+                // route.push({
+                //     name:'status',
+                //     params:{
+                //         fromRoute:this.$route
+                //     }
+                // });
+            },
+            onShow(){
+                console.log('show');
+            },
+            onHide(){
+                console.log('hide');
+            }
         }
 
     })

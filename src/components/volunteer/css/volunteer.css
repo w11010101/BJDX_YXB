@@ -234,3 +234,59 @@
     left:0;
     font-size: 18px;
 }
+
+/**/
+.volunteer-search .content{
+    padding-top:10px;
+}
+.volunteer-search .content .search-Box{
+    padding: 0 13px;
+}
+.volunteer-search .search-Box{
+    text-align:left;
+}
+.volunteer-search .search-Box input{
+    display: inline-block;
+    width: calc(100% - 60px);
+    height: 30px;
+    border:none;
+    border-radius:5rem;
+    padding-left: 40px;
+    background: url(../../../assets/volunteer/search.png) no-repeat left 15px center #f8f8f8;
+    background-size: 20px;
+    outline: none;
+    font-size: 16px;
+    user-select: auto;
+}
+.volunteer-search .search-Box button{
+    padding:0 10px;
+    line-height: 30px;
+    border:none;
+    background: none;
+    float:right;  
+    font-size: 16px;
+}
+.volunteer-search h2{
+    margin-top: 30px;
+    text-align: left;
+    padding-left: 18px;
+    font-size: 18px;
+    /*font-weight: normal;*/
+}
+.volunteer-search ul{
+    text-align:left;
+    padding-left:18px;
+}
+.volunteer-search ul li{
+    display: inline-block;
+    padding:5px 10px;
+    font-size: 14px;
+    color: #4a4a4a;
+    border-radius:4px;
+    border:1px solid #dfdfdf;
+    margin:10px 10px 0 0 ;
+}
+.volunteer-search ul li.active{
+    border:1px solid #ff8940;
+    color:#ff8940;
+}

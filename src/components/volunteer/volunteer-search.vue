@@ -2,96 +2,148 @@
     <div class="volunteer-search">
         <div class="content">
             <div class="search-Box" >
-                <input placeholder="搜索志愿活动" autocomplete=on/>
-                <button >取消 </button>
+                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal'/>
+                <!-- <Input v-model="searchVal" prefix="ios-search" class='searchInput' placeholder="搜索志愿活动" clearable style="width: calc(100% - 60px);" ></Input> -->
+                <button  @click='searchFn'>搜索</button>
+                <!-- <button v-if='searchVal == ""' @click='searchFn'>搜索</button>
+                <button v-else @click='cancelFn'>取消</button> -->
+                <!-- <search
+                  @result-click="resultClick"
+                  @on-change="getResult"
+                  :results="results"
+                  v-model="searchVal"
+                  position="absolute"
+                  auto-scroll-to-top
+                  top="46px"
+                  @on-focus="onFocus"
+                  @on-cancel="onCancel"
+                  @on-submit="onSubmit"
+                  ref="search"></search> -->
             </div>
             <!--  -->
             <h2>历史搜索</h2>
             <ul>
-                <li>鲁迅</li>
-                <li>医务义诊</li>
-                <li>儿童安全</li>
-                <li>志愿服务</li>
-                <li>多维宇宙</li>
+                <li v-for='(item,index) in hotSearch' :key='item.id' @click='setActive(index,"hot")' :class='{"active":index == hotSearchActive}'>{{item.name}}</li>
             </ul>
             <!--  -->
             <h2>热门搜索</h2>
             <ul>
-                <li>鲁迅</li>
-                <li>医务义诊</li>
-                <li>儿童安全</li>
-                <li>志愿服务</li>
-                <li>多维宇宙</li>
+                <li v-for='(item,index) in historySearch' :key='item.id' @click='setActive(index,"history")' :class='{"active":index == historySearchActive}'>{{item.name}}</li>
             </ul>
         </div>
         
     </div>
 </template>
 <script>
-    // import route from '@/router'
+    // import { Search } from 'vux'
+    import { Alert ,AlertModule} from 'vux'
     export default ({
         data(){
             return {
                 msg: 'this is volunteer-search.vue',
                 title: '志愿服务',
-               
+                searchVal:'',
+                // searchStyle:{
+                //     'display': 'inline-block',
+                //     'width': 'calc(100% - 60px)',
+                //     'height': '30px',
+                //     'border':'none',
+                //     'border-radius':'5rem',
+                //     'padding-left': '40px',
+                //     'background': 'url(../../../assets/volunteer/search.png) no-repeat left 15px center #f8f8f8',
+                //     'background-size': '20px',
+                //     'outline': 'none',
+                //     'font-size': '16px',
+                // },
+                results:[],
+                hotSearchActive:999,
+                hotSearch:[
+                    {name:"鲁迅",id:1},
+                    {name:"医务义诊",id:2},
+                    {name:"儿童安全",id:3},
+                    {name:"志愿服务",id:4},
+                    {name:"多维宇宙",id:5},
+                ],
+                historySearchActive:999,
+                historySearch:[
+                    {name:"鲁迅",id:1},
+                    {name:"医务义诊",id:2},
+                    {name:"儿童安全",id:3},
+                    {name:"志愿服务",id:4},
+                    {name:"多维宇宙",id:5},
+                ]
             }
         },
+        components:{
+            Alert
+            // Search
+        },
         methods:{
-            
+            setActive(index,type){
+                if(type=='hot'){
+                    this.hotSearchActive = index;
+                    this.historySearchActive = 999;
+                }else{
+                    this.historySearchActive = index;
+                    this.hotSearchActive = 999;
+                }
+                this.searchVal = event.target.innerText;
+                // console.dir(event.target)
+            },
+            cancelFn(){
+                console.log('cancelFn');
+                this.searchVal = '';
+            },
+            searchFn(){
+                console.log('searchFn');
+                if(this.searchVal){
+                    AlertModule.show({
+                        // title: '',
+                        content: '搜索。。。',
+                        onShow () {
+                            console.log('Plugin: I\'m showing')
+                        },
+                        onHide () {
+                            console.log('Plugin: I\'m hiding')
+                        }
+                    })
+                }else{
+                    AlertModule.show({
+                        // title: '',
+                        content: '请输入搜索关键字',
+                        onShow () {
+                            console.log('Plugin: I\'m showing')
+                        },
+                        onHide () {
+                            console.log('Plugin: I\'m hiding')
+                        }
+                    })
+                }
+                
+            },
+            // resultClick(){
+            //     console.log('resultClick')
+            // },
+            // getResult(){
+            //     console.log('getResult')
+            // },
+            // onFocus(){
+            //     console.log('onFocus')
+            // },
+            // onCancel(){
+            //     console.log('onCancel')
+            // },
+            // onSubmit(){
+            //     console.log('onSubmit')
+            // },            
+
         }
     });
 
 </script>
 <style scoped="">
     @import url(./css/volunteer.css);
-    .volunteer-search .content{
-        padding-top:10px;
-    }
-    .volunteer-search .content .search-Box{
-        padding: 0 13px;
-    }
-    .volunteer-search .search-Box{
-        text-align:left;
-    }
-    .volunteer-search .search-Box input{
-        display: inline-block;
-        width: 290px;
-        height: 30px;
-        border:none;
+    .search-Box /deep/ .searchInput{
         border-radius:5rem;
-        padding-left: 40px;
-        background: url(../../assets/volunteer/search.png) no-repeat left 15px center #f8f8f8;
-        background-size: 20px;
-        outline: none;
-        font-size: 16px;
-    }
-    .volunteer-search .search-Box button{
-        padding:0 10px;
-        line-height: 30px;
-        border:none;
-        background: none;
-        float:right;  
-        font-size: 16px;
-    }
-    .volunteer-search h2{
-        margin-top: 30px;
-        text-align: left;
-        padding-left: 18px;
-        font-size: 18px;
-        /*font-weight: normal;*/
-    }
-    .volunteer-search ul{
-        text-align:left;
-        padding-left:18px;
-    }
-    .volunteer-search ul li{
-        display: inline-block;
-        padding:5px 10px;
-        font-size: 14px;
-        color: #4a4a4a;
-        border-radius:4px;
-        border:1px solid #dfdfdf;
-        margin:10px 10px 0 0 ;
     }
 </style>

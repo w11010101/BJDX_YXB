@@ -2,19 +2,21 @@
     <div class='menu'>
         <my-header></my-header>
         <div class='btns' v-if='menuShow'>
-            <Button type="primary" size='large' long :to='todo.routerUrl' v-for='todo in menus' @click='title=todo.name'>{{todo.name}}</Button>
+            <Button type="primary" size='large' long 
+                v-for='(todo,index) in menus' 
+                :to='todo.routerUrl'
+                :key='index' 
+                @click='title=todo.name'>{{todo.name}}</Button>
             <Button type="primary" size='large' long>我的——常见问题</Button>
             <Button type="primary" size='large' long>Primary</Button>
         </div>
-        <!-- <Spin fix v-if="spinShow">
-            <Icon type="ios-loading" size=50 class="demo-spin-icon-load"></Icon>
-        </Spin> -->
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
         </transition>
+        <transition name="slide-fade">
+            <router-view class='status-view' name='status-view'/>
+        </transition>
         <!-- <list-menu :myprop="'this is HelloWorld.vue'"></list-menu> -->
-
-        <!-- <vue-menu></vue-menu> -->
     </div>
 </template>
 
@@ -38,8 +40,7 @@ export default {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,
-            menuShow:true,
-            // title:'Menu.vue',
+            menuShow:false,
             menus:[
                 {
                     name:'成绩查询',
@@ -57,11 +58,6 @@ export default {
         }
     },
     methods:{
-        // getSearchParams(paramName,url){
-        //     // var _url = url||window.location
-        //     let search = window.location.search.substr(1);
-        //     console.log(search)
-        // },
         GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
             var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
@@ -78,7 +74,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.project-view{
+.project-view,.status-view{
     position: absolute;
     width: 100%;
     top:.5rem;

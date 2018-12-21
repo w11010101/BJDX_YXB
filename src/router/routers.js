@@ -61,7 +61,11 @@ var router_config = [
                         },
                         props: {
                             'volunteer-view': true
-                        }
+                        },
+                        meta:{
+                            pageName:'志愿服务',
+                            index:2
+                        },
                     },
                     {
                         path:'search',
@@ -71,9 +75,22 @@ var router_config = [
                         },
                         props: {
                             'volunteer-view': true
-                        }
+                        },
+                        meta:{
+                            pageName:'志愿服务',
+                            index:2
+                        },
                     }
                 ]
+            },{
+                path: '/status/:id',
+                name: 'status',
+                components:{
+                    'project-view': resolve => require(['@/components/status/status.vue'],resolve),
+                },
+                props:{
+                    'project-view':true
+                },
             }
         ]
     },

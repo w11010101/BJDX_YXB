@@ -1,7 +1,7 @@
 <template>
     <div id="header">
-        <header class="">
-        <!-- <header class="" v-show='!title.includes("Menu")'> -->
+        <!-- <header class=""> -->
+        <header class="" v-show='!title.includes("Menu")'>
             <!-- v-show='!title.includes("Menu")' -->
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
@@ -36,6 +36,8 @@
         // props:['title'],
         watch: {
             '$route'(to,from){
+                console.log(to);
+                // console.log(from);
                 this.title = to.meta.pageName||from.meta.pageName;
                 
                 if(to.meta.index == 1){
@@ -51,6 +53,11 @@
         },
         methods:{
             goBack(){
+                // console.log(this.$route.matched);
+                // console.log(this.$route.params.matched);
+                // if(this.$route.name == 'status'){
+                //     console.log(this.$route.matched);
+                // }
                 router.go(-1);
             },
             popupFn(){

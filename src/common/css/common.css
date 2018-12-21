@@ -103,7 +103,31 @@ html{
 .demo-spin-icon-load{
   animation: ani-demo-spin 1s linear infinite;
 }
+/* vux popupPicker style*/
+body .vux-popup-header-left,
+body .vux-popup-header-right{
+    color:#ff5970;
+}
+/*body .vux-popup-header{
+    background: #fff;
+}
+body .scroller-item{
+    color:#b4b4b4;
+}
+body .scroller-item.scroller-item-selected{
+    font-size: 18px;
+    color: #000;
+}
 
+body .vux-flex-row{
+    background: #fff;
+}
+body .scroller-mask{
+    background: none;
+}
+body .scroller-indicator{
+    background: none;
+}*/
 /*@media screen and (max-width: 320px){
     html{
         font-size: calc(100vw / 3.2);
