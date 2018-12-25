@@ -18,7 +18,7 @@ var router_config = [
                 },
                 meta:{
                     pageName:'成绩查询',
-                    index:1
+                    index:1             
                 }
             },
             {
@@ -38,7 +38,7 @@ var router_config = [
                     {
                         path:'list',
                         components: {
-                            'internet-view': resolve => require(['@/components/internet/internet-list.vue'],resolve)
+                            'sub-components-view': resolve => require(['@/components/internet/internet-list.vue'],resolve)
                         },
                     }
                 ]
@@ -57,10 +57,10 @@ var router_config = [
                         path:'detail/:items',
                         name:'detail',
                         components: {
-                            'volunteer-view': resolve => require(['@/components/volunteer/volunteer-detail.vue'],resolve)
+                            'sub-components-view': resolve => require(['@/components/volunteer/volunteer-detail.vue'],resolve)
                         },
                         props: {
-                            'volunteer-view': true
+                            'sub-components-view': true
                         },
                         meta:{
                             pageName:'志愿服务',
@@ -71,10 +71,10 @@ var router_config = [
                         path:'search',
                         name:'search',
                         components: {
-                            'volunteer-view': resolve => require(['@/components/volunteer/volunteer-search.vue'],resolve)
+                            'sub-components-view': resolve => require(['@/components/volunteer/volunteer-search.vue'],resolve)
                         },
                         props: {
-                            'volunteer-view': true
+                            'sub-components-view': true
                         },
                         meta:{
                             pageName:'志愿服务',
@@ -82,16 +82,37 @@ var router_config = [
                         },
                     }
                 ]
-            },{
-                path: '/status/:id',
-                name: 'status',
-                components:{
-                    'project-view': resolve => require(['@/components/status/status.vue'],resolve),
+            },
+            {
+                path: '/salary',
+                name: 'salary',
+                components: {
+                    'project-view': resolve => require(['@/components/salary/salary.vue'],resolve)
                 },
                 props:{
                     'project-view':true
                 },
-            }
+                meta:{
+                    pageName:'薪资查询',
+                    index:1
+                },
+                children:[
+                    {
+                        path:'salary-detail',
+                        name:'',
+                        components: {
+                            'sub-components-view': resolve => require(['@/components/salary/salary-detail.vue'],resolve)
+                        },
+                        props: {
+                            'sub-components-view': true
+                        },
+                        meta:{
+                            pageName:'薪资查询',
+                            index:2
+                        }
+                    }
+                ]
+            },
         ]
     },
 ];

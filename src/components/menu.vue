@@ -7,15 +7,13 @@
                 :to='todo.routerUrl'
                 :key='index' 
                 @click='title=todo.name'>{{todo.name}}</Button>
-            <Button type="primary" size='large' long>我的——常见问题</Button>
-            <Button type="primary" size='large' long>Primary</Button>
         </div>
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
         </transition>
-        <transition name="slide-fade">
+        <!-- <transition name="slide-fade">
             <router-view class='status-view' name='status-view'/>
-        </transition>
+        </transition> -->
         <!-- <list-menu :myprop="'this is HelloWorld.vue'"></list-menu> -->
     </div>
 </template>
@@ -40,7 +38,7 @@ export default {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,
-            menuShow:false,
+            menuShow:true,
             menus:[
                 {
                     name:'成绩查询',
@@ -53,7 +51,16 @@ export default {
                 {
                     name:'志愿服务',
                     routerUrl:'/volunteer'
+                },
+                {
+                    name:'薪资查询',
+                    routerUrl:'/salary'
+                },
+                {
+                    name:'常见问题',
+                    routerUrl:'/'
                 }
+
             ]
         }
     },

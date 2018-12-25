@@ -1,7 +1,7 @@
 <template>
     <div id="header">
-        <!-- <header class=""> -->
-        <header class="" v-show='!title.includes("Menu")'>
+        <header class="">
+        <!-- <header class="" v-show='!title.includes("Menu")'> -->
             <!-- v-show='!title.includes("Menu")' -->
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
@@ -36,7 +36,7 @@
         // props:['title'],
         watch: {
             '$route'(to,from){
-                console.log(to);
+                // console.log(to);
                 // console.log(from);
                 this.title = to.meta.pageName||from.meta.pageName;
                 

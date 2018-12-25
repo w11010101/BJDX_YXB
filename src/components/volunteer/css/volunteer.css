@@ -1,12 +1,4 @@
-.volunteer-view{
-    position: absolute;
-    width: 100%;
-    top:0;
-    bottom:0;
-    background: #fff;
-    overflow: hidden;
-    z-index: 1;
-}
+
 .slide-fade-y-enter,.slide-fade-y-leave-to{
     transform: translateY(100%);
     /*opacity: 0;*/

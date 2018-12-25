@@ -23,6 +23,15 @@ html{
 .project-view{
   
 }
+.sub-components-view{
+    position: absolute;
+    width: 100%;
+    top:0;
+    bottom:0;
+    background: #fff;
+    overflow: hidden;
+    z-index: 1;
+}
 /**/
 .content{
     height:calc(100vh - 50px);
@@ -107,6 +116,23 @@ html{
 body .vux-popup-header-left,
 body .vux-popup-header-right{
     color:#ff5970;
+}
+.popup-picker-box /deep/ .weui-cells:before,
+.popup-picker-box /deep/ .weui-cells:after{
+    display: none;
+}
+.popup-picker-box /deep/ .weui-label,
+.popup-picker-box /deep/ .vux-popup-picker-value,
+.popup-picker-box /deep/ .vux-popup-picker-placeholder{
+    font-size: 14px;
+    color:#9b9b9b;
+}
+.popup-picker-box /deep/ .weui-cell_access .weui-cell__ft:after{
+    height: 12px;
+    width: 12px;
+    border-width: 0 1px 1px 0;
+    margin-top: -10px;
+    right: 10px;
 }
 /*body .vux-popup-header{
     background: #fff;

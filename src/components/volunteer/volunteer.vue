@@ -32,7 +32,7 @@
         </div>
         <!-- router-view -->
         <transition :name="transitionName">
-            <router-view class='volunteer-view' name='volunteer-view'></router-view>
+            <router-view class='sub-components-view' name='sub-components-view'></router-view>
         </transition>
     </div>
 </template>

@@ -1,0 +1,331 @@
+.score{
+    font-size: .3rem;
+}
+#header{
+    height: .5rem;
+    line-height: .5rem;
+    font-size: .2rem;
+}
+a{
+    color:#999;
+}
+li{
+    list-style: none;
+}
+i,em{
+    font-style: normal;
+}
+
+/* ------------------------- */
+.banner{
+    color:#fff;
+    height: 1rem;
+    margin-bottom: .11rem;
+    background: url(../../../assets/salary/banner.png) no-repeat;
+    background-size: contain; 
+    font-size: 0;
+    padding: 0 .2rem;
+}
+.banner div{
+    display: inline-block;
+    width: 50%;
+    line-height: 1rem;
+    font-size: .14rem;
+    text-align: left;
+}
+.banner div:last-child{
+    text-align: right;
+    font-size: .22rem;
+    font-weight: bold;
+}
+
+/* ------------------------- */
+.tabs .tabs-item{
+    font-size: 0;
+    height: .36rem;
+    line-height: .36rem;
+    text-align: center;
+    
+}
+.tabs >ul{
+    /*background: #abcdef;*/
+}
+.tabs .tabs-item{
+    display: inline-block;
+    width: 45%;
+    font-size: .16rem;
+    color:#999;
+}
+.tabs .tabs-item.active{
+    color:#000;
+}
+
+/* ------------------------- */
+ul li:not(:first-child) .parts{
+    margin-top: .11rem;
+}
+.parts h3{
+    text-align:left;
+    font-weight: normal;
+    height: .30rem;
+    line-height: .30rem;
+    padding: 0 .20rem;
+    font-size: .12rem;
+    color: #9b9b9b;
+    background: #f9f9f9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+}
+.parts .list{
+    
+}
+.parts .list li{
+    padding: .20rem 0 .2rem .20rem;
+    position: relative;
+    overflow: hidden;
+}
+.parts .list li:not(:last-child):after{
+    content:' ';
+    width: 100%;
+    position: absolute;
+    height: 1px;
+    transform:rotate(60deg);
+    -webkit-transform:rotateX(60deg);
+    background: #f2f2f2;
+    left: .2rem;
+    bottom: 0;
+}
+.parts .list li a{
+    display: block;
+    font-size: 0;
+}
+.parts .list li a > div{
+    display: inline-block;
+    vertical-align: top;
+}
+.parts .list li a .parts-1{
+    width: .8rem;
+    font-size: .16rem;
+    font-weight: bold;
+    color:#4a4a4a;
+}
+.parts .list li a .parts-2{
+    width: calc(100% - .8rem);
+    font-size: 0;
+}
+.parts-2 >div{
+    display: inline-block;
+    font-size: .14rem;
+    line-height: .14rem;
+    color:#4a4a4a;
+    width: 50%;
+    text-align: left;
+    
+}
+.parts-2 > div:not(:last-child){
+    margin-bottom: .23rem;
+}
+.parts-2 > div:nth-last-child(2){
+    margin-bottom:0;
+}
+.parts .list li a > div h4,
+.parts .list2 li a > div h4{
+    font-size: .16rem;
+    font-weight: normal;
+    padding-left: .07rem;
+    text-align: left;
+    line-height: .22rem;
+    margin-bottom: .12rem;
+    color: #505050;
+
+}
+.parts .list2 li a > div h4{
+    margin-bottom: 0;
+}
+.sticker{
+    display: inline-block;
+    width: .24rem;
+    height: .24rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: .24rem;
+    color:#fff; 
+    font-size: .14rem;
+    margin-right: .08rem;
+}
+.parts .list li a > div p{
+    font-size: .14rem;
+    line-height: .14rem;
+    text-align: left;
+    color:#31affd;
+    padding-top: .1rem;
+}
+.parts .list li a > div p span{
+    margin-left: .12rem;
+  /*  display: inline-block;
+    width: 50%;*/
+}
+.parts .list li .parts-2,
+.parts .list2 li .parts-2{
+    font-size:.24rem;
+    color:#31affd;
+}
+.parts .list li .parts-2 span,
+.parts .list2 li .parts-2 span{
+    font-size:.18rem;
+    vertical-align: top
+}
+/* ------------------------- */
+.parts .list2 li{
+    height: .70rem;
+    line-height: .70rem;
+    padding:0 0 0 .20rem;
+}
+.parts .list2 li >a{
+    
+}
+.parts .list2 li a > div h4{
+    line-height: .70rem;
+    color:#333;
+}
+.parts .list2 li a > div h4 img{
+    width: .16rem;
+    vertical-align: middle;
+    margin-right: .10rem;
+}
+.swiper-scrollbar-drag{
+    height: .04rem;
+}
+.swiper-scrollbar{
+    border-radius:0;
+    background: #fff;
+}
+.swiper-scrollbar-drag{
+    background: #ff5970;
+}
+
+.swiper-container{
+    font-size: .16rem;
+    margin-top: -.04rem;
+    height: calc(100vh - .91rem);
+}
+.swiper-wrapper .swiper-slide ul{
+    height: calc(100% - .55rem)!important;
+}
+.swiper-scrollbar{
+    top:0;
+    height: .04rem;
+}
+.swiper-slide ul{
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.scrollbar-container{
+    background: #abcdef;
+    height: .10rem;
+}
+.scrollbar-drag{
+    width: .65rem;
+    height: 100%;
+    background: #123456;
+}
+.salary-select-btn{
+    line-height: .55rem;
+    font-size: .16rem;
+    width: 100%;
+    position: absolute;
+    left:0;
+    background: #fff;
+    bottom: 0;
+    outline: none;
+    border:0;
+}
+.salary-select-btn:before{
+    content:'';
+    position: absolute;
+    width: 100%;
+    top:-6px;
+    left:0;
+    height: 6px;
+    background: linear-gradient(top,#fff,#bdbdbd);
+}
+/*
+
+ */
+
+.detail-content{
+    position: absolute;
+    top:1rem;
+    bottom: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-scrolling:touch;
+    text-align: left;
+    padding:.24rem .22rem .7rem .15rem;
+
+}
+.detail-content h2{
+    font-size: .14rem;
+    line-height: .2rem;
+    color:#4a4a4a;
+    padding-left: .25rem;
+
+    margin-bottom: .14rem
+}
+.detail-content .detail-part-1 h2{
+    background: url(../../../assets/salary/icon-1.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part-2 h2{
+    background: url(../../../assets/salary/icon-2.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part-2{
+    margin-top: .24rem
+}
+.detail-content h2~div{
+    padding-left: .15rem;
+    line-height: .4rem;
+    position: relative;
+    font-size: 0;
+    color:#9b9b9b;
+}
+.detail-content h2~div *{
+    display: inline-block;
+    width: 50%;
+    font-size: .14rem;
+}
+.detail-content h2~div >span{
+    color:#4a4a4a;
+    text-align: right
+}
+.detail-content h2~div:after{
+    content: '';
+    position: absolute;
+    left:.15rem;
+    bottom: 0;
+    width: 100vw;
+    height: 1px;
+    background: #dbdbdb;
+    transform: rotateX(60deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

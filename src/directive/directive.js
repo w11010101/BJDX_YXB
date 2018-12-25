@@ -196,7 +196,7 @@ Popup.prototype = {
 }
 Vue.directive('popup',{
     bind:function(el,binding){
-        console.log('bind = ',arguments);
+        // console.log('bind = ',arguments);
         new Popup(el,binding,'popup');
     },
     // inserted:function(){

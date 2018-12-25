@@ -62,7 +62,7 @@
         </div>
         <!-- router-view -->
         <transition name="slide-fade">
-            <router-view class='internet-view' name='internet-view'></router-view>
+            <router-view class='sub-components-view' name='sub-components-view'></router-view>
         </transition>
     </div>
 </template>
