@@ -40,24 +40,22 @@ i,em{
 }
 
 /* ------------------------- */
+
 .tabs .tabs-item{
-    font-size: 0;
-    height: .36rem;
-    line-height: .36rem;
-    text-align: center;
-    
-}
-.tabs >ul{
-    /*background: #abcdef;*/
-}
-.tabs .tabs-item{
-    display: inline-block;
     width: 45%;
-    font-size: .16rem;
-    color:#999;
 }
-.tabs .tabs-item.active{
-    color:#000;
+.swiper-container{
+    font-size: .16rem;
+    margin-top: -.04rem;
+    height: calc(100vh - .91rem);
+}
+.swiper-wrapper .swiper-slide ul{
+    /*height: calc(100% - .55rem)!important;*/
+}
+.swiper-slide ul{
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ------------------------- */
@@ -193,43 +191,8 @@ ul li:not(:first-child) .parts{
     vertical-align: middle;
     margin-right: .10rem;
 }
-.swiper-scrollbar-drag{
-    height: .04rem;
-}
-.swiper-scrollbar{
-    border-radius:0;
-    background: #fff;
-}
-.swiper-scrollbar-drag{
-    background: #ff5970;
-}
 
-.swiper-container{
-    font-size: .16rem;
-    margin-top: -.04rem;
-    height: calc(100vh - .91rem);
-}
-.swiper-wrapper .swiper-slide ul{
-    height: calc(100% - .55rem)!important;
-}
-.swiper-scrollbar{
-    top:0;
-    height: .04rem;
-}
-.swiper-slide ul{
-    height: 100%;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-}
-.scrollbar-container{
-    background: #abcdef;
-    height: .10rem;
-}
-.scrollbar-drag{
-    width: .65rem;
-    height: 100%;
-    background: #123456;
-}
+
 .salary-select-btn{
     line-height: .55rem;
     font-size: .16rem;

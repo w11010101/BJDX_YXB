@@ -200,6 +200,9 @@ ul li:not(:first-child) .parts{
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+/*.swiper-slide ul::-webkit-scrollbar {
+    display: none;
+}*/
 .scrollbar-container{
     background: #abcdef;
     height: .10rem;

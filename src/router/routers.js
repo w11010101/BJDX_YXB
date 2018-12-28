@@ -31,17 +31,9 @@ var router_config = [
                     'project-view':true
                 },
                 meta:{
-                    pageName:'上网服务',
+                    pageName:'上网记录',
                     index:1
                 },
-                children:[
-                    {
-                        path:'list',
-                        components: {
-                            'sub-components-view': resolve => require(['@/components/internet/internet-list.vue'],resolve)
-                        },
-                    }
-                ]
             },{
                 path: '/volunteer',
                 name: 'volunteer',
@@ -112,6 +104,20 @@ var router_config = [
                         }
                     }
                 ]
+            },
+            {
+                path: '/school-calendar',
+                name: 'school-calendar',
+                components: {
+                    'project-view': resolve => require(['@/components/school-calendar/school-calendar.vue'],resolve)
+                },
+                props:{
+                    'project-view':true
+                },
+                meta:{
+                    pageName:'校历',
+                    index:1
+                }
             },
         ]
     },

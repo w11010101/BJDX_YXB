@@ -1,10 +1,11 @@
 /** { touch-action: pan-x; }*/
-
+.swiper-slide{
+    overflow-y: auto;
+    -webkit-overflow-scrolling:touch;
+}
 /**/
 .content{
     font-size: 14px;
-    overflow-y:scroll;
-    -webkit-overflow-scrolling:touch;
 }
 .user-internet-info{
     height: 2.8rem;
@@ -17,8 +18,6 @@
     padding-left:.3rem;
     height: .76rem;
     padding-top: .14rem;
-    display: grid;
-    grid-template-columns: .6rem auto;
     position: relative;
 
 }
@@ -44,12 +43,13 @@
 }
 .info-msg p{
     line-height: .3rem;
+    font-size: .14rem;
 }
 .info > .deviceBtn{
     position: absolute;
     right:0;
     top:.25rem;
-    width: .96rem;
+    width: 1.4rem;
     height: .25rem;
     line-height: .14rem;
     background: rgba(242,242,242,0.22);
@@ -93,6 +93,7 @@
     display: inline-block;
     width: calc(100% - 1.2rem);
     font-size: .14rem;
+    color:#9b9b9b;
 }
 
 .parts h3{
@@ -210,54 +211,35 @@
     color:#9b9b9b;
     line-height: .20rem;
 }
-.internet-list .list li .list-content{
-    transition: all .3s ease;
-    -webkit-transition: all .3s ease;
-}
-.internet-list .list li.show .list-content{
-    transform: translateX(-76px);
-    -webkit-transform: translateX(-76px);
-}
 .internet-list .list li .list-input{
     position: absolute;
     right: 0;
     top:0;
     font-size: 0;
-    width: 0;
+    width: 2.4rem;
     height: .68rem;
-    transition: all .3s ease;
-    -webkit-transition: all .3s ease;
-    overflow:hidden;
 }
 .internet-list .list li.show .list-input{
     width: calc(.76rem * 3); 
 }
-.internet-list .list li .list-input button{
+.internet-list .list li .list-input >div {
     width: calc(100% / 3);
     height: .68rem;
-    border:0;
-    line-height: .68rem;
     font-size: .14rem;
-    color:#fff;
-    position: absolute;
-    right:0;
-    top:0;
+    float:right;
+    text-align: center;
     background: -webkit-linear-gradient(left,#ff6f6f,#fe9191);
     background: linear-gradient(left,#ff6f6f,#fe9191);
     
 }
-.internet-list .list li .list-input button:nth-child(3){
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
+.internet-list .list li .list-input >div button{
+    width: 70%;
+    height: .4rem;
+    line-height: .4rem;
+    color:#fff;
+    /*background: #abcdef;*/
+    margin-top: .14rem;
+    outline: none
 }
-.internet-list .list li .list-input button:nth-child(2){
-    transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-}
-.internet-list .list li .list-input button:nth-child(1){
-    transform: translateX(-200%);
-    -webkit-transform: translateX(-200%);
-}
-.internet-list .list li .list-input button[disabled]{
-    background: #dcdcdc;
-}
+
+

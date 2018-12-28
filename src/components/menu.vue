@@ -57,6 +57,10 @@ export default {
                     routerUrl:'/salary'
                 },
                 {
+                    name:'校历',
+                    routerUrl:'/school-calendar'
+                },
+                {
                     name:'常见问题',
                     routerUrl:'/'
                 }

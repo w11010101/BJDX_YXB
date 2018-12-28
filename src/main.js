@@ -7,6 +7,11 @@ import App from './App';
 import router from './router';
 import $ from 'zepto';
 import iView from 'iView';
+
+import { ToastPlugin ,AlertPlugin,ConfirmPlugin} from 'vux';
+Vue.use(ToastPlugin);
+Vue.use(AlertPlugin);
+Vue.use(ConfirmPlugin);
 Vue.use(iView);
 import 'iview/dist/styles/iview.css';
 // import 'iview.css'

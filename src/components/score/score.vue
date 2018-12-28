@@ -187,52 +187,7 @@
                     on:{
                         slideChangeTransitionEnd: function(){
                             _this.tabActive = this.activeIndex;//切换结束时，告诉我现在是第几个slide
-                        },
-                        //=================
-                        // ------------------- state -------------------
-                        // touchStart:function(){
-                        //     _this.scrollBarTranslate = this.getTranslate();
-                        //     console.log('touchStart = ',this.getTranslate());
-                        // },
-                        // touchEnd:function(){
-
-                        //     console.log('touchEnd = ',this.getTranslate());
-                        // },
-                        // transitionStart:function(){
-                        //     _this.duration = 300;
-
-                        //     _this.scrollBarTranslate = this.getTranslate();
-                        //     console.log('transitionStart = ',this.getTranslate());
-                        // },
-                        // transitionEnd:function(){
-                        //     _this.duration = 0;
-                        //     _this.scrollBarTranslate = this.getTranslate();
-                        //     console.log('transitionEnd = ',this.getTranslate());
-                        // },
-                        // // ------------------- move -------------------
-                        // // move
-                        // sliderMove: function(event){
-                        //     _this.scrollBarTranslate = this.getTranslate();
-                        //     // console.log('sliderMove = ',this.getTranslate());
-                        // },
-                        // setTranslate:function(){
-                        //     // _this.scrollBarTranslate = this.getTranslate();
-                        //     // console.log('setTranslate = ',this.getTranslate());
-                        // },
-                        // // ------------------- change -------------------
-                        // // change
-                        // slideChangeTransitionStart:function(){
-                        //     console.log('slideChangeTransitionStart = ',this.getTranslate());
-                        //     // _this.scrollBarTranslate = this.getTranslate();
-                        // },
-                        // slideChangeTransitionEnd:function(){
-                        //     console.log('slideChangeTransitionEnd = ',this.getTranslate());
-                        //     // _this.scrollBarTranslate = this.getTranslate();
-                        // },
-                        // slideChange:function(){
-                        //     console.log('slideChange = ',this.getTranslate());
-                        //     // _this.scrollBarTranslate = this.getTranslate();
-                        // }
+                        }
                     }
                 })
                 this.swiperObj.scrollbar.$el.css({

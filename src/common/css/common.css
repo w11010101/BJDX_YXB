@@ -18,7 +18,6 @@ html{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /*margin-top: 60px;*/
 }
 .project-view{
   
@@ -49,7 +48,6 @@ html{
 }
 .slide-fade-leave-to{
   transform: translateX(100%);
-  /*opacity: 0;*/
 }
 .nothing{
   padding:27px 0 37px 0;
@@ -134,26 +132,55 @@ body .vux-popup-header-right{
     margin-top: -10px;
     right: 10px;
 }
-/*body .vux-popup-header{
-    background: #fff;
+/* swiper tabs */
+.tabs .tabs-item{
+    font-size: 0;
+    height: .36rem;
+    line-height: .36rem;
+    text-align: center;
 }
-body .scroller-item{
-    color:#b4b4b4;
+.tabs >ul{
+    height: .36rem;
 }
-body .scroller-item.scroller-item-selected{
-    font-size: 18px;
-    color: #000;
+.tabs .tabs-item{
+    display: inline-block;
+    width: 33%;
+    font-size: .16rem;
+    color:#999;
 }
-
-body .vux-flex-row{
-    background: #fff;
+.tabs .tabs-item.active{
+    color:#000;
 }
-body .scroller-mask{
-    background: none;
+.swiper-scrollbar{
+    top:0;
+    height: .04rem;
 }
-body .scroller-indicator{
-    background: none;
+/*.swiper-wrapper{
+    overflow-y: auto;
+    overflow-scrolling:touch;
+}
+.swiper-slide{
+    overflow-y: auto;
+    overflow-scrolling:touch;
 }*/
+.swiper-container{
+    height: calc(100vh - .88rem)
+}
+.scrollbar-container{
+    background: #abcdef;
+    height: .10rem;
+}
+.swiper-scrollbar-drag{
+    height: .04rem;
+}
+.swiper-scrollbar{
+    border-radius:0;
+}
+.scrollbar-drag{
+    width: .65rem;
+    height: 100%;
+    background: #123456;
+}
 /*@media screen and (max-width: 320px){
     html{
         font-size: calc(100vw / 3.2);
