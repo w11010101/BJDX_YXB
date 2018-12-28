@@ -4,15 +4,18 @@
         <!-- <header class="" v-show='!title.includes("Menu")'> -->
             <!-- v-show='!title.includes("Menu")' -->
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
-            <label>{{title}}</label>
-            <Button type="text" class='menuBtn' :setSelect='select' v-popup='popupArr'></Button>
+            <label>{{title}} | {{popupactive}}</label>
+            <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button>
+            <!-- <Button type="text" class='menuBtn' :setSelect='select' v-popup='popupArr'></Button> -->
             <Button type="text" class='closeBtn' @click='closeFn'></Button>
         </header>
 
+        <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel></actionsheet>
     </div>
 </template>
 <script type="text/javascript">
     import router from '@/router';
+    import { Actionsheet } from 'vux';
     export default {
         name: 'myHeader',
         data(){
@@ -22,22 +25,27 @@
                 backShow:true,
                 popupArr:[
                     {
-                        value:'option-1',
+                        label:'option-1',
                         optionID:1,
+                        menuKey:1,
                     },
                     {
-                        value:'option-2',
+                        label:'option-2',
                         optionID:2,
+                        menuKey:2,
                     }
                 ],
-                select:null
+                select:null,
+                actionsheetShow:false,
+                headerPopupActive:''
             }
         },
-        // props:['title'],
+        components:{
+            Actionsheet
+        },
+        props:['popupactive'],
         watch: {
             '$route'(to,from){
-                // console.log(to);
-                // console.log(from);
                 this.title = to.meta.pageName||from.meta.pageName;
                 
                 if(to.meta.index == 1){
@@ -48,16 +56,13 @@
             }
         },
         mounted(){
-            // console.log(router.history.current)
+            this.$nextTick(function(){
+                console.log(this.popupactive)
+            })
             this.title = router.history.current.meta.pageName;
         },
         methods:{
             goBack(){
-                // console.log(this.$route.matched);
-                // console.log(this.$route.params.matched);
-                // if(this.$route.name == 'status'){
-                //     console.log(this.$route.matched);
-                // }
                 router.go(-1);
             },
             popupFn(){
@@ -74,6 +79,16 @@
                     // alert('android');
                     window.AndroidWebView.closePage();
                 }
+            },
+            showactionsheetShow(){
+                this.actionsheetShow = true;
+            },
+            clickFn(key,value){
+                console.log(key);
+                console.log(value);
+                this.popupactive = value.label;
+                this.$emit('update:popupactive',value.label);
+                this.headerPopupActive = value.label
             }
         }
     }

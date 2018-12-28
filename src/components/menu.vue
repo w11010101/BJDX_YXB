@@ -1,6 +1,6 @@
 <template>
     <div class='menu'>
-        <my-header></my-header>
+        <my-header ref='header' :popupactive.sync='popupactive'></my-header>
         <div class='btns' v-if='menuShow'>
             <Button type="primary" size='large' long 
                 v-for='(todo,index) in menus' 
@@ -8,6 +8,7 @@
                 :key='index' 
                 @click='title=todo.name'>{{todo.name}}</Button>
         </div>
+        {{popupactive}}
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
         </transition>
@@ -30,8 +31,18 @@ export default {
     beforeCreate(){
 
     },
+    watch:{
+        // popupactive(){
+        //     console.log(arguments)
+        // }
+        // 'this.$refs.header.popupActive'(){
+        //     console.log(this)
+        // }
+    },
     mounted(){
-        // alert(this.GetQueryString('page'));
+        this.$nextTick(function(){
+            console.log(this.$refs['header']);
+        })
         router.push('/'+this.GetQueryString('page'));
     },
     data () {
@@ -39,6 +50,7 @@ export default {
             msg: 'Welcome to Menu.vue',
             spinShow:true,
             menuShow:true,
+            popupactive:"menu",
             menus:[
                 {
                     name:'成绩查询',
@@ -59,6 +71,10 @@ export default {
                 {
                     name:'校历',
                     routerUrl:'/school-calendar'
+                },
+                {
+                    name:'帮助中心',
+                    routerUrl:'/help-center'
                 },
                 {
                     name:'常见问题',

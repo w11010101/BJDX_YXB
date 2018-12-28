@@ -119,6 +119,20 @@ var router_config = [
                     index:1
                 }
             },
+            {
+                path: '/help-center',
+                name: 'help-center',
+                components: {
+                    'project-view': resolve => require(['@/components/help-center/help-center.vue'],resolve)
+                },
+                props:{
+                    'project-view':true
+                },
+                meta:{
+                    pageName:'帮助中心',
+                    index:1
+                }
+            },
         ]
     },
 ];
