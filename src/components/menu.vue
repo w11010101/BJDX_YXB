@@ -12,16 +12,12 @@
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
         </transition>
-        <!-- <transition name="slide-fade">
-            <router-view class='status-view' name='status-view'/>
-        </transition> -->
-        <!-- <list-menu :myprop="'this is HelloWorld.vue'"></list-menu> -->
     </div>
 </template>
 
 <script>
 import router from '@/router';
-
+import {GetQueryString} from '@/common/js/common.js'
 export default {
     name: 'mymenu',
     components:{
@@ -31,18 +27,7 @@ export default {
     beforeCreate(){
 
     },
-    watch:{
-        // popupactive(){
-        //     console.log(arguments)
-        // }
-        // 'this.$refs.header.popupActive'(){
-        //     console.log(this)
-        // }
-    },
     mounted(){
-        this.$nextTick(function(){
-            console.log(this.$refs['header']);
-        })
         router.push('/'+this.GetQueryString('page'));
     },
     data () {
@@ -85,16 +70,7 @@ export default {
         }
     },
     methods:{
-        GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
-            var context = "";
-            if (r != null)
-                context = r[2];
-            reg = null;
-            r = null;
-            return context == null || context == "" || context == "undefined" ? "" : context;
-        }
+        GetQueryString,
     }
 }
 </script>
@@ -128,6 +104,13 @@ export default {
     height: 1rem;
     position: relative;
     border: 1px solid #eee;
+}
+
+/**/
+.jbq-container{
+    width: 400px;
+    height: 700px;
+    display: inline-block;
 }
 
 </style>

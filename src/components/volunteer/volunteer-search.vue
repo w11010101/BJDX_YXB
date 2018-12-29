@@ -2,40 +2,30 @@
     <div class="volunteer-search">
         <div class="content">
             <div class="search-Box" >
-                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal'/>
-                <!-- <Input v-model="searchVal" prefix="ios-search" class='searchInput' placeholder="搜索志愿活动" clearable style="width: calc(100% - 60px);" ></Input> -->
+                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal' v-focus/>
                 <button  @click='searchFn'>搜索</button>
-                <!-- <button v-if='searchVal == ""' @click='searchFn'>搜索</button>
-                <button v-else @click='cancelFn'>取消</button> -->
-                <!-- <search
-                  @result-click="resultClick"
-                  @on-change="getResult"
-                  :results="results"
-                  v-model="searchVal"
-                  position="absolute"
-                  auto-scroll-to-top
-                  top="46px"
-                  @on-focus="onFocus"
-                  @on-cancel="onCancel"
-                  @on-submit="onSubmit"
-                  ref="search"></search> -->
+
             </div>
+
             <!--  -->
-            <h2>历史搜索</h2>
+            <!-- <h2>历史搜索</h2>
             <ul>
                 <li v-for='(item,index) in hotSearch' :key='item.id' @click='setActive(index,"hot")' :class='{"active":index == hotSearchActive}'>{{item.name}}</li>
-            </ul>
+            </ul> -->
             <!--  -->
-            <h2>热门搜索</h2>
+            <!-- <h2>热门搜索</h2>
             <ul>
                 <li v-for='(item,index) in historySearch' :key='item.id' @click='setActive(index,"history")' :class='{"active":index == historySearchActive}'>{{item.name}}</li>
-            </ul>
+            </ul> -->
         </div>
-        
+        <!-- router-view -->
+        <transition name="slide-fade">
+            <router-view class='sub-components-view' name='volunteer-search-view'></router-view>
+        </transition>
     </div>
 </template>
 <script>
-    // import { Search } from 'vux'
+    import route from '@/router';
     import { Alert ,AlertModule} from 'vux'
     export default ({
         data(){
@@ -43,18 +33,6 @@
                 msg: 'this is volunteer-search.vue',
                 title: '志愿服务',
                 searchVal:'',
-                // searchStyle:{
-                //     'display': 'inline-block',
-                //     'width': 'calc(100% - 60px)',
-                //     'height': '30px',
-                //     'border':'none',
-                //     'border-radius':'5rem',
-                //     'padding-left': '40px',
-                //     'background': 'url(../../../assets/volunteer/search.png) no-repeat left 15px center #f8f8f8',
-                //     'background-size': '20px',
-                //     'outline': 'none',
-                //     'font-size': '16px',
-                // },
                 results:[],
                 hotSearchActive:999,
                 hotSearch:[
@@ -72,6 +50,19 @@
                     {name:"志愿服务",id:4},
                     {name:"多维宇宙",id:5},
                 ]
+            }
+        },
+        directives: {
+            focus: {
+                // 指令的定义
+                inserted: function (el) {
+                    el.focus();
+                }
+            }
+        },
+        watch:{
+            '$route'(){
+                console.log('search = ' , arguments)
             }
         },
         components:{
@@ -99,14 +90,18 @@
                 if(this.searchVal){
                     AlertModule.show({
                         // title: '',
-                        content: '搜索。。。',
+                        content: '搜索中。。。',
                         onShow () {
                             console.log('Plugin: I\'m showing')
                         },
                         onHide () {
                             console.log('Plugin: I\'m hiding')
                         }
-                    })
+                    });
+                    setTimeout(function(){
+                        AlertModule.hide();
+                        route.push('/volunteer/search/list/searchVal');
+                    },1000);
                 }else{
                     AlertModule.show({
                         // title: '',
@@ -120,22 +115,7 @@
                     })
                 }
                 
-            },
-            // resultClick(){
-            //     console.log('resultClick')
-            // },
-            // getResult(){
-            //     console.log('getResult')
-            // },
-            // onFocus(){
-            //     console.log('onFocus')
-            // },
-            // onCancel(){
-            //     console.log('onCancel')
-            // },
-            // onSubmit(){
-            //     console.log('onSubmit')
-            // },            
+            },           
 
         }
     });

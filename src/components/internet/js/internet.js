@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import 'swiper/dist/css/swiper.css';
 import Swiper from 'swiper';
-import {JSAjaxRequest,getSha1Data} from '@/common/js/ajax.js';
+import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
 import {httpApi} from '@/common/js/common.js'
 import { Confirm,TransferDomDirective as TransferDom } from 'vux';
 export default {
@@ -24,6 +24,8 @@ export default {
     methods:{
         // 获取用户信息
         getUserInfo(){
+            
+            
             JSAjaxRequest({
                 url:httpApi.internet.netServiceBasicInfo,
                 data:getSha1Data(),

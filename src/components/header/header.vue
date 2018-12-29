@@ -2,15 +2,14 @@
     <div id="header">
         <header class="">
         <!-- <header class="" v-show='!title.includes("Menu")'> -->
-            <!-- v-show='!title.includes("Menu")' -->
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
-            <label>{{title}} | {{popupactive}}</label>
+            <label>{{title}}</label>
             <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button>
             <!-- <Button type="text" class='menuBtn' :setSelect='select' v-popup='popupArr'></Button> -->
             <Button type="text" class='closeBtn' @click='closeFn'></Button>
         </header>
 
-        <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel></actionsheet>
+        <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel ></actionsheet>
     </div>
 </template>
 <script type="text/javascript">
@@ -63,7 +62,10 @@
         },
         methods:{
             goBack(){
-                router.go(-1);
+                console.log(this.$route)
+                // router.go(this.$route.matched[this.$route.matched.length-1]);
+                router.back();
+                // router.go(-1);
             },
             popupFn(){
                 console.log('popupFn');
@@ -84,11 +86,15 @@
                 this.actionsheetShow = true;
             },
             clickFn(key,value){
-                console.log(key);
-                console.log(value);
-                this.popupactive = value.label;
-                this.$emit('update:popupactive',value.label);
-                this.headerPopupActive = value.label
+                if(key != 'cancel'){
+                    console.log('key = ',key);
+                    console.log('value = ',value);
+                    this.$emit('update:popupactive',value.label);
+                    this.headerPopupActive = value.label
+                }else{
+                    console.log('cancel')
+                }
+                
             }
         }
     }
@@ -99,15 +105,6 @@
         line-height: .5rem;
         font-size: .16rem;
         position: relative;
-    }
-    header:after{
-        /*content:' ';*/
-        position: absolute;
-        width:100%;
-        height: 1px;
-        background:#ccc;
-        left:0;
-        bottom: 0;
     }
     #header button{
         width: .3rem;

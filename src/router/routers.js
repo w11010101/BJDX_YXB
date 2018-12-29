@@ -58,6 +58,23 @@ var router_config = [
                             pageName:'志愿服务',
                             index:2
                         },
+                        children:[
+                            
+                        ]
+                    },
+                    {
+                        path:'form',
+                        name:'form',
+                        components: {
+                            'sub-components-view': resolve => require(['@/components/volunteer/volunteer-form.vue'],resolve)
+                        },
+                        props: {
+                            'sub-components-view': true
+                        },
+                        meta:{
+                            pageName:'志愿服务',
+                            index:2
+                        },
                     },
                     {
                         path:'search',
@@ -70,8 +87,41 @@ var router_config = [
                         },
                         meta:{
                             pageName:'志愿服务',
+                            showType:'slide-fade-y',
                             index:2
                         },
+                        children:[
+                            {
+                                path:'list/:value',
+                                name:'list',
+                                components: {
+                                    'volunteer-search-view': resolve => require(['@/components/volunteer/volunteer-list.vue'],resolve)
+                                },
+                                props: {
+                                    'volunteer-search-view': true
+                                },
+                                meta:{
+                                    pageName:'志愿服务',
+                                    index:3
+                                },
+                                children:[
+                                    {
+                                        path:'detail/:items',
+                                        name:'list-detail',
+                                        components: {
+                                            'volunteer-list-view': resolve => require(['@/components/volunteer/volunteer-detail.vue'],resolve)
+                                        },
+                                        props: {
+                                            'volunteer-list-view': true
+                                        },
+                                        meta:{
+                                            pageName:'志愿服务',
+                                            index:4
+                                        },
+                                    },
+                                ]
+                            }
+                        ]
                     }
                 ]
             },

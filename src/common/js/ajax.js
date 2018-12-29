@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {stringToHex} from '@/common/js/common.js'
+import {stringToHex,GetQueryString} from '@/common/js/common.js'
 import CryptoJS from 'crypto-js'
 // axios 请求
 export function JSAjaxRequest(option){
@@ -51,7 +51,7 @@ export function getSha1Data(reqDate,key){
             getKey = key+'';
         }
     }
-
+    var token = getAESdecrypt(GetQueryString('token'));
     let data = {
         "sign": "231df862f2a59345aa4ae984f48f3f75f3b4a4ee",
         "orgCode": "bjmu",
@@ -61,7 +61,7 @@ export function getSha1Data(reqDate,key){
         "appVersion": "1.0.0",
         "clientType": "andriod",
         "clientMark": "2706F35A-62ED-4148-ABC1-5E6218828E00",   
-        "token": "69965e3035a9480db964fefe6443d397",//token，和APP交互
+        "token": token,//token，和APP交互
         "clientIp": "172.16.24.168",//ip地址
         "clientMac": "A4:5E:60:DB:09:0F12",
         "magic": "2356681452",
@@ -84,6 +84,24 @@ export function getSha1Data(reqDate,key){
     return data;
 }
 
+export function getAESdecrypt(value){
+
+    var key = CryptoJS.enc.Utf8.parse("1234567890123456");
+    var iv  = CryptoJS.enc.Utf8.parse("1234567890654321");
+
+    var cfg={
+        iv: iv,
+        mode:CryptoJS.mode.CBC,
+        padding:CryptoJS.pad.Pkcs7,
+    };
+    var decryptdata = CryptoJS.AES.decrypt(
+        value,
+        key,
+        cfg
+    )
+    return decryptdata.toString(CryptoJS.enc.Utf8)
+
+}
 
 
 
