@@ -181,8 +181,35 @@ var router_config = [
                 meta:{
                     pageName:'帮助中心',
                     index:1
-                }
-            },
+                },
+                children:[
+                    {
+                        path: 'problem/:id',
+                        name: 'problem',
+                        components: {
+                            'help-center-view': resolve => require(['@/components/help-center/problem.vue'],resolve)
+                        },
+                        props:{
+                            'project-view':true
+                        },
+                        meta:{
+                            pageName:'',
+                            index:2
+                        }
+                    },
+                    {
+                        path: 'illustrate',
+                        name: 'illustrate',
+                        components: {
+                            'help-center-view': resolve => require(['@/components/help-center/illustrate.vue'],resolve)
+                        },
+                        meta:{
+                            pageName:'',
+                            index:2
+                        }
+                    }
+                ]
+            }
         ]
     },
 ];

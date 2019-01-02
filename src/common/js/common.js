@@ -1,14 +1,23 @@
 // var requireHTTP = 'http://202.112.187.103:81/app/';
-var requireHTTP  = '/api/app/'
+var requireHTTP  = '/api/app/';
 export var httpApi = {
 	internet:{
-		netServiceBasicInfo:requireHTTP+'netServiceBasicInfo',
-        netServiceHistory:requireHTTP+'netServiceHistory',
-        netServiceDevices:requireHTTP+'netServiceDevices',
-        netServiceRename:requireHTTP+'netServiceRename',
-        netServiceDeleteMac:requireHTTP+'netServiceDeleteMac',
-        netServiceOffLine:requireHTTP+'netServiceOffLine',
-	}
+		netServiceBasicInfo: requireHTTP + 'netServiceBasicInfo',
+        netServiceHistory: requireHTTP + 'netServiceHistory',
+        netServiceDevices: requireHTTP + 'netServiceDevices',
+        // 重命名
+        netServiceRename: requireHTTP + 'netServiceRename',
+        // 解绑
+        netServiceDeleteMac: requireHTTP + 'netServiceDeleteMac',
+        // 下线
+        netServiceOffLine: requireHTTP + 'netServiceOffLine',
+	},
+    helpCenter:{
+        h5Columns: requireHTTP + "h5Columns",
+        h5QAs: requireHTTP + "h5QAs",
+        
+
+    }
 }
 export function stringToHex(str){
     var val="";

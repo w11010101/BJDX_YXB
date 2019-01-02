@@ -24,8 +24,6 @@ export default {
     methods:{
         // 获取用户信息
         getUserInfo(){
-            
-            
             JSAjaxRequest({
                 url:httpApi.internet.netServiceBasicInfo,
                 data:getSha1Data(),
@@ -37,7 +35,7 @@ export default {
                     }
                 },
                 error:(error)=>{
-                    console.log('error = ' , error)
+                    this.toastModule(error.msg)
                 }
             });
         },  
@@ -125,8 +123,8 @@ export default {
                 success:(data)=>{
                     let response = data.data;
                     if(response.code == 0){
-                        console.log('unbingingFn = ',response);
-                        this.toastModuleAuto('已下线','unbunling');
+                        console.log('setUnbunlingFn = ',response);
+                        this.toastModuleAuto('解绑成功','unbunling');
                     }
                 },
                 error:(error)=>{
@@ -134,24 +132,25 @@ export default {
                 }
             });
         },
+        // 下线
         setRollsOffFn(item){
             console.log(item)
-            // JSAjaxRequest({
-            //     url:httpApi.internet.netServiceOffLine,
-            //     data:getSha1Data({
-            //         "radOnlineId":item.macAddress
-            //     }),
-            //     success:(data)=>{
-            //         let response = data.data;
-            //         if(response.code == 0){
-            //             console.log('unbingingFn = ',response);
-            //             this.toastModuleAuto('解绑成功','unbunling');
-            //         }
-            //     },
-            //     error:(error)=>{
-            //         console.log('error = ' , error)
-            //     }
-            // });
+            JSAjaxRequest({
+                url:httpApi.internet.netServiceOffLine,
+                data:getSha1Data({
+                    "radOnlineId":item.macAddress
+                }),
+                success:(data)=>{
+                    let response = data.data;
+                    if(response.code == 0){
+                        console.log('setRollsOffFn = ',response);
+                        this.toastModuleAuto('已下线','rollsOff');
+                    }
+                },
+                error:(error)=>{
+                    console.log('error = ' , error)
+                }
+            });
         },
         // list 控件 renameFn、rollsOffFn、unbunlingFn
         // 重命名按钮
@@ -195,7 +194,7 @@ export default {
                 success:(data)=>{
                     let response = data.data;
                     if(response.code == 0){
-                        // console.log('renameFn = ',response);
+                        console.log('renameFn = ',response);
                         this.toastModuleAuto('修改成功','rename');
                     }
                 },
@@ -235,11 +234,16 @@ export default {
         },
         toastModuleAuto (value,type) {
             this.toastModule(value);
+            console.log(value,type)
             setTimeout(() => {
                 this.$vux.toast.hide();
                 if(type == 'unbunling' || type == 'rename'){
                     this.$set(this.$data,'internetServerBindList',[]);
                     this.getInternetServerList('0');
+                }else{
+
+                    this.$set(this.$data,'internetServerList',[]);
+                    this.getInternetServerList('1');
                 }
                 
             }, 1000)

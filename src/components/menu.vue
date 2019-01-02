@@ -8,7 +8,7 @@
                 :key='index' 
                 @click='title=todo.name'>{{todo.name}}</Button>
         </div>
-        {{popupactive}}
+        <!-- {{popupactive}} -->
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
         </transition>
@@ -28,14 +28,16 @@ export default {
 
     },
     mounted(){
-        router.push('/'+this.GetQueryString('page'));
+        router.replace('/'+this.GetQueryString('page'));
+        console.log('token',this.GetQueryString('token'));
+        localStorage.setItem('token',this.GetQueryString('token'));
     },
     data () {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,
-            menuShow:true,
-            popupactive:"menu",
+            menuShow:false,
+            popupactive:"",
             menus:[
                 {
                     name:'成绩查询',
@@ -61,10 +63,6 @@ export default {
                     name:'帮助中心',
                     routerUrl:'/help-center'
                 },
-                {
-                    name:'常见问题',
-                    routerUrl:'/'
-                }
 
             ]
         }

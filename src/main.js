@@ -8,7 +8,7 @@ import router from './router';
 import $ from 'zepto';
 import iView from 'iView';
 
-import { ToastPlugin ,AlertPlugin,ConfirmPlugin,Loading} from 'vux';
+import { ToastPlugin ,AlertPlugin ,ConfirmPlugin ,Loading} from 'vux';
 Vue.use(ToastPlugin);
 Vue.use(AlertPlugin);
 Vue.use(ConfirmPlugin);

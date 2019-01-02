@@ -1,6 +1,9 @@
 import axios from 'axios'
 import {stringToHex,GetQueryString} from '@/common/js/common.js'
-import CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js';
+// import Vue from 'vue'
+// import  { AlertPlugin } from 'vux'
+// Vue.use(AlertPlugin)
 // axios 请求
 export function JSAjaxRequest(option){
 
@@ -43,7 +46,7 @@ export function getSha1Data(reqDate,key){
     let getKey = 'synjones_bjmu_2018'
     if(arguments.length){
         if(typeof arguments[0] == 'object' ){
-            getDdate = reqDate;
+            getDdate = reqDate; 
         }else{
             getKey = reqDate+'';
         }
@@ -51,7 +54,15 @@ export function getSha1Data(reqDate,key){
             getKey = key+'';
         }
     }
-    var token = getAESdecrypt(GetQueryString('token'));
+    localStorage.setItem('token','6C696F7144556F62363153326C507845466347457272376E78432F6C48344875684B4230316C666C4A4B2F57716956444955636B744E4C707959637071634A7A')
+    if(!localStorage.getItem('token')){
+        alert('token为空');
+        localStorage.removeItem('token');
+        return false;
+    }
+    var key = hexCharCodeToStr(localStorage.getItem('token'));
+    var token = getAESdecrypt(key);
+    // console.log(token)
     let data = {
         "sign": "231df862f2a59345aa4ae984f48f3f75f3b4a4ee",
         "orgCode": "bjmu",
@@ -83,7 +94,7 @@ export function getSha1Data(reqDate,key){
     // console.log(JSON.stringify(data));
     return data;
 }
-
+// token AES 解码
 export function getAESdecrypt(value){
 
     var key = CryptoJS.enc.Utf8.parse("1234567890123456");
@@ -103,6 +114,27 @@ export function getAESdecrypt(value){
 
 }
 
+export function hexCharCodeToStr(hexCharCodeStr) {
+　　var trimedStr = hexCharCodeStr.trim();
+　　var rawStr = 
+　　trimedStr.substr(0,2).toLowerCase() === "0x"
+　　? 
+　　trimedStr.substr(2) 
+　　: 
+　　trimedStr;
+　　var len = rawStr.length;
+　　if(len % 2 !== 0) {
+　　　　alert("Illegal Format ASCII Code!");
+　　　　return "";
+　　}
+　　var curCharCode;
+　　var resultStr = [];
+　　for(var i = 0; i < len;i = i + 2) {
+　　　　curCharCode = parseInt(rawStr.substr(i, 2), 16); // ASCII Code Value
+　　　　resultStr.push(String.fromCharCode(curCharCode));
+　　}
+　　return resultStr.join("");
+}
 
 
 

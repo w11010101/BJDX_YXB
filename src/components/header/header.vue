@@ -1,12 +1,12 @@
 <template>
     <div id="header">
-        <header class="">
-        <!-- <header class="" v-show='!title.includes("Menu")'> -->
+        <!-- <header class=""> -->
+        <header class="" v-show='!title.includes("Menu")'>
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
             <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button>
             <!-- <Button type="text" class='menuBtn' :setSelect='select' v-popup='popupArr'></Button> -->
-            <Button type="text" class='closeBtn' @click='closeFn'></Button>
+            <Button type="text" class='closeBtn' @click='closeFn'></Button> 
         </header>
 
         <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel ></actionsheet>
@@ -62,7 +62,6 @@
         },
         methods:{
             goBack(){
-                console.log(this.$route)
                 // router.go(this.$route.matched[this.$route.matched.length-1]);
                 router.back();
                 // router.go(-1);

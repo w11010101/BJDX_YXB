@@ -1,12 +1,4 @@
 
-.slide-fade-y-enter,.slide-fade-y-leave-to{
-    transform: translateY(80%);
-    /*opacity: 0;*/
-}
-.slide-fade-y-enter-active,.slide-fade-y-leave-active{
-    transition: all .3s ease;
-    
-}
 .volunteer .banner{
     background: url(../../../assets/volunteer/volunteer-bg.png) no-repeat;
     -webkit-background-size: 100%;
@@ -39,28 +31,6 @@
     height: auto;
     overflow-y: scroll;
     -webkit-overflow-scrolling:touch;
-}
-.volunteer .content .search-Box{
-    padding: 0 20px;
-}
-.volunteer .content .search-Box a{
-    border-radius:5rem;
-    border:0;
-    color: #bababa;
-    font-size: .14rem;
-    display: block;
-    width: 100%;
-    height: .35rem;
-    line-height: .35rem;
-    padding:0 .20rem;
-    outline: none;
-    text-align: left;
-    background: url(../../../assets/volunteer/search.png) no-repeat right .15rem center #f8f8f8;
-    background-size: .20rem;
-}
-.volunteer .list{
-   /*height: 100%;*/
-   
 }
 .volunteer .list li{
     position: relative;
@@ -281,33 +251,7 @@
 .volunteer-search .content{
     padding-top:.10rem;
 }
-.volunteer-search .content .search-Box{
-    padding: 0 .13rem;
-}
-.volunteer-search .search-Box{
-    text-align:left;
-}
-.volunteer-search .search-Box input{
-    display: inline-block;
-    width: calc(100% - .6rem);
-    height: .3rem;
-    border:none;
-    border-radius:5rem;
-    padding-left: .40rem;
-    background: url(../../../assets/volunteer/search.png) no-repeat left .15rem center #f8f8f8;
-    background-size: .20rem;
-    outline: none;
-    font-size: .16rem;
-    user-select: auto;
-}
-.volunteer-search .search-Box button{
-    padding:0 .1rem;
-    line-height: .3rem;
-    border:none;
-    background: none;
-    float:right;  
-    font-size: .16rem;
-}
+
 .volunteer-search h2{
     margin-top: .30rem;
     text-align: left;

@@ -2,7 +2,7 @@
     <div class="volunteer-search">
         <div class="content">
             <div class="search-Box" >
-                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal' v-focus/>
+                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal'/>
                 <button  @click='searchFn'>搜索</button>
 
             </div>
@@ -52,14 +52,7 @@
                 ]
             }
         },
-        directives: {
-            focus: {
-                // 指令的定义
-                inserted: function (el) {
-                    el.focus();
-                }
-            }
-        },
+        
         watch:{
             '$route'(){
                 console.log('search = ' , arguments)
