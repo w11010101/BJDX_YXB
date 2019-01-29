@@ -59,25 +59,25 @@ var router_config = [
                             index:2
                         },
                         children:[
+                            {
+                                path:'form/:item',
+                                name:'form',
+                                components: {
+                                    'volunteer-form-view': resolve => require(['@/components/volunteer/volunteer-form.vue'],resolve)
+                                },
+                                props: {
+                                    'volunteer-form-view': true
+                                },
+                                meta:{
+                                    pageName:'志愿服务',
+                                    index:2
+                                },
+                            },
                             
                         ]
                     },
                     {
-                        path:'form',
-                        name:'form',
-                        components: {
-                            'sub-components-view': resolve => require(['@/components/volunteer/volunteer-form.vue'],resolve)
-                        },
-                        props: {
-                            'sub-components-view': true
-                        },
-                        meta:{
-                            pageName:'志愿服务',
-                            index:2
-                        },
-                    },
-                    {
-                        path:'search',
+                        path:'search/:type',
                         name:'search',
                         components: {
                             'sub-components-view': resolve => require(['@/components/volunteer/volunteer-search.vue'],resolve)
@@ -92,35 +92,36 @@ var router_config = [
                         },
                         children:[
                             {
-                                path:'list/:value',
-                                name:'list',
+                                path:'detail/:items',
+                                name:'list-detail',
                                 components: {
-                                    'volunteer-search-view': resolve => require(['@/components/volunteer/volunteer-list.vue'],resolve)
+                                    'volunteer-search-view': resolve => require(['@/components/volunteer/volunteer-detail.vue'],resolve)
                                 },
                                 props: {
                                     'volunteer-search-view': true
                                 },
                                 meta:{
                                     pageName:'志愿服务',
-                                    index:3
+                                    index:4
                                 },
                                 children:[
                                     {
-                                        path:'detail/:items',
-                                        name:'list-detail',
+                                        path:'form',
+                                        name:'form',
                                         components: {
-                                            'volunteer-list-view': resolve => require(['@/components/volunteer/volunteer-detail.vue'],resolve)
+                                            'volunteer-form-view': resolve => require(['@/components/volunteer/volunteer-form.vue'],resolve)
                                         },
                                         props: {
-                                            'volunteer-list-view': true
+                                            'volunteer-form-view': true
                                         },
                                         meta:{
                                             pageName:'志愿服务',
-                                            index:4
+                                            index:2
                                         },
                                     },
+                                    
                                 ]
-                            }
+                            },
                         ]
                     }
                 ]
@@ -140,8 +141,8 @@ var router_config = [
                 },
                 children:[
                     {
-                        path:'salary-detail',
-                        name:'',
+                        path:'salary-detail/:obj',
+                        name:'salaryDetail',
                         components: {
                             'sub-components-view': resolve => require(['@/components/salary/salary-detail.vue'],resolve)
                         },
@@ -187,7 +188,7 @@ var router_config = [
                         path: 'problem/:id',
                         name: 'problem',
                         components: {
-                            'help-center-view': resolve => require(['@/components/help-center/problem.vue'],resolve)
+                            'sub-components-view': resolve => require(['@/components/help-center/problem.vue'],resolve)
                         },
                         props:{
                             'project-view':true
@@ -198,10 +199,13 @@ var router_config = [
                         }
                     },
                     {
-                        path: 'illustrate',
+                        path: 'illustrate/:id',
                         name: 'illustrate',
                         components: {
-                            'help-center-view': resolve => require(['@/components/help-center/illustrate.vue'],resolve)
+                            'sub-components-view': resolve => require(['@/components/help-center/illustrate.vue'],resolve)
+                        },
+                        props:{
+                            'project-view':true
                         },
                         meta:{
                             pageName:'',
@@ -209,7 +213,82 @@ var router_config = [
                         }
                     }
                 ]
-            }
+            },
+            {
+                path: '/student-revenue',
+                name: 'student-revenue',
+                components: {
+                    'project-view': resolve => require(['@/components/student-revenue/student-revenue.vue'],resolve)
+                },
+                props:{
+                    'project-view':true
+                },
+                meta:{
+                    pageName:'学生收入',
+                    index:1
+                },
+                children:[
+                    {
+                        path:'student-revenue-detail/:revenueId',
+                        name:'student-revenue-detail',
+                        components: {
+                            'sub-components-view': resolve => require(['@/components/student-revenue/student-revenue-detail.vue'],resolve)
+                        },
+                        props: {
+                            'sub-components-view': true
+                        },
+                        meta:{
+                            pageName:'学生收入',
+                            index:2
+                        }
+                    }
+                ]
+            },
+            {
+                path: '/release',
+                name: 'release',
+                components: {
+                    'project-view': resolve => require(['@/components/release/release.vue'],resolve)
+                },
+                props:{
+                    'project-view':true
+                },
+                meta:{
+                    pageName:'发布页',
+                    index:2
+                },
+            },
+            {
+                path: '/course',
+                name: 'course',
+                components: {
+                    'project-view-props': resolve => require(['@/components/course/course.vue'],resolve)
+                },
+                props:{
+                    'project-view-props':true
+                },
+                meta:{
+                    pageName:'今日课程',
+                    index:2,
+                },
+                // children:[
+                //     {
+                //         path:'course-2',
+                //         name:'course-2',
+                //         components: {
+                //             'sub-components-view': resolve => require(['@/components/student-revenue/course-2.vue'],resolve)
+                //         },
+                //         props: {
+                //             'sub-components-view': true
+                //         },
+                //         meta:{
+                //             pageName:'明日课程',
+                //             index:2
+                //         }
+                //     }
+                // ]
+            },
+
         ]
     },
 ];

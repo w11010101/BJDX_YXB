@@ -12,7 +12,6 @@
                     </div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for='(item,index) in tabs'>
-
                             <template v-if='index == 0'>
                                 <div class='user-internet-info'>
                                     <div class='info' >
@@ -31,22 +30,28 @@
                                     </div>
                                 </div>
                                 <div class='parts'>
-                                    <h3>2018年11月</h3>
-                                    <ul class="list">
-                                        <li v-for = 'item in internetHistory'>
-                                            <h4>MAC地址：{{item.macAddress}}</h4>
-                                            <p name='p1'><label>计费策略：</label><span>{{item.strategy}}</span></p>
-                                            <p name='p2'><label>ipv4地址：</label><span>{{item.ip4Address}}</span></p>
-                                            <p name='p3'><label>ipv4流量：</label><span>{{item.ip4Flow}}</span></p>
-                                            <p name='p5'><label>上线时间：</label><span>{{item.upTime}}</span></p>
-                                            <p name='p6'><label>下线时间：</label><span>{{item.downTime}}</span></p>
-                                        </li>
-                                    </ul>
+                                    <template v-if='internetHistory.length>0'>
+                                        <h3>2018年11月</h3>
+                                        <ul class="list">
+                                            <li v-for = 'item in internetHistory'>
+                                                <h4>MAC地址：{{item.macAddress}}</h4>
+                                                <p name='p1'><label>计费策略：</label><span>{{item.strategy}}</span></p>
+                                                <p name='p2'><label>ipv4地址：</label><span>{{item.ip4Address}}</span></p>
+                                                <p name='p3'><label>ipv4流量：</label><span>{{item.ip4Flow}}</span></p>
+                                                <p name='p5'><label>上线时间：</label><span>{{item.upTime}}</span></p>
+                                                <p name='p6'><label>下线时间：</label><span>{{item.downTime}}</span></p>
+                                            </li>
+                                        </ul>
+                                    </template>
+                                    <div class='nullData' v-else>
+                                        暂无更多数据
+                                    </div>
                                 </div>
                             </template>
                             <template v-else >
                                 <div class='internet-list'>
-                                    <ul class='list'>
+                                    
+                                    <ul class='list' v-if='(index == 1?internetServerList:internetServerBindList).length>0'>
                                         <li v-for='todo in (index == 1?internetServerList:internetServerBindList)' >
                                             <div class='list-content'>
                                                 <label>{{todo.ipAddressOrName}}</label><p>{{todo.macAddress}}</p>
@@ -64,6 +69,9 @@
                                             </div>
                                         </li>
                                     </ul>
+                                    <div class='nullData' v-else >
+                                        暂无更多数据
+                                    </div>
                                 </div>
                             </template>
                         </div>

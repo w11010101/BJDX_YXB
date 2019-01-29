@@ -1,0 +1,80 @@
+.content{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
+}
+.student-revenue h3{
+    text-align:left;
+    font-weight: normal;
+    height: .30rem;
+    line-height: .30rem;
+    padding: 0 .20rem;
+    font-size: .14rem;
+    color: #9b9b9b;
+    background: #f9f9f9;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+}
+.student-revenue .parts{
+    overflow-x: hidden;
+}
+.student-revenue ul{
+    
+}
+.student-revenue ul li{
+    height: .95rem;
+    padding: .16rem .2rem;
+    font-size: 0;
+    position: relative;
+}
+.student-revenue ul li:not(:last-child):after{
+    content:'';
+    position: absolute;
+    width:100%;
+    height: 1px;
+    left:.2rem;
+    bottom:0;
+    background: #dbdbdb;
+    transform: rotateX(60deg);
+}
+.student-revenue ul li > div,
+.student-revenue ul li a> div{
+    display: inline-block;
+}
+.student-revenue ul li .revenue-icon{
+    width: .4rem;
+    vertical-align: top;
+}
+.student-revenue ul li .revenue-icon img{
+    width: 100%;
+}
+.student-revenue ul li .revenue-info{
+    width: calc(100% - .4rem);
+    font-size: .16rem;
+    padding-left: .2rem;
+    text-align: left;
+}
+.student-revenue ul li .revenue-info h4{
+    color:#3b3b3b;
+    font-weight: normal;
+    line-height: .2rem;
+}
+.student-revenue ul li .revenue-info h4 span{
+    float:right;
+    color:#96050b;
+    font-size: .18rem;
+}
+.student-revenue ul li .revenue-info p{
+    font-size: .14rem;
+    color: #4a4a4a;
+    margin-top: 2px;
+    line-height: .2rem;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+}
+.student-revenue ul li .revenue-info > span{
+    font-size: .12rem;
+    color: #9b9b9b;
+    line-height: .2rem;
+}

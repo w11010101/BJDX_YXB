@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import 'swiper/dist/css/swiper.css';
 import Swiper from 'swiper';
-import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
-import {httpApi} from '@/common/js/common.js'
+import {JSAjaxRequest,getSha1Data} from '@/common/js/ajax.js';
+import {httpApi,toastTips,alertTips} from '@/common/js/common.js'
 import { Confirm,TransferDomDirective as TransferDom } from 'vux';
 export default {
     directives: {
@@ -13,12 +13,14 @@ export default {
     },  
     mounted(){
         this.$nextTick(function(){
+            // alert('internet')
             // 获取用户信息
             this.getUserInfo();              
             // 上网服务历史分页查询
             this.getInternetHistory();
             // 启动 swiper
             this.runSwiper();
+            
         }) 
     },
     methods:{
@@ -32,10 +34,13 @@ export default {
                     // console.log('getUserInfo = ',response);
                     if(response.code == 0){
                         this.$set(this.$data,'userInfo',response.resData);
+                    }else{
+                        alertTips(response.msg);
                     }
                 },
                 error:(error)=>{
-                    this.toastModule(error.msg)
+                    // console.log(error);
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },  
@@ -53,10 +58,13 @@ export default {
                                 this.internetHistory.push(response.resData[i])
                             }
                         }
+                    }else{
+                        alertTips(response.msg);
                     }
                 },
                 error:(error)=>{
-                    console.log('error = ' , error)
+                    // console.log('error = ' , error);
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },
@@ -105,10 +113,13 @@ export default {
                         if(response.resData.length){
                             this.$set(this.$data,type=='1'?'internetServerList':'internetServerBindList',response.resData);
                         }
+                    }else{
+                        alertTips(response.msg);
                     }
                 },
                 error:(error)=>{
                     console.log('error = ' , error)
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },
@@ -118,7 +129,7 @@ export default {
             JSAjaxRequest({
                 url:httpApi.internet.netServiceDeleteMac,
                 data:getSha1Data({
-                    "macAddress":item.radOnlineId
+                    "macAddress":item.macAddress
                 }),
                 success:(data)=>{
                     let response = data.data;
@@ -128,7 +139,8 @@ export default {
                     }
                 },
                 error:(error)=>{
-                    console.log('error = ' , error)
+                    console.log('error = ' , error);
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },
@@ -138,17 +150,20 @@ export default {
             JSAjaxRequest({
                 url:httpApi.internet.netServiceOffLine,
                 data:getSha1Data({
-                    "radOnlineId":item.macAddress
+                    "radOnlineId":item.radOnlineId
                 }),
                 success:(data)=>{
                     let response = data.data;
                     if(response.code == 0){
                         console.log('setRollsOffFn = ',response);
                         this.toastModuleAuto('已下线','rollsOff');
+                    }else{
+                        alertTips(response.msg);
                     }
                 },
                 error:(error)=>{
                     console.log('error = ' , error)
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },
@@ -196,10 +211,13 @@ export default {
                     if(response.code == 0){
                         console.log('renameFn = ',response);
                         this.toastModuleAuto('修改成功','rename');
+                    }else{
+                        alertTips(response.msg);
                     }
                 },
                 error:(error)=>{
                     console.log('error = ' , error);
+                    toastTips('请求失败，请稍后重试');
                 }
             });
         },
@@ -234,7 +252,6 @@ export default {
         },
         toastModuleAuto (value,type) {
             this.toastModule(value);
-            console.log(value,type)
             setTimeout(() => {
                 this.$vux.toast.hide();
                 if(type == 'unbunling' || type == 'rename'){

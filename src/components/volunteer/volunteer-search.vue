@@ -2,21 +2,35 @@
     <div class="volunteer-search">
         <div class="content">
             <div class="search-Box" >
-                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchVal'/>
+                <input placeholder="搜索志愿活动" autocomplete=on v-model='searchServerName'/>
                 <button  @click='searchFn'>搜索</button>
 
             </div>
+            <div id="subwrapper">
+                <ul class='list'>
+                    <li v-for='(item,index) in serverList' >
+                        <router-link :to='setTo(item.id)'>
+                            <div class='list-img'>
+                                <img :src="item.iconUrl" alt="">
+                                <img :src="badge(item.state)" alt="" class='badge'>
+                            </div>
+                            
+                            <div class='list-info'>
+                                <h3>{{item.name}}</h3>
+                                <p>活动开始时间：<span>{{item.beginTime}}</span></p>
+                                <p>活动时长：{{item.time}}小时</p>
+                                <p>招募截止时间：<span>{{item.endTime}}</span></p>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+                <!--  -->
+                <div class='status'>
+                    <img src='@/assets/status/undefined.png'>
+                    <span>暂无更多数据</span>
+                </div>
+            </div>
 
-            <!--  -->
-            <!-- <h2>历史搜索</h2>
-            <ul>
-                <li v-for='(item,index) in hotSearch' :key='item.id' @click='setActive(index,"hot")' :class='{"active":index == hotSearchActive}'>{{item.name}}</li>
-            </ul> -->
-            <!--  -->
-            <!-- <h2>热门搜索</h2>
-            <ul>
-                <li v-for='(item,index) in historySearch' :key='item.id' @click='setActive(index,"history")' :class='{"active":index == historySearchActive}'>{{item.name}}</li>
-            </ul> -->
         </div>
         <!-- router-view -->
         <transition name="slide-fade">
@@ -26,13 +40,16 @@
 </template>
 <script>
     import route from '@/router';
+    import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
+    import {httpApi,toastTips,alertTips} from '@/common/js/common.js';
     import { Alert ,AlertModule} from 'vux'
+
+    import loadMoreFn from '../../../static/plugin/iscroll4/js/loadMore.js';
     export default ({
         data(){
             return {
                 msg: 'this is volunteer-search.vue',
                 title: '志愿服务',
-                searchVal:'',
                 results:[],
                 hotSearchActive:999,
                 hotSearch:[
@@ -49,18 +66,35 @@
                     {name:"儿童安全",id:3},
                     {name:"志愿服务",id:4},
                     {name:"多维宇宙",id:5},
-                ]
+                ],
+
+                searchServerName:'',
+                pageNum:1,
+                serverList:[],
+                scrollState:true,
             }
         },
         
         watch:{
-            '$route'(){
-                console.log('search = ' , arguments)
+            '$route'(to,from){
+                
+                if(to.params.type == 'history' && !to.name.includes('detail')){
+                    this.serverList = [];
+                    // console.log('router change = ' , arguments);
+                    this.getServerList(1,this.searchServerName,"1");
+                }
             }
         },
         components:{
-            Alert
+            Alert,
             // Search
+        },
+        mounted(){
+            // console.log('router = ',this.$route.params);
+            this.runIScrollFn();
+            if(this.$route.params.type == 'history'){
+                this.getServerList(1,this.searchServerName,"1");
+            }
         },
         methods:{
             setActive(index,type){
@@ -71,44 +105,111 @@
                     this.historySearchActive = index;
                     this.hotSearchActive = 999;
                 }
-                this.searchVal = event.target.innerText;
+                this.searchServerName = event.target.innerText;
                 // console.dir(event.target)
             },
             cancelFn(){
                 console.log('cancelFn');
-                this.searchVal = '';
+                this.searchServerName = '';
             },
             searchFn(){
-                console.log('searchFn');
-                if(this.searchVal){
-                    AlertModule.show({
-                        // title: '',
-                        content: '搜索中。。。',
-                        onShow () {
-                            console.log('Plugin: I\'m showing')
-                        },
-                        onHide () {
-                            console.log('Plugin: I\'m hiding')
-                        }
-                    });
+                var _this = this;
+                this.serverList = [];
+                if(this.searchServerName){
+                    
+                    this.$vux.loading.show();
+                    
                     setTimeout(function(){
-                        AlertModule.hide();
-                        route.push('/volunteer/search/list/searchVal');
+                        _this.$vux.loading.hide();
                     },1000);
                 }else{
-                    AlertModule.show({
-                        // title: '',
-                        content: '请输入搜索关键字',
-                        onShow () {
-                            console.log('Plugin: I\'m showing')
-                        },
-                        onHide () {
-                            console.log('Plugin: I\'m hiding')
-                        }
-                    })
+                    // toastTips('请输入搜索关键字');
+
                 }
+                this.getServerList(1,this.searchServerName,this.$route.params.type == 'history'?'1':"0");
                 
             },           
+            // 获取服务列表
+            getServerList(pageNum,searchVal,type){
+                // this.$vux.loading.show();
+                JSAjaxRequest({
+                    url:httpApi.getH5Service.h5ServicePaging,
+                    data:getSha1Data({
+                        pageNum:pageNum+'',
+                        name:searchVal,
+                        type:type
+                    }),
+                    success:(res)=>{
+                        if(res.status == 200){
+                            if(!res.data) {alertTips('数据为空'); return false;}
+                            var data = res.data;
+                            if(data.code!=0){alertTips(data.msg); return false;}
+                            var resData = data.resData;
+                            if(resData.list.length == 0){alertTips('数据暂时为空'); return false;}
+                            console.log('search  = ' , resData.list);
+                            for(var i in resData.list){
+                                this.serverList.push(resData.list[i])
+                            }
+                            this.$nextTick(function(){
+                                this.$vux.loading.hide();
+                            });
+                            
+                        }else{
+                            this.$vux.loading.hide();
+                            alertTips(res.statusText)
+                        }
+                        
+                    },
+                    error:(err)=>{
+                        this.$vux.loading.hide();
+                    }
+                })
+            },
+            // iScroll
+            runIScrollFn(){
+                let _this = this;
+                let loadMore = loadMoreFn();
+                // console.log('loadMore = ' ,loadMore)
+                var option = {
+                    id: "subwrapper",
+                    pullDown: function() {
+                        _this.serverList = [];
+                        _this.pageNum = 1;
+                        _this.getServerList(1,_this.searchServerName);
+                        subwrapper.refresh();
+                    },
+                    pullUp: function() {
+                        if (_this.scrollState) {
+                            ++_this.pageNum;
+
+                            _this.scrollState = false;
+                            setTimeout(function() {
+                                // 加载 ... 
+                                _this.getServerList(_this.pageNum,_this.searchServerName);
+                                _this.scrollState = true;
+                                subwrapper.refresh();
+                            }, 1000);
+                        }
+                    }
+                };
+                setTimeout(function(){
+                    loadMore.scroll(option);
+                },200);
+            },
+            setTo(id){
+                var url = "/volunteer/search/"+this.$route.params.type+"/detail/"+id;
+                return url;
+            },
+            // 徽章
+            badge(type){
+                if(type == 1){
+                    return require('@/assets/volunteer/going.png');
+                }else if(type ==2){
+                    return require('@/assets/volunteer/before.png');
+                }else{
+                    return require('@/assets/volunteer/end.png');
+                }
+            },
 
         }
     });
@@ -116,7 +217,22 @@
 </script>
 <style scoped="">
     @import url(./css/volunteer.css);
+    #subwrapper{
+        top:.4rem;
+    }
     .search-Box /deep/ .searchInput{
         border-radius:5rem;
+    }
+    .content .search-Box button{
+        background: none;
+        font-size: .14rem;
+        width: .6rem;
+        height: .3rem;
+        line-height: .3rem;
+        vertical-align: middle;
+        position: static;
+    }
+    .content .search-Box button:active{
+        background: #dbdbdb;
     }
 </style>

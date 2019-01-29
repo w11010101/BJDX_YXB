@@ -1,16 +1,19 @@
 <template>
     <div class='menu'>
-        <my-header ref='header' :popupactive.sync='popupactive'></my-header>
+        <my-header ref='header' :popupactive.sync='popupActive' :courseChange.sync='courseChangeValue'></my-header>
         <div class='btns' v-if='menuShow'>
             <Button type="primary" size='large' long 
                 v-for='(todo,index) in menus' 
                 :to='todo.routerUrl'
                 :key='index' 
                 @click='title=todo.name'>{{todo.name}}</Button>
+                
+            <Button type="primary" size='large' long>{{popupActive}}</Button>
         </div>
-        <!-- {{popupactive}} -->
+        
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
+            <router-view class='project-view' name='project-view-props' :subViewPorps='courseChangeValue'/>
         </transition>
     </div>
 </template>
@@ -29,15 +32,14 @@ export default {
     },
     mounted(){
         router.replace('/'+this.GetQueryString('page'));
-        console.log('token',this.GetQueryString('token'));
         localStorage.setItem('token',this.GetQueryString('token'));
     },
     data () {
         return {
             msg: 'Welcome to Menu.vue',
-            spinShow:true,
-            menuShow:false,
-            popupactive:"",
+            spinShow:true,  // true
+            menuShow:true, // false
+            popupActive:"popupActive",
             menus:[
                 {
                     name:'成绩查询',
@@ -63,14 +65,28 @@ export default {
                     name:'帮助中心',
                     routerUrl:'/help-center'
                 },
+                {
+                    name:'学生收入',
+                    routerUrl:'/student-revenue'
+                },
+                {
+                    name:'发布页',
+                    routerUrl:'/release'
+                },{
+                    name:'课表',
+                    routerUrl:'/course'
+                },
 
-            ]
+            ],
+            courseChangeValue:'',
+
         }
     },
     methods:{
         GetQueryString,
     }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

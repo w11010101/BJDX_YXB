@@ -51,10 +51,27 @@ html{
     transition: all .3s ease;
     
 }
+/**/
 .nothing{
   padding:27px 0 37px 0;
   color: #c5c5c5;
   font-size: 12px;
+}
+.status{
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  left: 50%;
+  top: 30%;
+  margin-top: -1rem;
+  margin-left: -1rem;
+}
+.status span{
+  font-size: .14rem;
+  color:#8d8d8d;
+}
+.status img{
+  width: 100%;
 }
 /**/
 .popup-container{
@@ -227,6 +244,23 @@ body .vux-popup-header-right{
     background: none;
     float:right;  
     font-size: .16rem;
+}
+.content .search-Box:active{
+  outline: none;
+}
+/* iscroll4 */
+[id*=wrapper]{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+/*
+  null data
+ */
+.nullData{
+  padding:.2rem 0;
+  
 }
 /*@media screen and (max-width: 320px){
     html{

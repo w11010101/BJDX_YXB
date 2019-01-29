@@ -50,19 +50,17 @@ i,em{
     height: calc(100vh - .91rem);
 }
 .swiper-wrapper .swiper-slide ul{
-    /*height: calc(100% - .55rem)!important;*/
-}
-.swiper-slide ul{
-    height: 100%;
+    height: calc(100% - .55rem);
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    background: #fff;
 }
 
 /* ------------------------- */
 ul li:not(:first-child) .parts{
     margin-top: .11rem;
 }
-.parts h3{
+h3{
     text-align:left;
     font-weight: normal;
     height: .30rem;
@@ -74,15 +72,15 @@ ul li:not(:first-child) .parts{
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
 }
-.parts .list{
+.list{
     
 }
-.parts .list li{
+.monthDetailed li{
     padding: .20rem 0 .2rem .20rem;
     position: relative;
     overflow: hidden;
 }
-.parts .list li:not(:last-child):after{
+.monthDetailed li:not(:last-child):after{
     content:' ';
     width: 100%;
     position: absolute;
@@ -93,25 +91,26 @@ ul li:not(:first-child) .parts{
     left: .2rem;
     bottom: 0;
 }
-.parts .list li a{
+.monthDetailed li a{
     display: block;
     font-size: 0;
 }
-.parts .list li a > div{
+.monthDetailed li a > div{
     display: inline-block;
     vertical-align: top;
 }
-.parts .list li a .parts-1{
+.monthDetailed li a .month{
     width: .8rem;
     font-size: .16rem;
     font-weight: bold;
     color:#4a4a4a;
+    text-align: left
 }
-.parts .list li a .parts-2{
+.monthDetailed li a .detailed{
     width: calc(100% - .8rem);
     font-size: 0;
 }
-.parts-2 >div{
+.detailed >div{
     display: inline-block;
     font-size: .14rem;
     line-height: .14rem;
@@ -120,14 +119,14 @@ ul li:not(:first-child) .parts{
     text-align: left;
     
 }
-.parts-2 > div:not(:last-child){
+.detailed > div:not(:last-child){
     margin-bottom: .23rem;
 }
-.parts-2 > div:nth-last-child(2){
+.detailed > div:nth-last-child(2){
     margin-bottom:0;
 }
-.parts .list li a > div h4,
-.parts .list2 li a > div h4{
+
+.monthDetailed li a > div h4{
     font-size: .16rem;
     font-weight: normal;
     padding-left: .07rem;
@@ -136,9 +135,6 @@ ul li:not(:first-child) .parts{
     margin-bottom: .12rem;
     color: #505050;
 
-}
-.parts .list2 li a > div h4{
-    margin-bottom: 0;
 }
 .sticker{
     display: inline-block;
@@ -151,48 +147,89 @@ ul li:not(:first-child) .parts{
     font-size: .14rem;
     margin-right: .08rem;
 }
-.parts .list li a > div p{
+.monthDetailed li a > div p{
     font-size: .14rem;
     line-height: .14rem;
     text-align: left;
     color:#31affd;
     padding-top: .1rem;
 }
-.parts .list li a > div p span{
+.monthDetailed li a > div p span{
     margin-left: .12rem;
-  /*  display: inline-block;
-    width: 50%;*/
 }
-.parts .list li .parts-2,
-.parts .list2 li .parts-2{
+.monthDetailed li .detailed{
     font-size:.24rem;
-    color:#31affd;
 }
-.parts .list li .parts-2 span,
-.parts .list2 li .parts-2 span{
+.monthDetailed li .detailed span{
     font-size:.18rem;
     vertical-align: top
 }
-/* ------------------------- */
-.parts .list2 li{
-    height: .70rem;
-    line-height: .70rem;
-    padding:0 0 0 .20rem;
+/**/
+.swiper-wrapper .swiper-slide{
+    background: #f9f9f9;
 }
-.parts .list2 li >a{
+.swiper-wrapper .swiper-slide ul.yearDetailed {
+    height: calc(100% - .65rem);
+    margin-top: .1rem;
     
 }
-.parts .list2 li a > div h4{
-    line-height: .70rem;
-    color:#333;
-}
-.parts .list2 li a > div h4 img{
-    width: .16rem;
-    vertical-align: middle;
-    margin-right: .10rem;
-}
+.yearDetailed li{
+    padding-top: .23rem;
+    padding-left: .1rem;
+    padding-right: .2rem;
+    position: relative;
 
+}
+.yearDetailed li:after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    width: 100%;
+    left: .2rem;
+    height: 1px;
+    background: #dbdbdb;
+    transform: rotateX(60deg);
 
+}
+.yearDetailed a{
+    display: block;
+}
+.yearDetailed a .year,
+.yearDetailed li > div .year {
+    text-align: left;
+    font-size: .16rem;
+    color:#000;
+    line-height: .2rem;
+    padding-left: .3rem;
+    padding-bottom: .23rem;
+    background: url(../../../assets/salary/icon-1.png) no-repeat top left;
+    -webkit-background-size: .2rem;
+    background-size: .2rem;
+}
+.yearDetailed a .year span,
+.yearDetailed li > div .year span{
+    float: right;
+    font-size: .14rem;
+    color:#9b9b9b;
+}
+.yearDetailed a .detailed,
+.yearDetailed li > div .detailed{
+    font-size: 0;
+    padding-left: .3rem;
+}
+.yearDetailed a .detailed>div,
+.yearDetailed li > div .detailed>div{
+    width: 33%;
+    font-size: .14rem;
+
+}
+.yearDetailed a .detailed>div p,
+.yearDetailed li > div .detailed>div p{
+    padding-top: .04rem;
+    line-height: .2rem;
+    color:#31affd;
+}
+/**/
 .salary-select-btn{
     line-height: .55rem;
     font-size: .16rem;
@@ -223,8 +260,8 @@ ul li:not(:first-child) .parts{
     bottom: 0;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: auto;
-    overflow-scrolling:touch;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
     text-align: left;
     padding:.24rem .22rem .7rem .15rem;
 
@@ -237,15 +274,40 @@ ul li:not(:first-child) .parts{
 
     margin-bottom: .14rem
 }
-.detail-content .detail-part-1 h2{
+
+.detail-content .detail-part.icon-1 h2{
     background: url(../../../assets/salary/icon-1.png) no-repeat 0 0;
     background-size:.2rem;
 }
-.detail-content .detail-part-2 h2{
+.detail-content .detail-part.icon-2 h2{
     background: url(../../../assets/salary/icon-2.png) no-repeat 0 0;
     background-size:.2rem;
 }
-.detail-content .detail-part-2{
+.detail-content .detail-part.icon-3 h2{
+    background: url(../../../assets/salary/icon-3.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part.icon-4 h2{
+    background: url(../../../assets/salary/icon-4.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part.icon-5 h2{
+    background: url(../../../assets/salary/icon-5.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part.icon-6 h2{
+    background: url(../../../assets/salary/icon-6.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part.icon-7 h2{
+    background: url(../../../assets/salary/icon-7.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part.icon-8 h2{
+    background: url(../../../assets/salary/icon-8.png) no-repeat 0 0;
+    background-size:.2rem;
+}
+.detail-content .detail-part:not(:first-child){
     margin-top: .24rem
 }
 .detail-content h2~div{
@@ -274,11 +336,44 @@ ul li:not(:first-child) .parts{
     background: #dbdbdb;
     transform: rotateX(60deg);
 }
+.add{
+    color:#e70a52!important;
+}
+.reduce{
+    color:#17b08d!important;
+}
 
+.explain{
+    padding-top: .45rem;
+    font-size: .12rem;
+    color:#4a4a4a;
+    /*padding-left:.2rem;*/
 
-
-
-
+}
+.explain span{
+    margin-right: .3rem;
+}
+.explain span:first-child{
+    margin-left: .1rem;
+}
+.explain span:first-child:before{
+    content: '';
+    /*background: #96050b;*/
+    background: #e70a52;
+    display: inline-block;
+    width: .1rem;
+    height: .1rem;
+    margin-right: .05rem;
+}
+.explain span:last-child:before{
+    content: '';
+    background: #17b08d;
+    /*background: #417505;*/
+    display: inline-block;
+    width: .1rem;
+    height: .1rem;
+    margin-right: .05rem;
+}
 
 
 

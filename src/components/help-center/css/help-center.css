@@ -76,8 +76,8 @@
 .help-center-problem .content ul,
 .help-center-illustrate .content ul{
     height: calc(100% - .34rem);
-    overflow-y:scroll;
-    overflow-scrolling:touch;
+   /* overflow-y:scroll;
+    overflow-scrolling:touch;*/
 }
 .help-center-problem .content ul li,
 .help-center-illustrate .content ul li{
@@ -124,3 +124,7 @@
     padding-left: 0;
     background: none;
 }
+.help-center-illustrate #wrapper,
+.help-center-problem #wrapper{
+    top:.35rem;
+}   

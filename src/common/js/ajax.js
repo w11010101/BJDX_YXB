@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {stringToHex,GetQueryString} from '@/common/js/common.js'
 import CryptoJS from 'crypto-js';
-// import Vue from 'vue'
+import Vue from 'vue'
 // import  { AlertPlugin } from 'vux'
 // Vue.use(AlertPlugin)
 // axios 请求
@@ -54,15 +54,20 @@ export function getSha1Data(reqDate,key){
             getKey = key+'';
         }
     }
-    localStorage.setItem('token','6C696F7144556F62363153326C507845466347457272376E78432F6C48344875684B4230316C666C4A4B2F57716956444955636B744E4C707959637071634A7A')
+    localStorage.setItem('token','4559736F68754639685869726256397877667A6B41434B66704F4D5130746D6373694A624672486550774232755A54474659776167636F74676C465377365645');
+
     if(!localStorage.getItem('token')){
-        alert('token为空');
+        // console.log(Vue.$vux.toast)
+        Vue.$vux.toast.show({
+            type:'text',
+            width:'auto',
+            text: '请求失败，token为空'
+        })
         localStorage.removeItem('token');
         return false;
     }
     var key = hexCharCodeToStr(localStorage.getItem('token'));
     var token = getAESdecrypt(key);
-    // console.log(token)
     let data = {
         "sign": "231df862f2a59345aa4ae984f48f3f75f3b4a4ee",
         "orgCode": "bjmu",
@@ -88,9 +93,7 @@ export function getSha1Data(reqDate,key){
     }
     str+=data.reqDataHex;
     str+='syn_2018_bjmu';
-
     data.sign = CryptoJS.HmacSHA1(str,getKey).toString(CryptoJS.enc.Hex);
-
     // console.log(JSON.stringify(data));
     return data;
 }

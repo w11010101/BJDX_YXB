@@ -13,7 +13,8 @@ module.exports = {
     proxyTable: {
         '/api':{
             // target:'http://192.168.90.62:81',
-            target:'http://202.112.187.103:81',
+            // target:'http://202.112.187.103:81',
+            target:'http://nativeapp.bjmu.edu.cn:80',
             changeOrigin:true,
             pathRewrite:{
                 '^/api':''

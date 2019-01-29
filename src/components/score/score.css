@@ -75,18 +75,16 @@ ul li:not(:first-child) .parts{
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
 }
-.parts .list{
-    
-}
+
 .parts .list li,
-.parts .list2 li{
+.list2 li{
     /*height: .92rem;*/
     padding: .20rem 0 .16rem .20rem;
     position: relative;
     overflow: hidden;
 }
 .parts .list li:not(:last-child):after,
-.parts .list2 li:not(:last-child):after{
+.list2 li:not(:last-child):after{
     content:' ';
     width: 100%;
     position: absolute;
@@ -98,26 +96,26 @@ ul li:not(:first-child) .parts{
     bottom: 0;
 }
 .parts .list li a,
-.parts .list2 li a{
+.list2 li a{
     display: block;
     font-size: 0;
 }
 .parts .list li a > div,
-.parts .list2 li a > div{
+.list2 li a > div{
     display: inline-block;
     vertical-align: top;
 }
 .parts .list li a .parts-1,
-.parts .list2 li a .parts-1{
+.list2 li a .parts-1{
     width: calc(100% - .95rem);
 }
 .parts .list li a .parts-2,
-.parts .list2 li a .parts-2{
+.list2 li a .parts-2{
     width: .95rem;
     height: 100%;
 }
 .parts .list li a > div h4,
-.parts .list2 li a > div h4{
+.list2 li a > div h4{
     font-size: .16rem;
     font-weight: normal;
     padding-left: .07rem;
@@ -125,9 +123,12 @@ ul li:not(:first-child) .parts{
     line-height: .22rem;
     margin-bottom: .12rem;
     color: #505050;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
 }
-.parts .list2 li a > div h4{
+.list2 li a > div h4{
     margin-bottom: 0;
 }
 .sticker{
@@ -153,29 +154,30 @@ ul li:not(:first-child) .parts{
     width: 50%;*/
 }
 .parts .list li .parts-2,
-.parts .list2 li .parts-2{
+.list2 li .parts-2{
     font-size:.24rem;
     color:#31affd;
 }
 .parts .list li .parts-2 span,
-.parts .list2 li .parts-2 span{
+.list2 li .parts-2 span{
     font-size:.18rem;
     vertical-align: top
 }
 /* ------------------------- */
-.parts .list2 li{
+
+.list2 li{
     height: .70rem;
     line-height: .70rem;
     padding:0 0 0 .20rem;
 }
-.parts .list2 li >a{
+.list2 li >a{
     
 }
-.parts .list2 li a > div h4{
+.list2 li a > div h4{
     line-height: .70rem;
     color:#333;
 }
-.parts .list2 li a > div h4 img{
+.list2 li a > div h4 img{
     width: .16rem;
     vertical-align: middle;
     margin-right: .10rem;
@@ -189,7 +191,7 @@ ul li:not(:first-child) .parts{
 .swiper-container{
     font-size: .16rem;
     margin-top: -.04rem;
-    height: calc(100vh - 1.89rem);
+    height: calc(100vh - .86rem);
 }
 .swiper-scrollbar{
     top:0;
@@ -199,6 +201,9 @@ ul li:not(:first-child) .parts{
     height: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+}
+.swiper-slide ul.list2{
+    height: calc(100vh - 1.89rem);
 }
 /*.swiper-slide ul::-webkit-scrollbar {
     display: none;
@@ -211,4 +216,7 @@ ul li:not(:first-child) .parts{
     width: .65rem;
     height: 100%;
     background: #123456;
+}
+.swiper-wrapper{
+    height: calc(100vh - .4rem);
 }

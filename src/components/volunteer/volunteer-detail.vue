@@ -1,48 +1,50 @@
 <template>
     <div class="volunteer-detail">
-
-        <div class='banner'>
-            <img :src="item.img2" alt="">
+        <div class="content">
+            <div class='banner'>
+                <img :src="item.iconUrl" alt="">
+            </div>
+            <div class='volunteer-title'>
+                <h1>{{item.name}}</h1>
+                <button class='going' v-if='item.state == 1'>正在活动</button>
+                <button class='before' v-else-if='item.state==2'>招募中</button>
+                <button class='end' v-else>已结束</button>
+                <!-- <p>招募人数：{{item.peoples}}人</p> -->
+                <img src="@/assets/volunteer/img5-1.png" alt="" v-if='item.state == 1'>
+                <img src="@/assets/volunteer/img5-2.png" alt="" v-else-if='item.state==2'>
+            </div>
+            <!-- info -->
+            <div class='volunteer-content'>
+                <h2>活动概况</h2>
+                <div>
+                    <label for="">开始时间：</label>
+                    <p>{{item.beginTime}}</p>
+                </div>
+                <div>
+                    <label for="">截止时间：</label>
+                    <p>{{item.endTime}}</p>
+                </div>
+                <div>
+                    <label for="">招募人数：</label>
+                    <p>已报名{{item.alreadySignUpCount}}人</p>
+                </div>
+                <div>
+                    <label for="">活动时长：</label>
+                    <p>{{item.time}}小时</p>
+                </div>
+                <div>
+                    <label for="">活动地点：</label>
+                    <p>{{item.address}}</p>
+                </div>
+            </div>
+            <div class='volunteer-content'>
+                <h2>活动详情</h2>
+                <p class='detail'>{{item.content}}</p>
+            </div>
+            
+            <!-- <alert v-model="show"  @on-show="onShow" @on-hide="onHide">报名中。。。</alert> -->
         </div>
-        <div class='volunteer-title'>
-            <h1>{{item.title}}</h1>
-            <button class='going' v-if='item.statue == 1'>正在活动</button>
-            <button class='before' v-else-if='item.statue==2'>招募中</button>
-            <button class='end' v-else>已结束</button>
-            <!-- <p>招募人数：{{item.peoples}}人</p> -->
-            <img src="@/assets/volunteer/img5-1.png" alt="" v-if='item.statue == 1'>
-            <img src="@/assets/volunteer/img5-2.png" alt="" v-else-if='item.statue==2'>
-        </div>
-        <!-- info -->
-        <div class='volunteer-content'>
-            <h2>活动概况</h2>
-            <div>
-                <label for="">开始时间：</label>
-                <p>{{item.starttime}}</p>
-            </div>
-            <div>
-                <label for="">截止时间：</label>
-                <p>{{item.endtime}}</p>
-            </div>
-            <div>
-                <label for="">招募人数：</label>
-                <p>已报名{{item.peoples}}人</p>
-            </div>
-            <div>
-                <label for="">活动时长：</label>
-                <p>{{item.longtime}}</p>
-            </div>
-            <div>
-                <label for="">活动地点：</label>
-                <p>{{item.address}}</p>
-            </div>
-        </div>
-        <div class='volunteer-content'>
-            <h2>活动详情</h2>
-            <p class='detail'>{{item.detailInfo}}</p>
-        </div>
-        <button class='floot-btn' @click='submitFn'>立即报名</button>
-        <alert v-model="show"  @on-show="onShow" @on-hide="onHide">报名中。。。</alert>
+        <button class='floot-btn' @click='submitFn' v-if='item.state == 1'>{{item.canSignUp?"立即报名":"取消报名"}}</button>
         <!-- router-view -->
         <transition name="slide-fade">
             <router-view class='sub-components-view' name='volunteer-form-view'></router-view>
@@ -51,36 +53,88 @@
 </template>
 <script>
     import route from '@/router';
+    import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
+    import {httpApi,toastTips,alertTips} from '@/common/js/common.js';
     import { Alert } from 'vux'
     export default ({
         data(){
             return {
                 msg: 'this is volunteer-detail.vue',
                 title: '志愿服务',
-                item:{},
-                show:false
+                serverId:'',
+                show:false,
+                item:{}
             }
         },
+        watch:{
+            '$route'(to,from){
+                console.log('from = ' ,from)
+            }
+
+        },
         mounted(){
-            this.item = this.$route.params;
+            this.serverId = this.$route.params.items;
+            this.getServerDetail(this.serverId);
         },
         components:{
             Alert
         },
         methods:{
+            // 获取活动详情
+            getServerDetail(id){
+                this.$vux.loading.show();
+                JSAjaxRequest({
+                    url:httpApi.getH5Service.h5ServiceDetail,
+                    data:getSha1Data({
+                        id:id
+                    }),
+                    success:(res)=>{
+                        // console.log('获取服务列表详情 = ' , res);
+                        if(res.status == 200){
+                            if(!res.data) {alertTips('数据为空'); this.$vux.loading.hide();return false;}
+                            var data = res.data;
+                            if(data.code!=0){alertTips(data.msg); this.$vux.loading.hide();return false;}
+                            var resData = data.resData;
+                            console.log('获取服务列表详情 = ' , resData);
+                            this.$set(this.$data,'item',resData)
+                            // if(resData.list.length == 0){alertTips('数据暂时为空'); return false;}
+                            this.$vux.loading.hide();
+                            
+                            
+                        }else{
+                            this.$vux.loading.hide();
+                            // alertTips(res.statusText)
+                        }
+                        
+                    },
+                    error:(err)=>{
+                        // console.log('获取服务列表详情 = ' , err);
+                        this.$vux.loading.hide();
+                    }
+                })
+            },
+            // 报名  or 取消报名
             submitFn(){
-                if(this.item.statue!=3){
-                    this.$vux.toast.text('暂时无法报名');
-                    // this.show = true;
-                    // route.push({
-                    //     name:'form',
-                    //     params:{
-                    //         item:this.item
-                    //     }
-                    // });
-                }else{
-                    this.$vux.toast.text('活动已结束');
+
+                var params = {
+                    canSignUp:this.item.canSignUp, 
+                    activityNumber:this.item.activityNumber,
+                    time:this.item.time, 
                 }
+                console.log(this.$route,params);
+                if(this.$route.path.includes('search')||this.$route.path.includes('history')){
+                    route.push({
+                        path:this.$route.path+'/form',
+                        query:params
+                        // params:params,
+                    })
+                }else{
+                    route.push({
+                        name:'form',
+                        params:params,
+                    })
+                }
+                
                 
             },
             onShow(){

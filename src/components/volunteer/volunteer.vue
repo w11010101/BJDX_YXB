@@ -2,102 +2,69 @@
     <div class="volunteer">
         <div class='content'>
             <div class="banner">
-                <h2>20</h2>
+                <h2>{{serverTime}}</h2>
                 <p>完成总时长(小时)</p>
+                <router-link to='/volunteer/search/history' class='history'><span>报名历史</span><img src='@/assets/icon/arrow.png'></router-link>
             </div>
             <div class="search-Box" @click='transitionName = "slide-fade-y"'>
-                <router-link to='/volunteer/search'>搜索志愿活动</router-link>
+                <router-link to='/volunteer/search/search'>搜索志愿活动</router-link>
             </div>
             <!-- list -->
-            <ul class='list'>
-                <li v-for='(item,index) in lists' @click='toDetail(index)'>
-                    <div class='list-img'>
-                        <img :src="item.img" alt="">
-                        <img :src="badge(item.statue)" alt="" class='badge'>
-                    </div>
-                    <div class='list-info'>
-                        <h3>{{item.title}}</h3>
-                        <p>活动开始时间：{{item.endtime}}</p>
-                        <p>活动时长：{{item.longtime}}</p>
-                        <p>招募截止时间：{{item.endtime}}</p>
-                    </div>
-                </li>
-            </ul>
-            <!-- nothing -->
-            <div class='nothing'>
-                没有更多了
+            <div id="wrapper">
+                <ul class='list'>
+                    <li v-for='(item,index) in serverList' >
+                        <router-link :to='"/volunteer/detail/"+item.id'>
+                            <div class='list-img'>
+                                <img :src="item.iconUrl" alt="">
+                                <img :src="badge(item.state)" alt="" class='badge'>
+                            </div>
+                            
+                            <div class='list-info'>
+                                <h3>{{item.name}}</h3>
+                                <p>活动开始时间：<span>{{item.beginTime}}</span></p>
+                                <p>活动时长：{{item.time}}小时</p>
+                                <p>招募截止时间：<span>{{item.endTime}}</span></p>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
             </div>
+            <!-- nothing -->
+            <!-- <div class='nothing'>
+                没有更多了
+            </div> -->
         </div>
         <!-- router-view -->
-        <transition :name="transitionName">
-            <router-view class='sub-components-view' name='sub-components-view'></router-view>
+        <transition name='slide-fade'>
+            <!-- <keep-alive> -->
+                <router-view class='sub-components-view' name='sub-components-view'></router-view>
+            <!-- </keep-alive> -->
         </transition>
     </div>
 </template>
 <script>
     import route from '@/router';
+    import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
+    import {httpApi,toastTips,alertTips} from '@/common/js/common.js';
+    import loadMoreFn from '../../../static/plugin/iscroll4/js/loadMore.js';
     export default ({
         data(){
             return {
                 msg: 'this is volunteer.vue',
                 title: '志愿服务',
                 transitionName:"slide-fade",
-                lists:[
-                    {
-                        title:'鲁迅博物馆讲解',
-                        starttime:'2019.12.12',
-                        endtime:'2019.09.09',
-                        longtime:'6小时',
-                        peoples:100,
-                        address :'北京大学北京大学北京大学北京大学北京大学北京大学北京大学北京大学',
-                        detailInfo:'作为中国科幻“四大天王”之一，韩松代表着其中人文与反思的一面。他站在不同维度、通过不同视角冷静观察着宇宙，以荒诞诡谲的风格，在科幻中描摹历史、现实和未来。韩松的作品常常突破文字的限制，给读者留下浓烈又独特的鬼魅感受。首次出版的精选集由韩松亲自选编，包含经典长篇《红色海洋》、《火星照耀美国》，并首度出版杂文集《我一次次活着是为了什么》、诗集《假漂亮和苍蝇拍手》，收录未发表中短篇小说《苦难》、获奖中短篇小说集《冷战与信使》。',
-                        img:require('@/assets/volunteer/img1-1.png'),
-                        img2:require('@/assets/volunteer/img1-2.png'),
-                        statue:'1'
-                    },
-                    {
-                        title:'第十一届全国大学生社会活动',
-                        starttime:'2019.12.12',
-                        endtime:'2019.10.09',
-                        longtime:'2小时',
-                        peoples:100,
-                        address :'北京大学北京大学北京大学北京大学北京大学北京大学北京大学北京大学',
-                        detailInfo:'作为中国科幻“四大天王”之一，韩松代表着其中人文与反思的一面。他站在不同维度、通过不同视角冷静观察着宇宙，以荒诞诡谲的风格，在科幻中描摹历史、现实和未来。韩松的作品常常突破文字的限制，给读者留下浓烈又独特的鬼魅感受。首次出版的精选集由韩松亲自选编，包含经典长篇《红色海洋》、《火星照耀美国》，并首度出版杂文集《我一次次活着是为了什么》、诗集《假漂亮和苍蝇拍手》，收录未发表中短篇小说《苦难》、获奖中短篇小说集《冷战与信使》。',
-                        img:require('@/assets/volunteer/img2-1.png'),
-                        img2:require('@/assets/volunteer/img2-2.png'),
-                        statue:'2'
-                    },
-                    {
-                        title:'多维宇宙观察者·《韩松精选集》首发',
-                        starttime:'2019.12.12',
-                        endtime:'2019.12.15',
-                        longtime:'1小时',
-                        peoples:100,
-                        address :'北京大学北京大学北京大学北京大学北京大学北京大学北京大学北京大学',
-                        detailInfo:'作为中国科幻“四大天王”之一，韩松代表着其中人文与反思的一面。他站在不同维度、通过不同视角冷静观察着宇宙，以荒诞诡谲的风格，在科幻中描摹历史、现实和未来。韩松的作品常常突破文字的限制，给读者留下浓烈又独特的鬼魅感受。首次出版的精选集由韩松亲自选编，包含经典长篇《红色海洋》、《火星照耀美国》，并首度出版杂文集《我一次次活着是为了什么》、诗集《假漂亮和苍蝇拍手》，收录未发表中短篇小说《苦难》、获奖中短篇小说集《冷战与信使》。',
-                        img:require('@/assets/volunteer/img2-1.png'),
-                        img2:require('@/assets/volunteer/img2-2.png'),
-                        statue:'3'
-                    },
-                    {
-                        title:'儿童户外活动安全讲座',
-                        starttime:'2019.12.12',
-                        endtime:'2019.12.15',
-                        longtime:'1小时',
-                        peoples:100,
-                        address :'北京大学北京大学北京大学北京大学北京大学北京大学北京大学北京大学',
-                        detailInfo:'作为中国科幻“四大天王”之一，韩松代表着其中人文与反思的一面。他站在不同维度、通过不同视角冷静观察着宇宙，以荒诞诡谲的风格，在科幻中描摹历史、现实和未来。韩松的作品常常突破文字的限制，给读者留下浓烈又独特的鬼魅感受。首次出版的精选集由韩松亲自选编，包含经典长篇《红色海洋》、《火星照耀美国》，并首度出版杂文集《我一次次活着是为了什么》、诗集《假漂亮和苍蝇拍手》，收录未发表中短篇小说《苦难》、获奖中短篇小说集《冷战与信使》。',
-                        img:require('@/assets/volunteer/img4-1.png'),
-                        img2:require('@/assets/volunteer/img4-2.png'),
-                        statue:'1'
-                    }
-                ],
 
+                serverTime:'0',
+                searchServerName:'',
+                pageNum:1,
+                serverList:[],
+                scrollState:true,
+                signUpStatusId:'1'
             }
         },
         watch:{
             '$route'(to,from){
-                if(to.name == 'search'){
+                if(to.params.type == 'search'){
                     this.transitionName = 'slide-fade-y';
                 }else{
                     this.transitionName = "slide-fade"
@@ -105,19 +72,103 @@
                 
             }
         },
+        mounted(){
+            this.runIScrollFn();
+            this.getH5ServiceTime();
+            this.getServerList(1,'','0');
+        },
         methods:{
-            toDetail(index){
-                this.transitionName = "slide-fade";
-                var _this = this;
-                // 跳转到详情页
-                route.push({
-                    // path:'/volunteer/detail',
-                    name:'detail',
-                    // query:_this.lists[index],
-                    params:_this.lists[index]
-                })
+            // 获取服务总时长
+            getH5ServiceTime(){
+                JSAjaxRequest({
+                    url:httpApi.getH5Service.h5ServiceTime,
+                    data:getSha1Data(),
+                    success:(res)=>{
+                        if(res.status == 200){
+                            if(!res.data) {alertTips('数据为空'); return false;}
+                            var data = res.data;
+                            if(data.code!=0){alertTips(data.msg); return false;}
+                            // console.log('获取服务总时长 = ' , data.resData)
+                            serverTime = data.resData||0;
 
+                        }else{
+                            alertTips(res.statusText)
+                        }
+                        
+                    },
+                    error:(err)=>{
+
+                    }
+                })
             },
+            // 获取服务列表
+            getServerList(pageNum,searchVal,type){
+                // this.$vux.loading.show();
+                JSAjaxRequest({
+                    url:httpApi.getH5Service.h5ServicePaging,
+                    data:getSha1Data({
+                        pageNum:pageNum+'',
+                        name:searchVal,
+                        type:type
+                    }),
+                    success:(res)=>{
+                        if(res.status == 200){
+                            if(!res.data) {alertTips('数据为空'); return false;}
+                            var data = res.data;
+                            if(data.code!=0){alertTips(data.msg); return false;}
+                            var resData = data.resData;
+                            if(resData.list.length == 0){alertTips('数据暂时为空'); return false;}
+                            // console.log('获取服务列表 = ' , resData.list);
+                            for(var i in resData.list){
+                                this.serverList.push(resData.list[i])
+                            }
+                            this.$nextTick(function(){
+                                // console.log(wrapper);
+                                this.$vux.loading.hide();
+                            });
+                            
+                        }else{
+                            this.$vux.loading.hide();
+                            alertTips(res.statusText)
+                        }
+                        
+                    },
+                    error:(err)=>{
+                        this.$vux.loading.hide();
+                    }
+                })
+            },
+            // iScroll
+            runIScrollFn(){
+                let _this = this;
+                let loadMore = loadMoreFn();
+                var option = {
+                    id: "wrapper",
+                    pullDown: function() {
+                        _this.serverList = [];
+                        _this.pageNum = 1;
+                        _this.getServerList(1,_this.searchServerName);
+                        wrapper.refresh();
+                    },
+                    pullUp: function() {
+                        if (_this.scrollState) {
+                            ++_this.pageNum;
+
+                            _this.scrollState = false;
+                            setTimeout(function() {
+                                // 加载 ... 
+                                _this.getServerList(_this.pageNum,_this.searchServerName);
+                                _this.scrollState = true;
+                                wrapper.refresh();
+                            }, 1000);
+                        }
+                    }
+                };
+                setTimeout(function(){
+                    loadMore.scroll(option);
+                },200);
+            },
+            // 徽章
             badge(type){
                 if(type == 1){
                     return require('@/assets/volunteer/going.png');

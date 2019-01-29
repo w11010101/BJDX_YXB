@@ -13,7 +13,7 @@ function resolve (dir) {
 let webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    "babel-polyfill":"babel-polyfill",
+    // 'babel-polyfill':'babel-polyfill',
     app: './src/main.js'
   },
   output: {
@@ -71,18 +71,13 @@ let webpackConfig = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      {
-        test: require.resolve('zepto'),
-        loader: 'exports-loader?window.Zepto!script-loader',
-      }
+      // {
+      //   test: require.resolve('zepto'),
+      //   loader: 'exports-loader?window.Zepto!script-loader',
+      // }
     ]
   },
-  plugins: [
-    // new webpack.ProvidePlugin({
-    //     $: 'zepto',
-    //     Zepto: 'zepto'
-    // })
-  ],
+  plugins: [],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

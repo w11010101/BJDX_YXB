@@ -1,18 +1,19 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import "babel-polyfill";
 import Vue from 'vue';
 import promise from 'es6-promise';
 promise.polyfill();
 import App from './App';
 import router from './router';
-import $ from 'zepto';
+// import $ from 'zepto';
 import iView from 'iView';
 
-import { ToastPlugin ,AlertPlugin ,ConfirmPlugin ,Loading} from 'vux';
+import { ToastPlugin ,AlertPlugin ,ConfirmPlugin ,LoadingPlugin} from 'vux';
 Vue.use(ToastPlugin);
 Vue.use(AlertPlugin);
 Vue.use(ConfirmPlugin);
-Vue.use(Loading);
+Vue.use(LoadingPlugin);
 Vue.use(iView);
 import 'iview/dist/styles/iview.css';
 // import 'iview.css'
@@ -26,7 +27,7 @@ import 'iview/dist/styles/iview.css';
 // import 'babel-polyfill';
 // import components from './components/list-menu/list-menu.js'
 // import directive from './directive/directive.js'
-import './directive/directive.js'
+// import './directive/directive.js'
 // console.log(components)
 Vue.config.productionTip = false;
 

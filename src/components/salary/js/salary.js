@@ -1,76 +1,18 @@
-export var data1 =  [
-    {
-        time:'2018年',
-        nodes:[
-            {
-                id:11,
-                month:12,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:12,
-                month:11,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:13,
-                month:10,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:14,
-                month:9,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            }
-        ]
-    },
-    {
-        time:'2017年',
-        nodes:[
-            {
-                id:21,
-                month:8,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:22,
-                month:7,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:23,
-                month:6,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            },
-            {
-                id:24,
-                month:5,
-                data1:1000,
-                data2:2000,
-                data3:3000,
-                data4:4000
-            }
-        ]
-    }
-]
+export function formatData(getSha1Data){
+    return {
+        appId: "1001",
+        appVersion: "1.0.0",
+        clientIp: "172.16.24.168",
+        clientMac: "A4:5E:60:DB:09:0F12",
+        clientMark: "2706F35A-62ED-4148-ABC1-5E6218828E00",
+        clientType: "andriod",
+        dateTime: "20181102101734",
+        magic: "2356681452",
+        orgCode: "bjmu",
+        data:getSha1Data.reqData,
+        reqDataHex: 123,
+        sign: "24c146106dcac71f167d96fb809a8f397695d443",
+        token: getSha1Data.token,
+        version: "1.0"
+    };
+}

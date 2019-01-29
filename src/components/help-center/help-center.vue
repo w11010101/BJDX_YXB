@@ -1,21 +1,25 @@
 <template>
     <div class="help-center">
         <div class="content">
-            <ul>
+            <div class="nullData" v-if='helpList.length<=0'>
+                暂无更多数据
+            </div>
+            <ul v-else>
                 <li v-for='item in helpList' :setid='item.id' :class='setIconFn(item.orderNumber)'>
                     <router-link :to='toSubRouter(item)'>{{item.name}}<img src="@/assets/icon/back@2x.png"></router-link>
                 </li>
             </ul>
+            
         </div>
         <transition name="slide-fade">
-            <router-view class='sub-components-view' name='help-center-view'/>
+            <router-view class='sub-components-view' name='sub-components-view'/>
         </transition>
     </div>
 </template>
 <script>
     import Vue from 'vue';
     import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
-    import {httpApi} from '@/common/js/common.js'
+    import {httpApi,toastTips} from '@/common/js/common.js'
     export default ({
         data(){
             return {
@@ -36,7 +40,7 @@
                     success:(data)=>{
                         let response = data.data;
                         if(response.code == 0){
-                            console.log('getH5Columns = ',response)
+                            // console.log('getH5Columns = ',response)
                             if(response.resData.length){
                                 for(var i in response.resData){
                                     this.helpList.push(response.resData[i])
@@ -45,7 +49,7 @@
                         }
                     },
                     error:(error)=>{
-                        console.log('error = ' , error)
+                        toastTips('请求失败，请稍后重试');
                     }
                 });
             },
@@ -70,10 +74,10 @@
                         url = '/help-center/problem/'+item.id;
                     break;
                     case 2:
-                        url = '/help-center/illustrate';
+                        url = '/help-center/illustrate/'+item.id;
                     break;
                     default:
-                        url = '/help-center';
+                        url = '/help-center/illustrate/'+item.id;
                     break;
 
                 }
