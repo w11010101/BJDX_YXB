@@ -19,11 +19,11 @@
                                             <h2>{{userInfo.name}}</h2>
                                             <p>上网账号：{{userInfo.account}}</p>
                                         </div>
-                                        <Button class='deviceBtn'>{{userInfo.endTime}}前有效</Button>
+                                        <!-- <Button class='deviceBtn'>{{userInfo.endTime}}前有效</Button> -->
                                     </div>
                                     <div class='info-details'>
-                                        <p><label>账号有效期</label><span>{{userInfo.endTime}}</span></p>
-                                        <p><label>服务截至时限</label><span>{{userInfo.expiryDate}}</span></p>
+                                        <p><label>账号有效期</label><span>{{userInfo.expiryDate}}</span></p>
+                                        <p><label>服务截至时限</label><span>{{userInfo.endTime}}</span></p>
                                         <p><label>当前设备地址</label><span>{{userInfo.currentIpAddress}}</span></p>
                                         <p><label>计费政策</label><span>{{userInfo.strategy}}</span></p>
                                         <p><label>最大连接数</label><span>{{userInfo.maxCount != ''?userInfo.maxCount:'--'}}</span></p>
@@ -37,8 +37,8 @@
                                                 <h4>MAC地址：{{item.macAddress}}</h4>
                                                 <p name='p1'><label>计费策略：</label><span>{{item.strategy}}</span></p>
                                                 <p name='p2'><label>ipv4地址：</label><span>{{item.ip4Address}}</span></p>
-                                                <p name='p3'><label>ipv4流量：</label><span>{{item.ip4Flow}}</span></p>
                                                 <p name='p5'><label>上线时间：</label><span>{{item.upTime}}</span></p>
+                                                <p name='p3'><label>ipv4流量：</label><span>{{item.ip4Flow}}</span></p>
                                                 <p name='p6'><label>下线时间：</label><span>{{item.downTime}}</span></p>
                                             </li>
                                         </ul>
@@ -69,8 +69,10 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class='nullData' v-else >
-                                        暂无更多数据
+                                    <!-- status -->
+                                    <div class='status' v-else>
+                                        <div class='bg'></div>
+                                        <span>暂无更多数据</span>
                                     </div>
                                 </div>
                             </template>

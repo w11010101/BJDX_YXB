@@ -4,10 +4,13 @@
         <div class='content'>
             <div class='banner'>
                 <div>实发工资（元）</div>
-                <div>{{SFE}}</div>
+                <div>{{SFE.toFixed(2)}}</div>
             </div>
             <!--  -->
             <div class='detail-content'>
+                <div class="explain">
+                    图例：<span>发放项</span><span>扣发项</span>
+                </div>
                 <!--  -->
                 <div :class="'detail-part '+ 'icon-'+(index+1)"  v-for= '(item,index) in queryApiArr' v-if='$data[item+"Data"].length'>
                     <h2>{{item|formatTitle}}</h2>
@@ -25,123 +28,121 @@
                     </div>
                     <div>
                         <label>应发额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].YFE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].YFE.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>税前扣除：</label>
-                        <span class='reduce'>{{$data[item+"Data"][0].SQKC}}</span> 
+                        <span class='reduce'>{{$data[item+"Data"][0].SQKC.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>应税额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].YSE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].YSE.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>扣税：</label>
-                        <span class='reduce'>{{$data[item+"Data"][0].KS}}</span> 
+                        <span class='reduce'>{{$data[item+"Data"][0].KS.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>实发额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].SFE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].SFE.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>现金额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].XJE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].XJE.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>转卡额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].ZKE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].ZKE.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>转存折额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].ZCZE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].ZCZE.toFixed(2)}}</span> 
                     </div>
                     <!-- 专项补助 -->
                     <div v-if='item == "queryYdzxbz"'>
                         <label>特殊补助：</label>
-                        <span class='add'>{{$data[item+"Data"][0].TSZX}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].TSZX.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>计生奖励：</label>
-                        <span class='add'>{{$data[item+"Data"][0].DSJL}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].DSJL.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>省部级奖：</label>
-                        <span class='add'>{{$data[item+"Data"][0].SBJJ}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].SBJJ.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>节日补助：</label>
-                        <span class='add'>{{$data[item+"Data"][0].JRBZ}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].JRBZ.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>供暖补贴：</label>
-                        <span class='add'>{{$data[item+"Data"][0].GNBT}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].GNBT.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>其他：</label>
-                        <span class='add'>{{$data[item+"Data"][0].SHXC}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].SHXC.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>补其他：</label>
-                        <span class='add'>{{$data[item+"Data"][0].BQT}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].BQT.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>补发应税额：</label>
-                        <span class='add'>{{$data[item+"Data"][0].BFYSE}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].BFYSE.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdzxbz"'>
                         <label>扣发：</label>
-                        <span class='add'>{{$data[item+"Data"][0].KF}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].KF.toFixed(2)}}</span> 
                     </div>
                     <!-- 年终奖 or 奖励工资 -->
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>奖励工资：</label>
-                        <span class='add'>{{$data[item+"Data"][0].JLGZ}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].JLGZ.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>生活补贴：</label>
-                        <span class='add'>{{$data[item+"Data"][0].SHBT}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].SHBT.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>CMB：</label>
-                        <span class='add'>{{$data[item+"Data"][0].CMB}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].CMB.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>985年终奖：</label>
-                        <span class='add'>{{$data[item+"Data"][0].NZJ985}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].NZJ985.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>专项绩效：</label>
-                        <span class='add'>{{$data[item+"Data"][0].ZXJX}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].ZXJX.toFixed(2)}}</span> 
                     </div>
                     <div v-if='item == "queryYdnzj" || item == "queryYdjlgz"'>
                         <label>一次性补发：</label>
-                        <span class='add'>{{$data[item+"Data"][0].YCXBF}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].YCXBF.toFixed(2)}}</span> 
                     </div>
                     <!-- 住房补贴 -->
                     <div v-if='item == "queryYdzfbt"'>
                         <label>住房补贴：</label>
-                        <span class='add'>{{$data[item+"Data"][0].ZFBT}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].ZFBT.toFixed(2)}}</span> 
                     </div>
                     <!-- 退税 -->
                     <div v-if='item == "queryYdts"'>
                         <label>退税：</label>
-                        <span class='add'>{{$data[item+"Data"][0].TS}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].TS.toFixed(2)}}</span> 
                     </div>
                     <!-- 基本工资 -->
                     <div v-if='item == "queryYdlwf"'>
                         <label>劳务费：</label>
-                        <span class='add'>{{$data[item+"Data"][0].LW}}</span> 
+                        <span class='add'>{{$data[item+"Data"][0].LW.toFixed(2)}}</span> 
                     </div>
                     <div>
                         <label>补扣税：</label>
-                        <span class='reduce'>{{$data[item+"Data"][0].BKS}}</span> 
+                        <span class='reduce'>{{$data[item+"Data"][0].BKS.toFixed(2)}}</span> 
                     </div>
                 </div>
                 <!-- ---------------- -->
                 
-                <div class="explain">
-                    图例：<span>发放项</span><span>扣发项</span>
-                </div>
+                
             </div>
         </div>
     </div>

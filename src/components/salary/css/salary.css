@@ -308,7 +308,7 @@ h3{
     background-size:.2rem;
 }
 .detail-content .detail-part:not(:first-child){
-    margin-top: .24rem
+    margin-top: .1rem
 }
 .detail-content h2~div{
     padding-left: .15rem;
@@ -344,14 +344,14 @@ h3{
 }
 
 .explain{
-    padding-top: .45rem;
+    text-align: right;
     font-size: .12rem;
     color:#4a4a4a;
     /*padding-left:.2rem;*/
 
 }
 .explain span{
-    margin-right: .3rem;
+    margin-left: .3rem;
 }
 .explain span:first-child{
     margin-left: .1rem;

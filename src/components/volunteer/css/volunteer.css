@@ -117,7 +117,7 @@
     white-space: nowrap;
 }
 .volunteer .list li .list-info p{
-    font-size: .12rem;
+    font-size: .14rem;
     color:#9b9b9b;
     line-height: .22rem;
 }
@@ -241,7 +241,7 @@
     line-height: .20rem;
     font-size: .14rem;
     display: inline-block;
-    width: calc(100% - .80rem);
+    width: calc(100% - 1rem);
     vertical-align: top;
     color:#4a4a4a;
 }

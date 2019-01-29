@@ -38,7 +38,7 @@ export default {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,  // true
-            menuShow:true, // false
+            menuShow:false, // false
             popupActive:"popupActive",
             menus:[
                 {

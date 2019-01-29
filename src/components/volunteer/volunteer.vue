@@ -10,8 +10,8 @@
                 <router-link to='/volunteer/search/search'>搜索志愿活动</router-link>
             </div>
             <!-- list -->
-            <div id="wrapper">
-                <ul class='list'>
+            <div id="wrapper" v-show='serverList.length'>
+                <ul class='list' >
                     <li v-for='(item,index) in serverList' >
                         <router-link :to='"/volunteer/detail/"+item.id'>
                             <div class='list-img'>
@@ -21,17 +21,19 @@
                             
                             <div class='list-info'>
                                 <h3>{{item.name}}</h3>
-                                <p>活动开始时间：<span>{{item.beginTime}}</span></p>
-                                <p>活动时长：{{item.time}}小时</p>
-                                <p>招募截止时间：<span>{{item.endTime}}</span></p>
+                                <p>活动开始时间：<span>{{item.beginTime?item.beginTime.substr(0,10):'-'}}</span></p>
+                                <p>活动时长：{{item.time||'-'}}小时</p>
+                                <p>招募截止时间：<span>{{item.endTime?item.endTime.substr(0,10):'-'}}</span></p>
                             </div>
                         </router-link>
                     </li>
                 </ul>
+                
             </div>
-            <!-- nothing -->
-            <!-- <div class='nothing'>
-                没有更多了
+            <!-- status -->
+            <!-- <div class='status' v-show='!serverList.length'>
+                <div class="bg"></div>
+                <span>暂无更多数据</span>
             </div> -->
         </div>
         <!-- router-view -->
@@ -59,7 +61,8 @@
                 pageNum:1,
                 serverList:[],
                 scrollState:true,
-                signUpStatusId:'1'
+                signUpStatusId:'1',
+                loadState:"up",
             }
         },
         watch:{
@@ -118,20 +121,23 @@
                             if(data.code!=0){alertTips(data.msg); return false;}
                             var resData = data.resData;
                             if(resData.list.length == 0){alertTips('数据暂时为空'); return false;}
-                            // console.log('获取服务列表 = ' , resData.list);
+                            console.log('获取服务列表 = ' , resData.list);
                             for(var i in resData.list){
                                 this.serverList.push(resData.list[i])
                             }
                             this.$nextTick(function(){
-                                // console.log(wrapper);
                                 this.$vux.loading.hide();
+                                if(wrapper.refresh){
+                                    wrapper.refresh();
+                                }
+                                
                             });
                             
                         }else{
                             this.$vux.loading.hide();
                             alertTips(res.statusText)
                         }
-                        
+                        this.scrollState = true;
                     },
                     error:(err)=>{
                         this.$vux.loading.hide();
@@ -147,20 +153,19 @@
                     pullDown: function() {
                         _this.serverList = [];
                         _this.pageNum = 1;
-                        _this.getServerList(1,_this.searchServerName);
+                        _this.getServerList(1,_this.searchServerName,"0");
                         wrapper.refresh();
                     },
                     pullUp: function() {
                         if (_this.scrollState) {
                             ++_this.pageNum;
-
+                            console.log('pullUP')
                             _this.scrollState = false;
-                            setTimeout(function() {
+                            _this.$nextTick(function() {
                                 // 加载 ... 
-                                _this.getServerList(_this.pageNum,_this.searchServerName);
-                                _this.scrollState = true;
+                                _this.getServerList(_this.pageNum,_this.searchServerName,'0');
                                 wrapper.refresh();
-                            }, 1000);
+                            });
                         }
                     }
                 };
@@ -183,5 +188,7 @@
 </script>
 <style scoped="">
     @import url(./css/volunteer.css);
-    
+    .status{
+        top:calc(30% + 1.4rem);
+    }
 </style>

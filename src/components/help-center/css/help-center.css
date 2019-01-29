@@ -46,15 +46,15 @@
     height: .34rem;
     line-height: .34rem;
 }
-.help-center-problem .content .search-Box input,
+/*.help-center-problem .content .search-Box input,
 .help-center-illustrate .content .search-Box input{
     height: .34rem;
     line-height: .34rem;
     width: 100%;
     background: #f8f8f8;
     padding-left: .15rem;
-}
-.content .search-Box button{
+}*/
+/*.content .search-Box button{
     position: absolute;
     top:.07rem;
     right: .25rem;
@@ -67,12 +67,12 @@
     outline: none;
     transition: all .2s ease;
     border-radius: 5px;
-}
-.content .search-Box button:active{
+}*/
+/*.content .search-Box button:active{
     background: url(../../../assets/icon/search.png) no-repeat #dbdbdb;
     -webkit-background-size: .2rem;
     background-size: .2rem;
-}
+}*/
 .help-center-problem .content ul,
 .help-center-illustrate .content ul{
     height: calc(100% - .34rem);

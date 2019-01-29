@@ -54,22 +54,25 @@ export function getSha1Data(reqDate,key){
             getKey = key+'';
         }
     }
-    localStorage.setItem('token','4559736F68754639685869726256397877667A6B41434B66704F4D5130746D6373694A624672486550774232755A54474659776167636F74676C465377365645');
+    // localStorage.setItem('token','4559736F68754639685869726256397877667A6B41434B66704F4D5130746D6373694A624672486550774232755A54474659776167636F74676C465377365645');
+    
+    // localStorage.setItem('token','443239577651526566737530557A5270767653387830344D5636584C654C306244616B713953667568304B4D3873754671314D756D44317152316A2F56464E62');
 
-    if(!localStorage.getItem('token')){
+    let gettoken = localStorage.getItem('token');
+
+    if(!gettoken){
         // console.log(Vue.$vux.toast)
-        Vue.$vux.toast.show({
-            type:'text',
-            width:'auto',
-            text: '请求失败，token为空'
-        })
+        // Vue.$vux.toast.show({
+        //     type:'text',
+        //     width:'auto',
+        //     text: '请求失败，token为空'
+        // })
         localStorage.removeItem('token');
-        return false;
     }
-    var key = hexCharCodeToStr(localStorage.getItem('token'));
+    var key = hexCharCodeToStr(gettoken||'');
     var token = getAESdecrypt(key);
     let data = {
-        "sign": "231df862f2a59345aa4ae984f48f3f75f3b4a4ee",
+        "sign": "",
         "orgCode": "bjmu",
         "appId": "1001",
         "version": "1.0",

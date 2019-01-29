@@ -14,67 +14,77 @@
                     </div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for='(item,index) in tabs'>
-                            <ul v-if='index == 0'>
-                                <li v-for='todo in monthData'>
+                            <ul v-if='index == 0' >
+                                <li v-for='todo in monthData' v-show='monthData.length'>
                                     <div class='parts'>
                                         <h3>{{todo.year}}</h3>
                                         <ul class='monthDetailed'>
                                             <li v-for='(node,index) in todo.data' 
                                                 v-if='todo.data.length' :setId = 'node.ZGH' @click='toDetail(node)'>
                                                 <a>
-                                                <!-- <router-link :to='{name:"salary-detail",params:{ZGH:node.ZGH,NIANYUE:node.NIANYUE,SFE:node.SFE}}'> -->
                                                     <div class='month'>
                                                         <span>{{node.NIANYUE.split('-')[1]}}月</span>
                                                     </div>
                                                     <div class='detailed'>
                                                         <div>
-                                                            每月的应发额
-                                                            <p class='add'>{{node.YFE||'-'}}元</p>
+                                                            应发额
+                                                            <p class='add'>{{node.YFE.toFixed(2)||'-'}}元</p>
                                                         </div>
                                                         <div>
                                                             实发额
-                                                            <p class='add'>{{node.SFE||'-'}}元</p>
+                                                            <p class='add'>{{node.SFE.toFixed(2)||'-'}}元</p>
                                                         </div>
                                                         <div>
                                                             扣税
-                                                            <p class='reduce'>{{node.KS||'-'}}元</p>
+                                                            <p class='reduce'>{{node.KS.toFixed(2)||'-'}}元</p>
                                                         </div>
                                                         <div>
                                                             住房公积金
-                                                            <p class='reduce'>{{node.GJJ||'-'}}元</p>
+                                                            <p class='reduce'>{{node.GJJ.toFixed(2)||'-'}}元</p>
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <!-- </router-link> -->
                                             </li>
                                         </ul>            
                                     </div>
                                 </li>
+                                <!-- status -->
+                                <!-- <div class='status' v-show='!monthData.length'>
+                                    <div class="bg"></div>
+                                    <span>暂无更多数据</span>
+                                </div> -->
                             </ul>
+                            
                             <ul class='yearDetailed' v-else>
-                                <li v-for='todo in formatYearData' v-if='todo.NIAN' >
-                                    <div>
+                                <li v-for='todo in formatYearData'  v-show='formatYearData.length'>
+                                    <div v-if='todo.NIAN'>
                                         <div class='year'>
                                             <label>{{todo.NIAN}}年</label>
-                                            <span>合计：{{todo.HJ}}元</span>
+                                            <span>合计：{{todo.HJ.toFixed(2)}}元</span>
                                         </div>
                                         <div class='detailed'>
                                             <div>
                                                 工资总额
-                                                <p>{{todo.YFE}}元</p>
+                                                <p>{{todo.YFE.toFixed(2)}}元</p>
                                             </div>
                                             <div>
                                                 奖金
-                                                <p>{{todo.JLGZ}}元</p>
+                                                <p>{{todo.JLGZ.toFixed(2)}}元</p>
                                             </div>
                                             <div>
                                                 其他收入
-                                                <p>{{todo.GJJ}}元</p>
+                                                <p>{{todo.GJJ.toFixed(2)}}元</p>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
+                                <!-- status -->
+                                <!-- <div class='status' v-show='!formatYearData.length'>
+                                    <div class="bg"></div>
+                                    <span>暂无更多数据</span>
+                                </div> -->
                             </ul>
+                            
                             <!-- btn -->
                             <button @click="clickfn(index)" 
                                 class='salary-select-btn'>{{index == 0?"单月筛选":"单年筛选"}}</button>

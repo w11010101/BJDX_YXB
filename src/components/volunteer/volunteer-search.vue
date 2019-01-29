@@ -3,11 +3,12 @@
         <div class="content">
             <div class="search-Box" >
                 <input placeholder="搜索志愿活动" autocomplete=on v-model='searchServerName'/>
-                <button  @click='searchFn'>搜索</button>
+                <!-- <button  @click='searchFn'>搜索</button> -->
+                <Button type="text" @click='searchFn'>搜索</Button>
 
             </div>
-            <div id="subwrapper">
-                <ul class='list'>
+            <div id="subwrapper" v-show='serverList.length'>
+                <ul class='list' >
                     <li v-for='(item,index) in serverList' >
                         <router-link :to='setTo(item.id)'>
                             <div class='list-img'>
@@ -17,18 +18,18 @@
                             
                             <div class='list-info'>
                                 <h3>{{item.name}}</h3>
-                                <p>活动开始时间：<span>{{item.beginTime}}</span></p>
+                                <p>活动开始时间：<span>{{item.beginTime?item.beginTime.substr(0,10):0}}</span></p>
                                 <p>活动时长：{{item.time}}小时</p>
-                                <p>招募截止时间：<span>{{item.endTime}}</span></p>
+                                <p>招募截止时间：<span>{{item.endTime?item.endTime.substr(0,10):0}}</span></p>
                             </div>
                         </router-link>
                     </li>
                 </ul>
-                <!--  -->
-                <div class='status'>
-                    <img src='@/assets/status/undefined.png'>
-                    <span>暂无更多数据</span>
-                </div>
+            </div>
+            <!-- status -->
+            <div class='status' v-show='searchState'>
+                <div class="bg"></div>
+                <span>暂无更多数据</span>
             </div>
 
         </div>
@@ -67,7 +68,7 @@
                     {name:"志愿服务",id:4},
                     {name:"多维宇宙",id:5},
                 ],
-
+                searchState:false,
                 searchServerName:'',
                 pageNum:1,
                 serverList:[],
@@ -77,11 +78,12 @@
         
         watch:{
             '$route'(to,from){
-                
-                if(to.params.type == 'history' && !to.name.includes('detail')){
-                    this.serverList = [];
-                    // console.log('router change = ' , arguments);
-                    this.getServerList(1,this.searchServerName,"1");
+                var _this = this;
+                // console.log('router change = ' , to);
+                if(to.params.type == 'history' && to.name.includes('search')){
+                    _this.serverList = [];
+                    _this.getServerList(1,_this.searchServerName,"1");
+                    
                 }
             }
         },
@@ -90,10 +92,14 @@
             // Search
         },
         mounted(){
+
             // console.log('router = ',this.$route.params);
             this.runIScrollFn();
             if(this.$route.params.type == 'history'){
                 this.getServerList(1,this.searchServerName,"1");
+                if(this.serverList.length == 0){
+                    this.searchState = true;
+                }
             }
         },
         methods:{
@@ -140,25 +146,30 @@
                         type:type
                     }),
                     success:(res)=>{
+
                         if(res.status == 200){
-                            if(!res.data) {alertTips('数据为空'); return false;}
+                            if(!res.data) {return false;}
                             var data = res.data;
+                            console.log(this.serverList)
                             if(data.code!=0){alertTips(data.msg); return false;}
                             var resData = data.resData;
-                            if(resData.list.length == 0){alertTips('数据暂时为空'); return false;}
-                            console.log('search  = ' , resData.list);
+                            if(resData.list.length == 0){ this.searchState = true;return false;}
+                            console.log('1search  = ' , resData.list);
                             for(var i in resData.list){
                                 this.serverList.push(resData.list[i])
                             }
                             this.$nextTick(function(){
                                 this.$vux.loading.hide();
+                                if(wrapper.refresh){
+                                    subwrapper.refresh();
+                                }
                             });
                             
                         }else{
                             this.$vux.loading.hide();
                             alertTips(res.statusText)
                         }
-                        
+                        this.scrollState = true;
                     },
                     error:(err)=>{
                         this.$vux.loading.hide();
@@ -169,7 +180,6 @@
             runIScrollFn(){
                 let _this = this;
                 let loadMore = loadMoreFn();
-                // console.log('loadMore = ' ,loadMore)
                 var option = {
                     id: "subwrapper",
                     pullDown: function() {
@@ -183,12 +193,12 @@
                             ++_this.pageNum;
 
                             _this.scrollState = false;
-                            setTimeout(function() {
+                            _this.$nextTick(function() {
                                 // 加载 ... 
                                 _this.getServerList(_this.pageNum,_this.searchServerName);
-                                _this.scrollState = true;
+                                
                                 subwrapper.refresh();
-                            }, 1000);
+                            });
                         }
                     }
                 };
@@ -223,16 +233,5 @@
     .search-Box /deep/ .searchInput{
         border-radius:5rem;
     }
-    .content .search-Box button{
-        background: none;
-        font-size: .14rem;
-        width: .6rem;
-        height: .3rem;
-        line-height: .3rem;
-        vertical-align: middle;
-        position: static;
-    }
-    .content .search-Box button:active{
-        background: #dbdbdb;
-    }
+
 </style>

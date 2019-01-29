@@ -203,10 +203,11 @@
                     url:httpApi.getScore.queryScore,
                     data,
                     success:(res)=>{
+                        console.log('成绩查询1 = ',res);
                         if(res.status != 200){alertTips(res.statusText);this.$vux.loading.hide(); return false;}
                         if(!res.data) { alertTips('数据为空');this.$vux.loading.hide(); return false;}
                         var data = res.data;
-                        if(!data.resData) { alertTips('数据暂时为空');this.$vux.loading.hide(); return false;}
+                        if(!data.resData) { this.$vux.loading.hide(); return false;}
                         var resData = data.resData;
                         console.log('成绩查询 = ',resData);
                         var arr = []

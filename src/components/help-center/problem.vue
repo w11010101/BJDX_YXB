@@ -2,8 +2,8 @@
     <div class="help-center-problem">
         <div class="content">
             <div class="search-Box" >
-                <input placeholder="搜索常见问题" autocomplete=on v-model='searchVal' />
-                <button  @click='searchFn'>搜索</button>
+                <input placeholder="搜索常见问题" autocomplete=on v-model='searchVal'/>
+                <Button type="text" @click='searchFn'>搜索</Button>
             </div>
             <!--  -->
             <div id="wrapper">
@@ -41,5 +41,7 @@
 </script>
 <style scoped>
     @import url('./css/help-center.css');
-
+    .content{
+        padding-top: .1rem
+    }
 </style>

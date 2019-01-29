@@ -3,16 +3,16 @@
         <header class="" v-if='headerStatus'>
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
-            <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button>
+            <!-- <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button> -->
             <Button type="text" class='closeBtn' @click='closeFn'></Button> 
-            <a v-if='headerLink' class='headerLinkClick' @click='headerLinkClick'>{{headerLinkStatus?'明日课程':'今日课程'}}</a>
+            <!-- // <a v-if='headerLink' class='headerLinkClick' @click='headerLinkClick'>{{headerLinkStatus?'明日课程':'今日课程'}}</a> -->
         </header>
         <header class="" v-show='!title.includes("Menu")' v-else>
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
-            <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button>
+            <!-- <Button type="text" class='menuBtn' :setSelect='select' @click='showactionsheetShow'></Button> -->
             <Button type="text" class='closeBtn' @click='closeFn'></Button> 
-            <a v-if='headerLink' class='headerLinkClick' @click='headerLinkClick'>{{headerLinkStatus?'明日课程':'今日课程'}}</a>
+            <!-- <a v-if='headerLink' class='headerLinkClick' @click='headerLinkClick'>{{headerLinkStatus?'明日课程':'今日课程'}}</a> -->
         </header>
         <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel ></actionsheet>
     </div>

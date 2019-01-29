@@ -31,7 +31,7 @@ var router_config = [
                     'project-view':true
                 },
                 meta:{
-                    pageName:'上网记录',
+                    pageName:'上网服务',
                     index:1
                 },
             },{
@@ -268,7 +268,7 @@ var router_config = [
                     'project-view-props':true
                 },
                 meta:{
-                    pageName:'今日课程',
+                    pageName:'课程',
                     index:2,
                 },
                 // children:[

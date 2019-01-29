@@ -1,10 +1,10 @@
 import Vue from 'vue';
 
-// var requireHTTP = 'http://nativeapp.bjmu.edu.cn:80/app/';
-// var requireHTTP2 = 'http://nativeapp.bjmu.edu.cn:80/';
+var requireHTTP = 'http://nativeapp.bjmu.edu.cn:80/app/';
+var requireHTTP2 = 'http://nativeapp.bjmu.edu.cn:80/';
 
-var requireHTTP  = '/api/app/';
-var requireHTTP2  = '/api/';
+// var requireHTTP  = '/api/app/';
+// var requireHTTP2  = '/api/';
 
 export var httpApi = {
     // 上网服务

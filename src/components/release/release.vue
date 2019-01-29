@@ -49,24 +49,12 @@
         },
         methods:{
             getH5DeployeeInfo(){
+                // var data = getSha1Data();
+                // data['token'] = '';
+                // console.log(data)
                 JSAjaxRequest({
                     url:httpApi.h5DeployeeInfo,
-                    data:{
-                        "sign": "",
-                        "orgCode": "bjmu",
-                        "appId": "1001",
-                        "version": "1.0",
-                        "dateTime": "20181102101734",
-                        "appVersion": "1.0.0",
-                        "clientType": "andriod",
-                        "clientMark": "2706F35A-62ED-4148-ABC1-5E6218828E00",   
-                        "token": "",//token，和APP交互
-                        "clientIp": "172.16.24.168",//ip地址
-                        "clientMac": "A4:5E:60:DB:09:0F12",
-                        "magic": "2356681452",
-                        "reqData": {},
-                        "reqDataHex": ''
-                    },
+                    data:getSha1Data(),
                     success:(data)=>{
                         let response = data.data;
                         console.log('h5DeployeeInfo = ',response);

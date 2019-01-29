@@ -104,14 +104,15 @@
             },
             // 报名  or 取消报名
             SignUpFn(phone){
-
                 var _this = this;
+    
+                    
                 JSAjaxRequest({
                     url:httpApi.getH5Service.h5ServiceSignUpOrCancle,
                     data:getSha1Data({
-                        "type":this.item.canSignUp?"1":"0",  //1：报名  0：取消报名
-                        "hdbh":this.item.activityNumber,//活动编号
-                        "fwsc":this.item.time,  //活动时长,
+                        "type":"1",  //1：报名  0：取消报名
+                        "hdbh":_this.item.activityNumber,//活动编号
+                        "fwsc":_this.item.time,  //活动时长,
                         "phone":phone,
                     }),
                     success:(res)=>{
@@ -122,19 +123,19 @@
                             var resData = data.resData;
                             toastTips(resData);
                             setTimeout(function(){
-                                // _this.$vux.loading.hide();
                                 route.go(-2);
-                            },1000);
+                            },500);
                             
                         }else{
-                            this.$vux.loading.hide();
+                            _this.$vux.loading.hide();
                             alertTips(res.statusText)
                         }
                     },
                     error:(err)=>{
-                        this.$vux.loading.hide();
+                        _this.$vux.loading.hide();
                     }
                 })
+                
             },
             onblurFn(){
                 console.log('on blur')

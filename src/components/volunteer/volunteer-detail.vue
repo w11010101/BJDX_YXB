@@ -7,26 +7,40 @@
             <div class='volunteer-title'>
                 <h1>{{item.name}}</h1>
                 <button class='going' v-if='item.state == 1'>正在活动</button>
-                <button class='before' v-else-if='item.state==2'>招募中</button>
+                <button class='before' v-else-if='item.state==3'>招募中</button>
                 <button class='end' v-else>已结束</button>
-                <!-- <p>招募人数：{{item.peoples}}人</p> -->
-                <img src="@/assets/volunteer/img5-1.png" alt="" v-if='item.state == 1'>
-                <img src="@/assets/volunteer/img5-2.png" alt="" v-else-if='item.state==2'>
+                <img src="@/assets/volunteer/img5-1.png" alt="" v-if='item.signUpState == 0'>
+                <img src="@/assets/volunteer/img5-2.png" alt="" v-else-if='item.signUpState==1'>
+                <!-- <img src="@/assets/volunteer/img5-3.png" alt="" v-else-if='item.signUpState==2'>
+                <img src="@/assets/volunteer/img5-4.png" alt="" v-else> -->
             </div>
             <!-- info -->
             <div class='volunteer-content'>
                 <h2>活动概况</h2>
                 <div>
                     <label for="">开始时间：</label>
-                    <p>{{item.beginTime}}</p>
+                    <p>{{item.beginTime?item.beginTime.substr(0,10):'-'}}</p>
+                </div>
+                <div>
+                    <label for="">结束时间：</label>
+                    <p>{{item.beginTime?item.endTime.substr(0,10):'-'}}</p>
                 </div>
                 <div>
                     <label for="">截止时间：</label>
-                    <p>{{item.endTime}}</p>
+                    <p>{{item.cutOffTime?item.endTime.substr(0,10):'-'}}</p>
                 </div>
                 <div>
                     <label for="">招募人数：</label>
-                    <p>已报名{{item.alreadySignUpCount}}人</p>
+                    <p>{{item.alreadySignUpCount}}人</p>
+                </div>
+                <div>
+                    <label for="">活动组织者：</label>
+                    <p>{{item.originazeName}}人</p>
+                </div>
+                
+                <div>
+                    <label for="">组织人数：</label>
+                    <p>已报名{{item.totalPerson}}人</p>
                 </div>
                 <div>
                     <label for="">活动时长：</label>
@@ -115,26 +129,82 @@
             },
             // 报名  or 取消报名
             submitFn(){
-
+                var _this = this;
                 var params = {
                     canSignUp:this.item.canSignUp, 
                     activityNumber:this.item.activityNumber,
                     time:this.item.time, 
                 }
-                console.log(this.$route,params);
-                if(this.$route.path.includes('search')||this.$route.path.includes('history')){
-                    route.push({
-                        path:this.$route.path+'/form',
-                        query:params
-                        // params:params,
-                    })
-                }else{
-                    route.push({
-                        name:'form',
-                        params:params,
-                    })
-                }
                 
+                if(this.$route.path.includes('search')||this.$route.path.includes('history')){
+                    
+                    if(!this.item.canSignUp){
+                        this.$vux.confirm.show( {
+                            content:'确定要取消报名吗？',
+                            onCancel () {
+                                route.go(-1);
+                            },
+                            onConfirm () {
+                                _this.cancelSignUpFn(_this.item.phone);
+                            }
+                        })
+                    }else{
+                        route.push({
+                            path:this.$route.path+'/form',
+                            query:params
+                        })
+                    }
+                }else{
+                    if(!this.item.canSignUp){
+                        this.$vux.confirm.show({
+                            content:'确定要取消报名吗？',
+                            onCancel () {
+                                route.go(-1);
+                            },
+                            onConfirm () {
+                                console.log(_this.item.phone)
+                                _this.cancelSignUpFn(_this.item.phone);
+                            }
+                        })
+                    }else{
+                        route.push({
+                            name:'form',
+                            params:params,
+                        })
+                    }
+                    
+                }
+            },
+            cancelSignUpFn(phone){
+                var _this = this;
+                JSAjaxRequest({
+                    url:httpApi.getH5Service.h5ServiceSignUpOrCancle,
+                    data:getSha1Data({
+                        "type":"0",  //1：报名  0：取消报名
+                        "hdbh":_this.item.activityNumber,//活动编号
+                        "fwsc":_this.item.time,  //活动时长,
+                        "phone":phone,
+                    }),
+                    success:(res)=>{
+                        if(res.status == 200){
+                            if(!res.data) {alertTips('数据为空'); return false;}
+                            var data = res.data;
+                            if(data.code!=0){alertTips(data.msg); return false;}
+                            var resData = data.resData;
+                            toastTips(resData);
+                            setTimeout(function(){
+                                route.go(-1);
+                            },500);
+                            
+                        }else{
+                            _this.$vux.loading.hide();
+                            alertTips(res.statusText)
+                        }
+                    },
+                    error:(err)=>{
+                        _this.$vux.loading.hide();
+                    }
+                })
                 
             },
             onShow(){

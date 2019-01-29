@@ -31,7 +31,7 @@ export default {
                 data:getSha1Data(),
                 success:(data)=>{
                     let response = data.data;
-                    // console.log('getUserInfo = ',response);
+                    console.log('getUserInfo = ',response);
                     if(response.code == 0){
                         this.$set(this.$data,'userInfo',response.resData);
                     }else{

@@ -1,29 +1,47 @@
 <template>
     <div class="content courseContent">
-        <ul v-if='!subViewPorps'>
-            <li v-for='(item,index) in todayCourseList' v-if='item'>
-                <div class='course-date'>
-                    <label>{{item.timeBegin}} - {{item.timeEnd}}</label>
-                </div>
-                <div class='course-info'>
-                    <h2>{{item.courseName}}</h2>
-                    <p>[教师]<span>{{item.teacherName}}</span></p>
-                    <p>[地点]<span>{{item.address}}</span></p>
-                </div>
-            </li>
-        </ul>
-        <ul v-else>
-            <li v-for='(item,index) in tomorrowCourseList' v-if='item'>
-                <div class='course-date'>
-                    <label>{{item.timeBegin}} - {{item.timeEnd}}</label>
-                </div>
-                <div class='course-info'>
-                    <h2>{{item.courseName}}</h2>
-                    <p>[教师]<span>{{item.teacherName}}</span></p>
-                    <p>[地点]<span>{{item.address}}</span></p>
-                </div>
-            </li>
-        </ul>
+        <div class="btns">
+            <Button type='text' @click='changeTab(1)'>今日课表</Button>
+            <Button type='text' @click='changeTab(2)'>明日课表</Button>
+        </div>
+        <div v-if='tab == 1'>
+            <ul v-if='todayCourseList.length'>
+                <li v-for='(item,index) in todayCourseList' v-if='item'>
+                    <div class='course-date'>
+                        <label>{{item.timeBegin}} - {{item.timeEnd}}</label>
+                    </div>
+                    <div class='course-info'>
+                        <h2>{{item.courseName}}</h2>
+                        <p>[教师]<span>{{item.teacherName}}</span></p>
+                        <p>[地点]<span>{{item.address}}</span></p>
+                    </div>
+                </li>
+            </ul>
+            <!-- status -->
+            <div class='status' v-else>
+                <img src='@/assets/status/undefined.png'>
+                <span>暂无更多数据</span>
+            </div>
+        </div>
+        <div v-if='tab == 2'>
+            <ul v-if='tomorrowCourseList.length'>
+                <li v-for='(item,index) in tomorrowCourseList' v-if='item'>
+                    <div class='course-date'>
+                        <label>{{item.timeBegin}} - {{item.timeEnd}}</label>
+                    </div>
+                    <div class='course-info'>
+                        <h2>{{item.courseName}}</h2>
+                        <p>[教师]<span>{{item.teacherName}}</span></p>
+                        <p>[地点]<span>{{item.address}}</span></p>
+                    </div>
+                </li>
+            </ul>
+            <!-- status -->
+            <div class='status' v-else>
+                <img src='@/assets/status/undefined.png'>
+                <span>暂无更多数据</span>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -36,11 +54,11 @@
                 msg: 'this is course.vue',
                 title: '课表',
                 todayCourseList:[],
-                tomorrowCourseList:[]
+                tomorrowCourseList:[],
+                tab:1,
             }
         },
         mounted(){
-            console.log(header)
             this.getCourse();
         },
         props:['subViewPorps'],
@@ -58,7 +76,7 @@
                             if(data.resData.length == 0) {alertTips('数据暂时为空'); return false;}
                             var resData = data.resData;
                             for(var i in resData){
-                                // console.log(resData[i])
+                                console.log(resData[i])
                                 for(var j in resData[i].courses){
                                     // console.log(resData[i].courses[j])
                                     if(i == '0'){
@@ -79,7 +97,12 @@
                     }
 
                 })
-            }
+            },
+            changeTab(tab){
+                this.tab = tab;
+                console.log()
+            },
+
         }
     })
 </script>
@@ -89,7 +112,17 @@
         position: absolute;
         top:-.5rem;
     }
+    .btns{
+    }
+    .btns button{
+        font-size: .16rem;
+        height: .3rem;
+        padding:0 .1rem;
+        line-height: .3rem;
+        margin:0 .1rem;
+    }
     .courseContent{
+        padding-top: .1rem;
         overflow-y: scroll; 
     }
     .courseContent ul{

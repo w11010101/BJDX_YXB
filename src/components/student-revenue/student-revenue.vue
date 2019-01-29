@@ -21,8 +21,10 @@
                     </ul>
                 </div>
             </template>
-            <div class="nullData" v-else >
-                暂无更多数据
+            <!-- status -->
+            <div class='status' v-else>
+                <div class="bg"></div>
+                <span>暂无更多数据</span>
             </div>
         </div>
         <!-- router-view -->
@@ -177,7 +179,7 @@
                         if(!data.content) { alertTips('数据暂时为空');this.$vux.loading.hide(); return false;}
                         var content = JSON.parse(data.content);
                         
-                        if(!content.datas) {alertTips('datas 数据为空');this.$vux.loading.hide(); return false;}
+                        if(!content.datas) {this.$vux.loading.hide(); return false;}
                         var datas = content.datas;
                         // console.log(api,' = ' ,datas);
                         for(var i in datas){
