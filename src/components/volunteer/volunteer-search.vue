@@ -97,9 +97,8 @@
             this.runIScrollFn();
             if(this.$route.params.type == 'history'){
                 this.getServerList(1,this.searchServerName,"1");
-                if(this.serverList.length == 0){
-                    this.searchState = true;
-                }
+                console.log(this.serverList.length)
+                
             }
         },
         methods:{
@@ -153,8 +152,12 @@
                             console.log(this.serverList)
                             if(data.code!=0){alertTips(data.msg); return false;}
                             var resData = data.resData;
-                            if(resData.list.length == 0){ this.searchState = true;return false;}
-                            console.log('1search  = ' , resData.list);
+                            if(resData.list.length == 0){ 
+                                
+                                this.searchState = true;
+                                return false;
+                            }
+                            // console.log('1search  = ' , resData.list);
                             for(var i in resData.list){
                                 this.serverList.push(resData.list[i])
                             }
