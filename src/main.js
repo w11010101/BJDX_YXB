@@ -31,10 +31,12 @@ import 'iview/dist/styles/iview.css';
 // console.log(components)
 Vue.config.productionTip = false;
 
-
 /* eslint-disable no-new */
 window.myVue = new Vue({
     el: '#app',
+    data:{
+        a:1
+    },
     router,
     components: { 
         App,

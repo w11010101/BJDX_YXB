@@ -1,26 +1,23 @@
 <template>
     <div class="volunteer-form">
-        <!-- <div class="content"> -->
+        <ul class='group'>
+            <li><label>学号</label><span>{{userInfo.number}}</span></li>
+            <li><label>姓名</label><span>{{userInfo.name}}</span></li>
+            <li><label>性别</label><span>{{userInfo.sex == 0?'-':userInfo.sex == 1?"男":"女"}}</span></li>
+            <li><label>学院</label><span>{{userInfo.dept}}</span></li>
+            <li><label>年级</label><span>{{userInfo.grade||'-'}}</span></li>
+            <!-- <li><label>学生类型</label><span>研究生</span></li> -->
+            <li>
+                <group><x-switch title="是否在校" v-model="userInfo.isInSchool==1?true:false" disabled ></x-switch></group>
+            </li>
+        </ul>
+        <div class='edit'>
             <ul class='group'>
-                <li><label>学号</label><span>{{userInfo.number}}</span></li>
-                <li><label>姓名</label><span>{{userInfo.name}}</span></li>
-                <li><label>性别</label><span>{{userInfo.sex == 0?'-':userInfo.sex == 1?"男":"女"}}</span></li>
-                <li><label>学院</label><span>{{userInfo.dept}}</span></li>
-                <li><label>年级</label><span>{{userInfo.grade||'-'}}</span></li>
-                <!-- <li><label>学生类型</label><span>研究生</span></li> -->
-                <li>
-                    <group><x-switch title="是否在校" v-model="userInfo.isInSchool==1?true:false" disabled ></x-switch></group>
-                </li>
+                <li><label>联系电话</label><input type="tel" class='phone' v-model='userInfo.phone' placeholder="输入电话号码" maxlength="11" @blur='onblurFn'></li>
             </ul>
-            <div class='edit'>
-                <ul class='group'>
-                    <li><label>联系电话</label><input type="tel" class='phone' v-model='userInfo.phone' placeholder="输入电话号码" maxlength="11" @blur='onblurFn'></li>
-                </ul>
-                
-            </div>
-            <button class='floot-btn' @click='submitFn'>{{item.canSignUp?"立即报名":"取消报名"}}</button>
-        <!-- </div> -->
-
+            
+        </div>
+        <button class='floot-btn' @click='submitFn'>{{item.signUpState == 0?"立即报名":"取消报名"}}</button>
         <loading :show="loadingshow" text=""></loading>
     </div>
 </template>

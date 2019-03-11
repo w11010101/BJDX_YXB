@@ -27,7 +27,7 @@
                 </ul>
             </div>
             <!-- status -->
-            <div class='status' v-show='searchState'>
+            <div class='status' v-show='nothingState'>
                 <div class="bg"></div>
                 <span>暂无更多数据</span>
             </div>
@@ -68,11 +68,12 @@
                     {name:"志愿服务",id:4},
                     {name:"多维宇宙",id:5},
                 ],
-                searchState:false,
+                nothingState:false,
                 searchServerName:'',
                 pageNum:1,
                 serverList:[],
                 scrollState:true,
+                
             }
         },
         
@@ -154,7 +155,7 @@
                             var resData = data.resData;
                             if(resData.list.length == 0){ 
                                 
-                                this.searchState = true;
+                                this.nothingState = true;
                                 return false;
                             }
                             // console.log('1search  = ' , resData.list);
@@ -163,7 +164,7 @@
                             }
                             this.$nextTick(function(){
                                 this.$vux.loading.hide();
-                                if(wrapper.refresh){
+                                if(subwrapper.refresh){
                                     subwrapper.refresh();
                                 }
                             });
@@ -188,6 +189,7 @@
                     pullDown: function() {
                         _this.serverList = [];
                         _this.pageNum = 1;
+                        _this.nothingState = false;
                         _this.getServerList(1,_this.searchServerName);
                         subwrapper.refresh();
                     },

@@ -12,9 +12,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api':{
-            // target:'http://192.168.90.62:81',
-            // target:'http://202.112.187.103:81',
-            target:'http://nativeapp.bjmu.edu.cn:80',
+            // target:'https://192.168.90.62:81',
+            // target:'https://202.112.187.103:81',
+            // target:'https://nativeapp.bjmu.edu.cn:80',
+            // target:'https://h5app.bjmu.edu.cn:80',
+            target:'https://h5app.bjmu.edu.cn:443',
+            // target: "https://202.112.183.195:80",
             changeOrigin:true,
             pathRewrite:{
                 '^/api':''
@@ -23,7 +26,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

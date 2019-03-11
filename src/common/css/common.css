@@ -1,27 +1,30 @@
 * {
-  -webkit-touch-callout:none;
-  -webkit-user-select:none;
-  -khtml-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  list-style: none;
-  -webkit-text-size-adjust: 100% !important;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    list-style: none;
+    -webkit-text-size-adjust: 100% !important;
 }
 html{
+    height: 100%;
     /*font-size: 100px;*/
     font-size: calc(100vw / 3.75);
 }
+body{
+    height:inherit;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    height:inherit;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
-.project-view{
-  
-}
+
 .sub-components-view{
     position: absolute;
     width: 100%;
@@ -69,6 +72,9 @@ html{
 .status span{
   font-size: .14rem;
   color:#8d8d8d;
+}
+.status img{
+    width: 100%;
 }
 .status .bg{
   width: 2rem;
@@ -219,6 +225,7 @@ body .vux-popup-header-right{
 }
 .content .search-Box{
     text-align:left;
+    margin-top: .1rem;
 }
 .content .search-Box input{
     display: inline-block;
@@ -267,6 +274,29 @@ body .vux-popup-header-right{
 .nullData{
   padding:.2rem 0;
   
+}
+@media screen and (min-width: 768px){
+    
+    html{
+        font-size: 100px;
+    }
+
+    #app,body{
+        width: 375px;
+        height: 667px;
+        overflow: hidden;
+
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);   
+    }
+    .menu{
+        height: 100%;
+        background: #fff;
+        position: relative;
+    }
+
 }
 /*@media screen and (max-width: 320px){
     html{

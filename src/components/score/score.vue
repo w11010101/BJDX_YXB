@@ -39,7 +39,7 @@
                                     <div class='parts'>
                                         <h3>{{todo.time}}</h3>
                                         <ul class='list'>
-                                            <li v-for='(node,index) in todo.list' v-if='todo.list.length' :setId = 'node.id||index'>
+                                            <li v-for='(node,index) in todo.list' v-if='typeof todo.list == "object" && todo.list.length' :setId = 'node.id||index'>
                                                 <a>
                                                     <div class='parts-1'>
                                                         <h4>
@@ -50,6 +50,19 @@
                                                     </div>
                                                     <div class='parts-2'>{{Math.floor(node.totalScore)}}<span>.{{node.totalScore.toString().split('.')[1]|formatScore}}</span></div>
                                                 </a>
+                                            </li>
+                                            <li  v-else :setId = 'node.id||index'>
+                                                {{todo}}
+                                               <!--  <a>
+                                                    <div class='parts-1'>
+                                                        <h4>
+                                                            <i class='sticker' :style='"background:"+colors[index%colors.length]'>{{node.scoreName.substr(0,1)}}</i>
+                                                            <label for="">{{node.scoreName}}</label>
+                                                        </h4>
+                                                        <p><span>平时成绩：{{node.usualScore||'-'}}分</span><span>考试成绩：{{node.examScore||'-'}}分</span></p>
+                                                    </div>
+                                                    <div class='parts-2'>{{Math.floor(node.totalScore)}}<span>.{{node.totalScore.toString().split('.')[1]|formatScore}}</span></div>
+                                                </a> -->
                                             </li>
                                         </ul>            
                                     </div>
@@ -101,7 +114,17 @@
                 tabActive:0,
                 tabs:['课程成绩','学期绩点','学年绩点'],
                 terms:[],
-                popupPickerData:[],
+                popupPickerData:[
+                    {
+                        name:"全部",
+                        value:'all',
+                        parent:0
+                    },{
+                        name:"全部",
+                        // value:'全部',
+                        parent:'all'
+                    }
+                ],
 
                 popupValue: [],
                 swiperObj:{},
@@ -134,11 +157,16 @@
             })
         },
         methods:{
-            // 选项卡切换
+            // 点击选项卡切换
             changeTabsFn(index){
-                console.log(index)
+                // console.log(index)
                 this.tabActive = index;
                 this.swiperObj.slideTo(index, 300, false);
+                if(index == 1){
+                    this.queryJdFn('queryXqJd');
+                }else if(index == 2){
+                    this.queryJdFn('queryXnJd');
+                }
             },
             // 随机数
             randomFn(maxNum,arr){
@@ -150,7 +178,9 @@
                     url:httpApi.getScore.getTerms,
                     data:getSha1Data(),
                     success:(data)=>{
+
                         let response = data.data;
+                        // console.log(response)
                         if(response.code == 0){
                             if(response.resData.length == 0) return false;
                             // 排序
@@ -177,7 +207,7 @@
                             alertTips(response.msg);
                         }
 
-                        console.log(this.popupPickerData)
+                        // console.log(this.popupPickerData)
                         
                     },
                     error:(error)=>{
@@ -190,26 +220,33 @@
             queryScoreFn(searchValue){
                 if(this.allScoreData.length) return false;
                 this.$vux.loading.hide();
+                console.log('searchValue = ',searchValue);
+
                 if(searchValue){
-                    var data = getSha1Data({
-                        "xn":searchValue[0],
-                        "xq":searchValue[1]
-                    })
+                    if(searchValue[0] == 'all'){
+                        var data = getSha1Data();
+                    }else{
+                       var data = getSha1Data({
+                            "xn":searchValue[0],
+                            "xq":searchValue[1]
+                        }) 
+                    }
+                    
                 }else{
-                    var data = getSha1Data()
+                    var data = getSha1Data();
                 }
                 var _this = this;
                 JSAjaxRequest({
                     url:httpApi.getScore.queryScore,
                     data,
                     success:(res)=>{
-                        console.log('成绩查询1 = ',res);
+                        // console.log('成绩查询1 = ',res);
                         if(res.status != 200){alertTips(res.statusText);this.$vux.loading.hide(); return false;}
                         if(!res.data) { alertTips('数据为空');this.$vux.loading.hide(); return false;}
                         var data = res.data;
                         if(!data.resData) { this.$vux.loading.hide(); return false;}
                         var resData = data.resData;
-                        console.log('成绩查询 = ',resData);
+                        // console.log('成绩查询 = ',resData);
                         var arr = []
                         for(var i in resData){
                             arr.unshift({
@@ -218,10 +255,11 @@
                             })
 
                         }
-                        console.log('成绩查询 = ',this.allScoreData);
+                        // console.log('成绩查询 = ',this.allScoreData);
                         arr.sort((a,b)=>{return parseInt(b.time.replace(/-/g,'')) - parseInt(a.time.replace(/-/g,'')) });
-                        console.log('arr = ',arr)
-                        this.$set(this.$data,'allScoreData',arr)
+                        // console.log('arr = ',arr)
+                        this.$set(this.$data,'allScoreData',arr);
+                        console.log('this.allScoreData = ' ,this.allScoreData)
                     },
                     error:(error)=>{
                         console.log(error);
@@ -262,8 +300,10 @@
             // popupPicker change 
             changeFn(){
                 console.log(this.popupValue);
+
                 this.allScoreData = [];
                 this.queryScoreFn(this.popupValue);
+                
             },
 
             runSwiperFn(){

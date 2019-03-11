@@ -1,6 +1,7 @@
 <template>
     <div class='menu'>
         <my-header ref='header' :popupactive.sync='popupActive' :courseChange.sync='courseChangeValue'></my-header>
+        <!--  -->
         <div class='btns' v-if='menuShow'>
             <Button type="primary" size='large' long 
                 v-for='(todo,index) in menus' 
@@ -8,19 +9,23 @@
                 :key='index' 
                 @click='title=todo.name'>{{todo.name}}</Button>
                 
-            <Button type="primary" size='large' long>{{popupActive}}</Button>
+            <!-- <Button type="primary" size='large' long>{{popupActive}}</Button> -->
         </div>
-        
+        <!--  -->
         <transition name="slide-fade">
             <router-view class='project-view' name='project-view'/>
             <router-view class='project-view' name='project-view-props' :subViewPorps='courseChangeValue'/>
+            <!-- release view -->
+            <router-view class='release-view' name='release-view' />
         </transition>
     </div>
 </template>
 
 <script>
 import router from '@/router';
-import {GetQueryString} from '@/common/js/common.js'
+import {GetQueryString} from '@/common/js/common.js';
+// const fnName = 'abc';
+// console.log(fnName)
 export default {
     name: 'mymenu',
     components:{
@@ -33,12 +38,13 @@ export default {
     mounted(){
         router.replace('/'+this.GetQueryString('page'));
         localStorage.setItem('token',this.GetQueryString('token'));
+        
     },
     data () {
         return {
             msg: 'Welcome to Menu.vue',
             spinShow:true,  // true
-            menuShow:false, // false
+            menuShow:true, // false
             popupActive:"popupActive",
             menus:[
                 {
@@ -72,9 +78,14 @@ export default {
                 {
                     name:'发布页',
                     routerUrl:'/release'
-                },{
+                },
+                {
                     name:'课表',
                     routerUrl:'/course'
+                },
+                {
+                    name:'学生信息查询',
+                    routerUrl:'/student-info-query'
                 },
 
             ],
@@ -84,20 +95,31 @@ export default {
     },
     methods:{
         GetQueryString,
+        // [fnName](){
+        //     console.log(123)
+        // }
     }
 }
+
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.project-view,.status-view{
+.menu{
+    height: inherit;
+    position: relative;
+}
+.project-view,.status-view,.release-view{
     position: absolute;
     width: 100%;
     top:.5rem;
     bottom:0;
     background: #fff;
     overflow: hidden;
+}
+.release-view{
+    top:0;
 }
 .btns{
     padding:.2rem;
@@ -120,11 +142,5 @@ export default {
     border: 1px solid #eee;
 }
 
-/**/
-.jbq-container{
-    width: 400px;
-    height: 700px;
-    display: inline-block;
-}
 
 </style>

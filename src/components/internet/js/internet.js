@@ -4,6 +4,7 @@ import Swiper from 'swiper';
 import {JSAjaxRequest,getSha1Data} from '@/common/js/ajax.js';
 import {httpApi,toastTips,alertTips} from '@/common/js/common.js'
 import { Confirm,TransferDomDirective as TransferDom } from 'vux';
+import axios from 'axios';
 export default {
     directives: {
         TransferDom

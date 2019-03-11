@@ -9,10 +9,7 @@
                 <button class='going' v-if='item.state == 1'>正在活动</button>
                 <button class='before' v-else-if='item.state==3'>招募中</button>
                 <button class='end' v-else>已结束</button>
-                <img src="@/assets/volunteer/img5-1.png" alt="" v-if='item.signUpState == 0'>
-                <img src="@/assets/volunteer/img5-2.png" alt="" v-else-if='item.signUpState==1'>
-                <!-- <img src="@/assets/volunteer/img5-3.png" alt="" v-else-if='item.signUpState==2'>
-                <img src="@/assets/volunteer/img5-4.png" alt="" v-else> -->
+                <img :src="selectSignUpState(item.signUpState)" alt="" >
             </div>
             <!-- info -->
             <div class='volunteer-content'>
@@ -58,7 +55,7 @@
             
             <!-- <alert v-model="show"  @on-show="onShow" @on-hide="onHide">报名中。。。</alert> -->
         </div>
-        <button class='floot-btn' @click='submitFn' v-if='item.state == 1'>{{item.canSignUp?"立即报名":"取消报名"}}</button>
+        <button class='floot-btn' @click='submitFn' v-if='item.state == 1'>{{item.signUpState == 0?"立即报名":"取消报名"}}</button>
         <!-- router-view -->
         <transition name="slide-fade">
             <router-view class='sub-components-view' name='volunteer-form-view'></router-view>
@@ -131,14 +128,14 @@
             submitFn(){
                 var _this = this;
                 var params = {
-                    canSignUp:this.item.canSignUp, 
+                    signUpState:this.item.signUpState, 
                     activityNumber:this.item.activityNumber,
                     time:this.item.time, 
                 }
                 
                 if(this.$route.path.includes('search')||this.$route.path.includes('history')){
                     
-                    if(!this.item.canSignUp){
+                    if(this.item.signUpState){
                         this.$vux.confirm.show( {
                             content:'确定要取消报名吗？',
                             onCancel () {
@@ -155,7 +152,7 @@
                         })
                     }
                 }else{
-                    if(!this.item.canSignUp){
+                    if(this.item.signUpState){
                         this.$vux.confirm.show({
                             content:'确定要取消报名吗？',
                             onCancel () {
@@ -212,6 +209,15 @@
             },
             onHide(){
                 console.log('hide');
+            },
+            selectSignUpState(state){
+                console.log(state)
+                if(state!=undefined){
+                    return require('@/assets/volunteer/signup-'+state+'.png')
+                }else{
+                    return ''
+                }
+                
             }
         }
 

@@ -248,10 +248,10 @@ var router_config = [
                 path: '/release',
                 name: 'release',
                 components: {
-                    'project-view': resolve => require(['@/components/release/release.vue'],resolve)
+                    'release-view': resolve => require(['@/components/release/release.vue'],resolve)
                 },
                 props:{
-                    'project-view':true
+                    'release-view':true
                 },
                 meta:{
                     pageName:'发布页',
@@ -271,22 +271,20 @@ var router_config = [
                     pageName:'课程',
                     index:2,
                 },
-                // children:[
-                //     {
-                //         path:'course-2',
-                //         name:'course-2',
-                //         components: {
-                //             'sub-components-view': resolve => require(['@/components/student-revenue/course-2.vue'],resolve)
-                //         },
-                //         props: {
-                //             'sub-components-view': true
-                //         },
-                //         meta:{
-                //             pageName:'明日课程',
-                //             index:2
-                //         }
-                //     }
-                // ]
+            },
+            {
+                path: '/student-info-query',
+                name: 'student-info-query',
+                components: {
+                    'project-view': resolve => require(['@/components/student-info-query/student-info-query.vue'],resolve)
+                },
+                props:{
+                    'project-view':true
+                },
+                meta:{
+                    pageName:'学生信息查询',
+                    index:2,
+                },
             },
 
         ]

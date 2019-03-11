@@ -1,11 +1,16 @@
 <template>
     <div class="release">
+        <!-- <a class='release-backBtn' @click='backFn'></a> -->
         <div class="appImg-container">
             <div v-if='bgFileType=="video"' class='bgVideo'>
                 <video width="375" height="667" autoplay=autoplay loop muted :src="info.backgroundUrl">
                     <source  type="video/mp4">
                     不支持
                 </video>
+                <!-- <video width="375" height="667" autoplay=autoplay loop muted src="@/assets/release/bg-video-1.mp4">
+                    <source  type="video/mp4">
+                    不支持
+                </video> -->
                 <div class="videoMask"></div>
             </div>
             <img :src="info.backgroundUrl" alt="" v-else >
@@ -29,6 +34,7 @@
     import Vue from 'vue';
     import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
     import {httpApi,toastTips,alertTips} from '@/common/js/common.js';
+    import router from '@/router';
     export default ({
         data(){
             return {
@@ -53,7 +59,7 @@
                 // data['token'] = '';
                 // console.log(data)
                 JSAjaxRequest({
-                    url:httpApi.h5DeployeeInfo,
+                    url:'https://appadmin.bjmu.edu.cn:443/app/h5DeployeeInfo',
                     data:getSha1Data(),
                     success:(data)=>{
                         let response = data.data;
@@ -71,7 +77,10 @@
                         toastTips('请求失败，请稍后重试');
                     }
                 });
-            }
+            },
+            backFn(){
+                router.go(-1)
+            },
         }
     })
 </script>
@@ -157,5 +166,16 @@
         border:1px solid #dbdbdb;
         border-radius: 5px;
         background: #fff;
+    }
+    .release-backBtn{
+        position: absolute;
+        width: .45rem;
+        height: .45rem;
+        z-index: 999;
+        left:.1rem;
+        top:.1rem;
+        background: url(../../assets/icon/back@2x.png) no-repeat center;
+        -webkit-background-size: .2rem;
+        background-size: .2rem;
     }
 </style>

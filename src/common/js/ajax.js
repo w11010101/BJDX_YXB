@@ -2,11 +2,18 @@ import axios from 'axios'
 import {stringToHex,GetQueryString} from '@/common/js/common.js'
 import CryptoJS from 'crypto-js';
 import Vue from 'vue'
+export var JSAjaxRequestArr = {
+    cancel:{
+
+    }
+}
 // import  { AlertPlugin } from 'vux'
 // Vue.use(AlertPlugin)
 // axios 请求
 export function JSAjaxRequest(option){
-
+    // console.log(myVue.$data)
+    var CancelToken = axios.CancelToken;
+    // var source = CancelToken.source();
     // axios ajax
     var _default = {
         url:option.url,
@@ -37,8 +44,17 @@ export function JSAjaxRequest(option){
         onDownloadProgress: function (progressEvent) {
             _default.onDownloadProgress||_default.onDownloadProgress(progressEvent);
         },
+        // cancelToken: source.token,
+        cancelToken: new CancelToken(function executor(c) {
+            var key = _default.url.split('/')[_default.url.split('/').length-1];
+            JSAjaxRequestArr.cancel[key] = c;
+            // myVue.$set(myVue.$data,_default.url.split('/')[_default.url.split('/').length-1],c)
+        })
     }).then((response)=>{_default.success(response)})
-    .catch((error)=>{_default.error(error);});
+    .catch((error)=>{
+        _default.error(error);
+    });
+    
 }
 // sha1加密
 export function getSha1Data(reqDate,key){
@@ -54,9 +70,9 @@ export function getSha1Data(reqDate,key){
             getKey = key+'';
         }
     }
-    // localStorage.setItem('token','4559736F68754639685869726256397877667A6B41434B66704F4D5130746D6373694A624672486550774232755A54474659776167636F74676C465377365645');
+    localStorage.setItem('token','4431316D4A4E2B464F3950707078476C6942794D5A6D64426D5579777150374B6169455265454E642F50647767424F394D6C2F363074626A42386C7134357569');
     
-    // localStorage.setItem('token','443239577651526566737530557A5270767653387830344D5636584C654C306244616B713953667568304B4D3873754671314D756D44317152316A2F56464E62');
+    // localStorage.setItem('token','4559736F68754639685869726256397877667A6B41434B66704F4D5130746D6373694A624672486550774232755A54474659776167636F74676C465377365645');
 
     let gettoken = localStorage.getItem('token');
 
@@ -96,7 +112,11 @@ export function getSha1Data(reqDate,key){
     }
     str+=data.reqDataHex;
     str+='syn_2018_bjmu';
-    data.sign = CryptoJS.HmacSHA1(str,getKey).toString(CryptoJS.enc.Hex);
+    // console.log(data)
+    // console.log(str)
+    // data.sign = CryptoJS.HmacSHA1(str,getKey).toString(CryptoJS.enc.Hex);
+    data.sign = CryptoJS.HmacSHA256(str,getKey).toString(CryptoJS.enc.Hex);
+    // console.log(data.sign);
     // console.log(JSON.stringify(data));
     return data;
 }

@@ -31,10 +31,10 @@
                 
             </div>
             <!-- status -->
-            <!-- <div class='status' v-show='!serverList.length'>
+            <div class='status' v-show='nothingState'>
                 <div class="bg"></div>
                 <span>暂无更多数据</span>
-            </div> -->
+            </div>
         </div>
         <!-- router-view -->
         <transition name='slide-fade'>
@@ -46,9 +46,10 @@
 </template>
 <script>
     import route from '@/router';
-    import {JSAjaxRequest,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
+    import {JSAjaxRequest,JSAjaxRequestArr,getSha1Data,getAESdecrypt} from '@/common/js/ajax.js';
     import {httpApi,toastTips,alertTips} from '@/common/js/common.js';
     import loadMoreFn from '../../../static/plugin/iscroll4/js/loadMore.js';
+    import axios from 'axios'
     export default ({
         data(){
             return {
@@ -63,19 +64,21 @@
                 scrollState:true,
                 signUpStatusId:'1',
                 loadState:"up",
+                nothingState:false,
             }
         },
         watch:{
             '$route'(to,from){
+                console.log('$route')
                 if(to.params.type == 'search'){
                     this.transitionName = 'slide-fade-y';
                 }else{
                     this.transitionName = "slide-fade"
                 }
-                
             }
         },
         mounted(){
+            console.dir(wrapper);
             this.runIScrollFn();
             this.getH5ServiceTime();
             this.getServerList(1,'','0');
@@ -83,6 +86,7 @@
         methods:{
             // 获取服务总时长
             getH5ServiceTime(){
+
                 JSAjaxRequest({
                     url:httpApi.getH5Service.h5ServiceTime,
                     data:getSha1Data(),
@@ -102,7 +106,9 @@
                     error:(err)=>{
 
                     }
-                })
+                });
+                //
+                // JSAjaxRequestArr.cancel.h5ServiceTime();
             },
             // 获取服务列表
             getServerList(pageNum,searchVal,type){
@@ -129,19 +135,23 @@
                                 this.$vux.loading.hide();
                                 if(wrapper.refresh){
                                     wrapper.refresh();
+                                }else{
+                                    this.runIScrollFn();
                                 }
-                                
                             });
+                            
                             
                         }else{
                             this.$vux.loading.hide();
                             alertTips(res.statusText)
                         }
                         this.scrollState = true;
+                        this.nothingState = false;
                     },
                     error:(err)=>{
                         this.$vux.loading.hide();
-                    }
+                    },
+                    cancel:true
                 })
             },
             // iScroll
@@ -153,13 +163,13 @@
                     pullDown: function() {
                         _this.serverList = [];
                         _this.pageNum = 1;
+                        _this.nothingState = false;
                         _this.getServerList(1,_this.searchServerName,"0");
                         wrapper.refresh();
                     },
                     pullUp: function() {
                         if (_this.scrollState) {
                             ++_this.pageNum;
-                            console.log('pullUP')
                             _this.scrollState = false;
                             _this.$nextTick(function() {
                                 // 加载 ... 

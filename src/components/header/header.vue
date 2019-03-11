@@ -1,5 +1,5 @@
 <template>
-    <div id="header">
+    <div id="header" v-if='headerShow'>
         <header class="" v-if='headerStatus'>
             <Button type="text" class='backBtn' @click='goBack' v-if='backShow'></Button>
             <label>{{title}}</label>
@@ -14,7 +14,7 @@
             <Button type="text" class='closeBtn' @click='closeFn'></Button> 
             <!-- <a v-if='headerLink' class='headerLinkClick' @click='headerLinkClick'>{{headerLinkStatus?'明日课程':'今日课程'}}</a> -->
         </header>
-        <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel ></actionsheet>
+        <!-- <actionsheet v-model="actionsheetShow" :menus="popupArr" @on-click-menu="clickFn" show-cancel ></actionsheet> -->
     </div>
 </template>
 <script type="text/javascript">
@@ -44,6 +44,7 @@
                 actionsheetShow:false,
                 headerPopupActive:'',
                 headerLinkStatus:true,
+                headerShow:true,
             }
         },
         components:{
@@ -53,12 +54,14 @@
         watch: {
             '$route'(to,from){
                 this.title = to.meta.pageName||from.meta.pageName;
-                
+                console.log(to)
                 if(to.meta.index > 1){
                     this.backShow = true;
                 }else{
                     this.backShow = false;
                 }
+                //
+                // this.headerShow = to.name == 'release'?false:true;
             }
         },
         computed:{

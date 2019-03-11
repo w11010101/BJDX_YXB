@@ -61,9 +61,7 @@
     })
 </script>
 <style>
-    img{
-        width: 100%;
-    }
+    
     .school-calendar div{
         height: 100%;
         overflow-y: auto;
